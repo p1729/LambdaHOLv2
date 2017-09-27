@@ -24,7 +24,7 @@ public class B_Comparators {
     final Person jermaine = new Person("Jermaine", "Jackson", 61);
 
     /**
-     * Write a Comparator that compare intances of String using their length.
+     * Write a Comparator that compare instances of String using their length.
      * For instance FOUR (4 letters) is greater than TWO (three letters)
      */
     @Test
@@ -46,7 +46,7 @@ public class B_Comparators {
     // </editor-fold>
 
     /**
-     * Write a Comparator that compare intances of String using their length.
+     * Write a Comparator that compare instances of String using their length.
      * If the lengths are the same, then use the alphabetical order.
      */
     @Test
