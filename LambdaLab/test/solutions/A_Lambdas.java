@@ -293,7 +293,7 @@ public class A_Lambdas {
     }
 
     /**
-     * Write an unbound method reference that returns a new, empty StringBuilder.
+     * Write a constructor reference that returns a new, empty StringBuilder.
      */
     @Test
     public void d_supplier3() {
