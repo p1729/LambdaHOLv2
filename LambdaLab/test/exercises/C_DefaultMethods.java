@@ -1,13 +1,9 @@
 package exercises;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -195,21 +191,22 @@ public class C_DefaultMethods {
     @Test @Ignore
     public void c08_mapWithMissingValues() {
         List<String> keys = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        Map<String, String> map = new HashMap<>(Map.of("a", "alfa",
-                                                       "b", "bravo",
-                                                       "c", "charlie",
-                                                       "d", "delta"));
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "alfa");
+        map.put("b", "bravo");
+        map.put("c", "charlie");
+        map.put("d", "delta");
 
         // TODO write code to fix the map
 
-        assertEquals(Map.of("a", "alfa",
-                            "b", "bravo",
-                            "c", "charlie",
-                            "d", "delta",
-                            "e", "",
-                            "f", "",
-                            "g", ""),
-                     map);
+        Assertions.assertThat(map)
+                .containsExactly(new AbstractMap.SimpleEntry<>("a", "alfa"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("b", "bravo"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("c", "charlie"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("d", "delta"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("e", ""))
+                .containsExactly(new AbstractMap.SimpleEntry<>("f", ""))
+                .containsExactly(new AbstractMap.SimpleEntry<>("g", ""));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -225,21 +222,22 @@ public class C_DefaultMethods {
     @Test @Ignore
     public void c09_mapRemoveEntriesWithEmptyValues() {
         List<String> keys = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        Map<String, String> map = new HashMap<>(Map.of("a", "alfa",
-                                                       "b", "bravo",
-                                                       "c", "charlie",
-                                                       "d", "delta",
-                                                       "e", "",
-                                                       "f", "",
-                                                       "g", ""));
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "alfa");
+        map.put("b", "bravo");
+        map.put("c", "charlie");
+        map.put("d", "delta");
+        map.put("e", "");
+        map.put("f", "");
+        map.put("g", "");
 
         // TODO write code to fix the map
 
-        assertEquals(Map.of("a", "alfa",
-                            "b", "bravo",
-                            "c", "charlie",
-                            "d", "delta"),
-                     map);
+        Assertions.assertThat(map)
+                .containsExactly(new AbstractMap.SimpleEntry<>("a", "alfa"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("b", "bravo"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("c", "charlie"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("d", "delta"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -256,24 +254,25 @@ public class C_DefaultMethods {
     @Test @Ignore
     public void c10_mapReplaceEmptyValues() {
         List<String> keys = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        Map<String, String> map = new HashMap<>(Map.of("a", "alfa",
-                                                       "b", "bravo",
-                                                       "c", "charlie",
-                                                       "d", "delta",
-                                                       "e", "",
-                                                       "f", "",
-                                                       "g", ""));
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "alfa");
+        map.put("b", "bravo");
+        map.put("c", "charlie");
+        map.put("d", "delta");
+        map.put("e", "");
+        map.put("f", "");
+        map.put("g", "");
 
         // TODO write code to fix the map
 
-        assertEquals(Map.of("a", "alfa",
-                            "b", "bravo",
-                            "c", "charlie",
-                            "d", "delta",
-                            "e", "e",
-                            "f", "f",
-                            "g", "g"),
-                map);
+        Assertions.assertThat(map)
+                .containsExactly(new AbstractMap.SimpleEntry<>("a", "alfa"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("b", "bravo"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("c", "charlie"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("d", "delta"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("e", ""))
+                .containsExactly(new AbstractMap.SimpleEntry<>("f", ""))
+                .containsExactly(new AbstractMap.SimpleEntry<>("g", ""));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -290,21 +289,22 @@ public class C_DefaultMethods {
     @Test @Ignore
     public void c11_computeWithMissingEntries() {
         List<String> keys = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        Map<String, String> map = new HashMap<>(Map.of("a", "alfa",
-                                                       "b", "bravo",
-                                                       "c", "charlie",
-                                                       "d", "delta"));
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "alfa");
+        map.put("b", "bravo");
+        map.put("c", "charlie");
+        map.put("d", "delta");
 
         // TODO write code transform the map
 
-        assertEquals(Map.of("a", "ALFA",
-                            "b", "BRAVO",
-                            "c", "CHARLIE",
-                            "d", "DELTA",
-                            "e", "e",
-                            "f", "f",
-                            "g", "g"),
-                map);
+        Assertions.assertThat(map)
+                .containsExactly(new AbstractMap.SimpleEntry<>("a", "ALFA"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("b", "BRAVO"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("c", "CHARLIE"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("d", "DELTA"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("e", "e"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("f", "f"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("g", "g"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -322,21 +322,22 @@ public class C_DefaultMethods {
     @Test @Ignore
     public void c12_computeAndRemoveSomeEntries() {
         List<String> keys = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        Map<String, String> map = new HashMap<>(Map.of("a", "alfa",
-                                                       "b", "bravo",
-                                                       "c", "charlie",
-                                                       "d", "delta",
-                                                       "e", "",
-                                                       "f", "",
-                                                       "g", ""));
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "alfa");
+        map.put("b", "bravo");
+        map.put("c", "charlie");
+        map.put("d", "delta");
+        map.put("e", "");
+        map.put("f", "");
+        map.put("g", "");
 
         // TODO write code transform the map
 
-        assertEquals(Map.of("a", "ALFA",
-                            "b", "BRAVO",
-                            "c", "CHARLIE",
-                            "d", "DELTA"),
-                map);
+        Assertions.assertThat(map)
+                .containsExactly(new AbstractMap.SimpleEntry<>("a", "ALFA"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("b", "BRAVO"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("c", "CHARLIE"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("d", "DELTA"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">

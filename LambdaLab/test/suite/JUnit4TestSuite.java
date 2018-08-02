@@ -10,8 +10,7 @@ import org.junit.runners.Suite;
     exercises.C_DefaultMethods.class,
     exercises.D_SimpleStreams.class,
     exercises.E_IntermediateStreams.class,
-    exercises.F_AdvancedStreams.class,
-    exercises.G_Challenges.class
+    exercises.F_AdvancedStreams.class
 })
 public class JUnit4TestSuite {
 }
