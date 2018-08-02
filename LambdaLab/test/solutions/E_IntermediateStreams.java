@@ -338,7 +338,7 @@ public class E_IntermediateStreams {
     @Before
     public void z_setUpBufferedReader() throws IOException {
         reader = Files.newBufferedReader(
-                Paths.get("SonnetI.txt"), StandardCharsets.UTF_8);
+                Paths.get("files/SonnetI.txt"), StandardCharsets.UTF_8);
     }
 
     @After

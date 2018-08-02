@@ -150,7 +150,7 @@ public class G_MatcherScanner {
 
     @Before
     public void z_readFileIntoString() throws IOException {
-        SONNET = new String(Files.readAllBytes(Paths.get("SonnetI.txt")),
+        SONNET = new String(Files.readAllBytes(Paths.get("files/SonnetI.txt")),
                             StandardCharsets.UTF_8);
     }
 }
