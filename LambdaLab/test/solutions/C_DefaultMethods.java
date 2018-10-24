@@ -1,13 +1,9 @@
 package solutions;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -220,24 +216,25 @@ public class C_DefaultMethods {
     @Test
     public void c08_mapWithMissingValues() {
         List<String> keys = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        Map<String, String> map = new HashMap<>(Map.of("a", "alfa",
-                                                       "b", "bravo",
-                                                       "c", "charlie",
-                                                       "d", "delta"));
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "alfa");
+        map.put("b", "bravo");
+        map.put("c", "charlie");
+        map.put("d", "delta");
 
         //UNCOMMENT//// TODO write code to fix the map
         //BEGINREMOVE
         keys.forEach(key -> map.putIfAbsent(key, ""));
         //ENDREMOVE
 
-        assertEquals(Map.of("a", "alfa",
-                            "b", "bravo",
-                            "c", "charlie",
-                            "d", "delta",
-                            "e", "",
-                            "f", "",
-                            "g", ""),
-                     map);
+        Assertions.assertThat(map)
+                .containsExactly(new AbstractMap.SimpleEntry<>("a", "alfa"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("b", "bravo"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("c", "charlie"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("d", "delta"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("e", ""))
+                .containsExactly(new AbstractMap.SimpleEntry<>("f", ""))
+                .containsExactly(new AbstractMap.SimpleEntry<>("g", ""));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -253,24 +250,25 @@ public class C_DefaultMethods {
     @Test
     public void c09_mapRemoveEntriesWithEmptyValues() {
         List<String> keys = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        Map<String, String> map = new HashMap<>(Map.of("a", "alfa",
-                                                       "b", "bravo",
-                                                       "c", "charlie",
-                                                       "d", "delta",
-                                                       "e", "",
-                                                       "f", "",
-                                                       "g", ""));
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "alfa");
+        map.put("b", "bravo");
+        map.put("c", "charlie");
+        map.put("d", "delta");
+        map.put("e", "");
+        map.put("f", "");
+        map.put("g", "");
 
         //UNCOMMENT//// TODO write code to fix the map
         //BEGINREMOVE
         keys.forEach(key -> map.remove(key, ""));
         //ENDREMOVE
 
-        assertEquals(Map.of("a", "alfa",
-                            "b", "bravo",
-                            "c", "charlie",
-                            "d", "delta"),
-                     map);
+        Assertions.assertThat(map)
+                .containsExactly(new AbstractMap.SimpleEntry<>("a", "alfa"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("b", "bravo"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("c", "charlie"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("d", "delta"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -287,27 +285,28 @@ public class C_DefaultMethods {
     @Test
     public void c10_mapReplaceEmptyValues() {
         List<String> keys = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        Map<String, String> map = new HashMap<>(Map.of("a", "alfa",
-                                                       "b", "bravo",
-                                                       "c", "charlie",
-                                                       "d", "delta",
-                                                       "e", "",
-                                                       "f", "",
-                                                       "g", ""));
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "alfa");
+        map.put("b", "bravo");
+        map.put("c", "charlie");
+        map.put("d", "delta");
+        map.put("e", "");
+        map.put("f", "");
+        map.put("g", "");
 
         //UNCOMMENT//// TODO write code to fix the map
         //BEGINREMOVE
         keys.forEach(key -> map.replace(key, "", key));
         //ENDREMOVE
 
-        assertEquals(Map.of("a", "alfa",
-                            "b", "bravo",
-                            "c", "charlie",
-                            "d", "delta",
-                            "e", "e",
-                            "f", "f",
-                            "g", "g"),
-                map);
+        Assertions.assertThat(map)
+                .containsExactly(new AbstractMap.SimpleEntry<>("a", "alfa"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("b", "bravo"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("c", "charlie"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("d", "delta"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("e", ""))
+                .containsExactly(new AbstractMap.SimpleEntry<>("f", ""))
+                .containsExactly(new AbstractMap.SimpleEntry<>("g", ""));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -324,24 +323,25 @@ public class C_DefaultMethods {
     @Test
     public void c11_computeWithMissingEntries() {
         List<String> keys = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        Map<String, String> map = new HashMap<>(Map.of("a", "alfa",
-                                                       "b", "bravo",
-                                                       "c", "charlie",
-                                                       "d", "delta"));
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "alfa");
+        map.put("b", "bravo");
+        map.put("c", "charlie");
+        map.put("d", "delta");
 
         //UNCOMMENT//// TODO write code transform the map
         //BEGINREMOVE
         keys.forEach(key -> map.compute(key, (k, v) -> v == null ? k : v.toUpperCase()));
         //ENDREMOVE
 
-        assertEquals(Map.of("a", "ALFA",
-                            "b", "BRAVO",
-                            "c", "CHARLIE",
-                            "d", "DELTA",
-                            "e", "e",
-                            "f", "f",
-                            "g", "g"),
-                map);
+        Assertions.assertThat(map)
+                .containsExactly(new AbstractMap.SimpleEntry<>("a", "ALFA"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("b", "BRAVO"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("c", "CHARLIE"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("d", "DELTA"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("e", "e"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("f", "f"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("g", "g"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -359,24 +359,25 @@ public class C_DefaultMethods {
     @Test
     public void c12_computeAndRemoveSomeEntries() {
         List<String> keys = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        Map<String, String> map = new HashMap<>(Map.of("a", "alfa",
-                                                       "b", "bravo",
-                                                       "c", "charlie",
-                                                       "d", "delta",
-                                                       "e", "",
-                                                       "f", "",
-                                                       "g", ""));
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "alfa");
+        map.put("b", "bravo");
+        map.put("c", "charlie");
+        map.put("d", "delta");
+        map.put("e", "");
+        map.put("f", "");
+        map.put("g", "");
 
         //UNCOMMENT//// TODO write code transform the map
         //BEGINREMOVE
         keys.forEach(key -> map.compute(key, (k, v) -> v.isEmpty() ? null : v.toUpperCase()));
         //ENDREMOVE
 
-        assertEquals(Map.of("a", "ALFA",
-                            "b", "BRAVO",
-                            "c", "CHARLIE",
-                            "d", "DELTA"),
-                map);
+        Assertions.assertThat(map)
+                .containsExactly(new AbstractMap.SimpleEntry<>("a", "ALFA"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("b", "BRAVO"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("c", "CHARLIE"))
+                .containsExactly(new AbstractMap.SimpleEntry<>("d", "DELTA"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
