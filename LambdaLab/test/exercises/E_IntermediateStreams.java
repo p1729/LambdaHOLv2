@@ -223,9 +223,8 @@ public class E_IntermediateStreams {
 
         List<String> result = null; // TODO
 
-        assertEquals(
-            List.of(ArrayList.class, AbstractList.class, AbstractCollection.class, Object.class),
-            result);
+        List<Class<?>> classes = Arrays.asList(ArrayList.class, AbstractList.class, AbstractCollection.class, Object.class);
+        assertEquals(classes, result);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
