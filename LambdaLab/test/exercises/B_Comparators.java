@@ -3,14 +3,10 @@ package exercises;
 import java.util.Comparator;
 import java.util.function.IntBinaryOperator;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import model.Person;
 
