@@ -295,8 +295,8 @@ public class A_Lambdas {
     public void e_bifunction2() {
         BiFunction<String, String, Integer> bifunc = null; // TODO
 
-        assertThat(bifunc.apply("abcdefghi", "def").intValue()).isEqualTo(3);
-        assertThat(bifunc.apply("abcdefghi", "xyz").intValue()).isEqualTo(-1);
+        assertThat(bifunc.apply("abcdefghi", "def")).isEqualTo(3);
+        assertThat(bifunc.apply("abcdefghi", "xyz")).isEqualTo(-1);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
