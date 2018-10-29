@@ -96,7 +96,6 @@ public class C_DefaultMethods {
                 .containsEntry(1, new StringBuilder("alfa1"))
                 .containsEntry(2, new StringBuilder("bravo2"))
                 .containsEntry(3, new StringBuilder("charlie3"));
-        assertEquals(3, map.size());
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -124,7 +123,6 @@ public class C_DefaultMethods {
                 .containsEntry(1, "alfa1")
                 .containsEntry(2, "bravo2")
                 .containsEntry(3, "charlie3");
-        assertEquals(3, map.size());
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -206,6 +204,7 @@ public class C_DefaultMethods {
 
         // TODO write code to fix the map
 
+        assertThat(map.size()).isEqualTo(7);
         assertThat(map)
                 .containsEntry("a", "alfa")
                 .containsEntry("b", "bravo")
