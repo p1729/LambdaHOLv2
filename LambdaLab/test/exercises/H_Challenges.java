@@ -25,12 +25,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class H_Challenges {
 
@@ -59,29 +58,19 @@ public class H_Challenges {
      */
     @Test @Ignore
     public void h1_denormalizeMap() {
-        Map<Integer, List<String>> input = new HashMap<>();
-        input.put(4, Arrays.asList("ibex", "hedgehog", "wombat"));
-        input.put(6, Arrays.asList("ant", "beetle", "cricket"));
-        input.put(8, Arrays.asList("octopus", "spider", "squid"));
-        input.put(10, Arrays.asList("crab", "lobster", "scorpion"));
-        input.put(750, Arrays.asList("millipede"));
+        Map<Integer, List<String>> input =
+                Map.of(4, List.of("ibex", "hedgehog", "wombat"),
+                       6, List.of("ant", "beetle", "cricket"),
+                       8, List.of("octopus", "spider", "squid"),
+                       10, List.of("crab", "lobster", "scorpion"),
+                       750, List.of("millipede"));
 
         List<String> result = null; // TODO
 
-        assertEquals(13, result.size());
-        assertTrue(result.contains("ibex:4"));
-        assertTrue(result.contains("hedgehog:4"));
-        assertTrue(result.contains("wombat:4"));
-        assertTrue(result.contains("ant:6"));
-        assertTrue(result.contains("beetle:6"));
-        assertTrue(result.contains("cricket:6"));
-        assertTrue(result.contains("octopus:8"));
-        assertTrue(result.contains("spider:8"));
-        assertTrue(result.contains("squid:8"));
-        assertTrue(result.contains("crab:10"));
-        assertTrue(result.contains("lobster:10"));
-        assertTrue(result.contains("scorpion:10"));
-        assertTrue(result.contains("millipede:750"));
+        assertThat(result.size()).isEqualTo(13);
+        assertThat(result)
+                .contains("ibex:4", "hedgehog:4", "wombat:4", "ant:6", "beetle:6", "octopus:8", "spider:8",
+                          "squid:8", "crab:10", "lobster:10", "scorpion:10", "millipede:750");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -123,21 +112,22 @@ public class H_Challenges {
      */
     @Test @Ignore
     public void h2_invertMultiMap() {
-        Map<String, Set<Integer>> input = new HashMap<>();
-        input.put("a", new HashSet<>(Arrays.asList(1, 2)));
-        input.put("b", new HashSet<>(Arrays.asList(2, 3)));
-        input.put("c", new HashSet<>(Arrays.asList(1, 3)));
-        input.put("d", new HashSet<>(Arrays.asList(1, 4)));
-        input.put("e", new HashSet<>(Arrays.asList(2, 4)));
-        input.put("f", new HashSet<>(Arrays.asList(3, 4)));
+        Map<String, Set<Integer>> input =
+                Map.of("a", Set.of(1, 2),
+                       "b", Set.of(2, 3),
+                       "c", Set.of(1, 3),
+                       "d", Set.of(1, 4),
+                       "e", Set.of(2, 4),
+                       "f", Set.of(3, 4));
 
         Map<Integer, Set<String>> result = null; // TODO
 
-        assertEquals(new HashSet<>(Arrays.asList("a", "c", "d")), result.get(1));
-        assertEquals(new HashSet<>(Arrays.asList("a", "b", "e")), result.get(2));
-        assertEquals(new HashSet<>(Arrays.asList("b", "c", "f")), result.get(3));
-        assertEquals(new HashSet<>(Arrays.asList("d", "e", "f")), result.get(4));
-        assertEquals(4, result.size());
+        assertThat(result.size()).isEqualTo(4);
+        assertThat(result)
+                .containsEntry(1, Set.of("a", "c", "d"))
+                .containsEntry(2, Set.of("a", "b", "e"))
+                .containsEntry(3, Set.of("b", "c", "f"))
+                .containsEntry(4, Set.of("d", "e", "f"));
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -169,7 +159,7 @@ public class H_Challenges {
             Collector.of(null, null, null, null));
         // TODO implement a collector by replacing the nulls above
 
-        assertEquals(Arrays.asList("charlie", "foxtrot"), result);
+        assertThat(result).containsExactly("charlie", "foxtrot");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -192,7 +182,7 @@ public class H_Challenges {
 
         List<String> result = null; // TODO
 
-        assertEquals("[aaaaa, bb, cccc, d, eeeeee, aaa, fff]", result.toString());
+        assertThat(result).containsExactly("aaaaa", "bb", "cccc", "d", "eeeeee", "aaa", "fff");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -211,16 +201,15 @@ public class H_Challenges {
         Stream<String> input =
             IntStream.range(0, 100).mapToObj(String::valueOf).parallel();
 
-        Collection<String> result =
+        List<String> result =
             input.collect(Collector.of(null, null, null));
             // TODO fill in collector functions above
 
-        assertEquals(
-            IntStream.range(0, 100)
-                     .map(i -> 99 - i)
-                     .mapToObj(String::valueOf)
-                     .collect(Collectors.toList()),
-            new ArrayList<>(result));
+        List<String> expectedResult = IntStream.range(0, 100)
+                .map(i -> 99 - i)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.toList());
+        assertThat(result).isEqualTo(expectedResult);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -260,8 +249,8 @@ public class H_Challenges {
         OptionalInt result1 = majority(array1);
         OptionalInt result2 = majority(array2);
 
-        assertEquals(OptionalInt.of(24), result1);
-        assertFalse(result2.isPresent());
+        assertThat(result1).isEqualTo(OptionalInt.of(24));
+        assertThat(result2).isEmpty();
     }
 
     /**
@@ -302,12 +291,13 @@ public class H_Challenges {
         Shoe shoe3 = sup2.get();
         Shoe shoe4 = sup2.get();
 
-        assertTrue(shoe1 != shoe2);
-        assertTrue(shoe3 != shoe4);
-        assertEquals(new Shoe(9), shoe1);
-        assertEquals(shoe1, shoe2);
-        assertEquals(new Shoe(13), shoe3);
-        assertEquals(shoe3, shoe4);
+        assertThat(shoe1).isNotSameAs(shoe2);
+        assertThat(shoe3).isNotSameAs(shoe4);
+
+        assertThat(shoe1).isEqualTo(new Shoe(9));
+        assertThat(shoe1).isEqualTo(shoe2);
+        assertThat(shoe3).isEqualTo(new Shoe(13));
+        assertThat(shoe3).isEqualTo(shoe4);
     }
 
     /**
@@ -322,10 +312,11 @@ public class H_Challenges {
         Class<?> origin = ArrayList.class;
         Map<Boolean, Set<Class<?>>> result = null; // TODO
 
-        assertEquals(Map.of(false, Set.of(ArrayList.class, Object.class),
-                            true,  Set.of(List.class, RandomAccess.class, Cloneable.class,
-                                          Serializable.class, Collection.class)),
-                     result);
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result)
+                .containsEntry(false, Set.of(ArrayList.class, Object.class))
+                .containsEntry(true, Set.of(List.class, RandomAccess.class, Cloneable.class,
+                        Serializable.class, Collection.class));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
