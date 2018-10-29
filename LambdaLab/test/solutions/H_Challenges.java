@@ -1,21 +1,10 @@
 package solutions;
 
+import org.junit.Test;
+
 import java.io.Serializable;
 import java.lang.reflect.Modifier;
-import java.util.AbstractMap;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.OptionalInt;
-import java.util.RandomAccess;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
@@ -25,12 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class H_Challenges {
 
@@ -40,31 +24,31 @@ public class H_Challenges {
      * "denormalized" list of strings describing the animal, with the animal's name separated
      * by a colon from the number of legs it has. The ordering in the output list is not
      * considered significant.
-     *
+     * <p>
      * Input is Map<Integer, List<String>>:
-     *   { 4=["ibex", "hedgehog", "wombat"],
-     *     6=["ant", "beetle", "cricket"],
-     *     ...
-     *   }
-     *
+     * { 4=["ibex", "hedgehog", "wombat"],
+     * 6=["ant", "beetle", "cricket"],
+     * ...
+     * }
+     * <p>
      * Output should be a List<String>:
-     *   [ "ibex:4",
-     *     "hedgehog:4",
-     *     "wombat:4",
-     *     "ant:6",
-     *     "beetle:6",
-     *     "cricket:6",
-     *     ...
-     *   ]
+     * [ "ibex:4",
+     * "hedgehog:4",
+     * "wombat:4",
+     * "ant:6",
+     * "beetle:6",
+     * "cricket:6",
+     * ...
+     * ]
      */
     @Test
     public void h1_denormalizeMap() {
-        Map<Integer, List<String>> input = new HashMap<>();
-        input.put(4, Arrays.asList("ibex", "hedgehog", "wombat"));
-        input.put(6, Arrays.asList("ant", "beetle", "cricket"));
-        input.put(8, Arrays.asList("octopus", "spider", "squid"));
-        input.put(10, Arrays.asList("crab", "lobster", "scorpion"));
-        input.put(750, Arrays.asList("millipede"));
+        Map<Integer, List<String>> input =
+                Map.of(4, List.of("ibex", "hedgehog", "wombat"),
+                        6, List.of("ant", "beetle", "cricket"),
+                        8, List.of("octopus", "spider", "squid"),
+                        10, List.of("crab", "lobster", "scorpion"),
+                        750, List.of("millipede"));
 
         //TODO//List<String> result = null;
         //BEGINREMOVE
@@ -75,7 +59,7 @@ public class H_Challenges {
 
         List<String> result = new ArrayList<>();
         input.forEach((legs, names) ->
-                          names.forEach(name -> result.add(name + ":" + legs)));
+                names.forEach(name -> result.add(name + ":" + legs)));
 
         // Alternative solution: stream over map entries, and use flatMap to generate
         // Animal instances for each animal name with the given number of legs. This
@@ -90,20 +74,10 @@ public class H_Challenges {
 
         //ENDREMOVE
 
-        assertEquals(13, result.size());
-        assertTrue(result.contains("ibex:4"));
-        assertTrue(result.contains("hedgehog:4"));
-        assertTrue(result.contains("wombat:4"));
-        assertTrue(result.contains("ant:6"));
-        assertTrue(result.contains("beetle:6"));
-        assertTrue(result.contains("cricket:6"));
-        assertTrue(result.contains("octopus:8"));
-        assertTrue(result.contains("spider:8"));
-        assertTrue(result.contains("squid:8"));
-        assertTrue(result.contains("crab:10"));
-        assertTrue(result.contains("lobster:10"));
-        assertTrue(result.contains("scorpion:10"));
-        assertTrue(result.contains("millipede:750"));
+        assertThat(result.size()).isEqualTo(13);
+        assertThat(result)
+                .contains("ibex:4", "hedgehog:4", "wombat:4", "ant:6", "beetle:6", "octopus:8", "spider:8",
+                        "squid:8", "crab:10", "lobster:10", "scorpion:10", "millipede:750");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -118,7 +92,7 @@ public class H_Challenges {
 
     /**
      * Invert a "multi-map". (From an idea by Paul Sandoz)
-     *
+     * <p>
      * Given a Map<X, Set<Y>>, convert it to Map<Y, Set<X>>.
      * Each set member of the input map's values becomes a key in
      * the result map. Each key in the input map becomes a set member
@@ -126,42 +100,42 @@ public class H_Challenges {
      * may appear in the value set of multiple keys. In the result
      * map, that item will be a key, and its value set will be
      * its corresopnding keys from the input map.
-     *
+     * <p>
      * In this case the input is Map<String, Set<Integer>>
      * and the result is Map<Integer, Set<String>>.
-     *
+     * <p>
      * For example, if the input map is
-     *     {p=[10, 20], q=[20, 30]}
+     * {p=[10, 20], q=[20, 30]}
      * then the result map should be
-     *     {10=[p], 20=[p, q], 30=[q]}
+     * {10=[p], 20=[p, q], 30=[q]}
      * irrespective of ordering. Note that the Integer 20 appears
      * in the value sets for both p and q in the input map. Therefore,
      * in the result map, there should be a mapping with 20 as the key
      * and p and q as its value set.
-     *
+     * <p>
      * It is possible to accomplish this task using a single stream
      * pipeline (not counting nested streams), that is, in a single pass
      * over the input, without storing anything in a temporary collection.
      */
     @Test
     public void h2_invertMultiMap() {
-        Map<String, Set<Integer>> input = new HashMap<>();
-        input.put("a", new HashSet<>(Arrays.asList(1, 2)));
-        input.put("b", new HashSet<>(Arrays.asList(2, 3)));
-        input.put("c", new HashSet<>(Arrays.asList(1, 3)));
-        input.put("d", new HashSet<>(Arrays.asList(1, 4)));
-        input.put("e", new HashSet<>(Arrays.asList(2, 4)));
-        input.put("f", new HashSet<>(Arrays.asList(3, 4)));
+        Map<String, Set<Integer>> input =
+                Map.of("a", Set.of(1, 2),
+                        "b", Set.of(2, 3),
+                        "c", Set.of(1, 3),
+                        "d", Set.of(1, 4),
+                        "e", Set.of(2, 4),
+                        "f", Set.of(3, 4));
 
         //TODO//Map<Integer, Set<String>> result = null;
         //BEGINREMOVE
         Map<Integer, Set<String>> result =
-            input.entrySet().stream()
-                 .flatMap(e -> e.getValue().stream()
+                input.entrySet().stream()
+                        .flatMap(e -> e.getValue().stream()
                                 .map(v -> new AbstractMap.SimpleEntry<>(e.getKey(), v)))
-                 .collect(Collectors.groupingBy(Map.Entry::getValue,
-                                                Collectors.mapping(Map.Entry::getKey,
-                                                                   Collectors.toSet())));
+                        .collect(Collectors.groupingBy(Map.Entry::getValue,
+                                Collectors.mapping(Map.Entry::getKey,
+                                        Collectors.toSet())));
 
         // Alternatively:
         // Map<Integer, Set<String>> result =
@@ -176,11 +150,12 @@ public class H_Challenges {
 
         //ENDREMOVE
 
-        assertEquals(new HashSet<>(Arrays.asList("a", "c", "d")), result.get(1));
-        assertEquals(new HashSet<>(Arrays.asList("a", "b", "e")), result.get(2));
-        assertEquals(new HashSet<>(Arrays.asList("b", "c", "f")), result.get(3));
-        assertEquals(new HashSet<>(Arrays.asList("d", "e", "f")), result.get(4));
-        assertEquals(4, result.size());
+        assertThat(result.size()).isEqualTo(4);
+        assertThat(result)
+                .containsEntry(1, Set.of("a", "c", "d"))
+                .containsEntry(2, Set.of("a", "b", "e"))
+                .containsEntry(3, Set.of("b", "c", "f"))
+                .containsEntry(4, Set.of("d", "e", "f"));
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -205,18 +180,18 @@ public class H_Challenges {
     @Test
     public void h3_selectLongestWordsOnePass() {
         Stream<String> input = Stream.of(
-            "alfa", "bravo", "charlie", "delta",
-            "echo", "foxtrot", "golf", "hotel").parallel();
+                "alfa", "bravo", "charlie", "delta",
+                "echo", "foxtrot", "golf", "hotel").parallel();
 
         //UNCOMMENT//List<String> result = input.collect(
         //UNCOMMENT//    Collector.of(null, null, null, null));
         //UNCOMMENT//// TODO implement a collector by replacing the nulls above
         //BEGINREMOVE
         List<String> result = input.collect(
-            Collector.of(Longest::new, Longest::acc, Longest::comb, Longest::finish));
+                Collector.of(Longest::new, Longest::acc, Longest::comb, Longest::finish));
         //ENDREMOVE
 
-        assertEquals(Arrays.asList("charlie", "foxtrot"), result);
+        assertThat(result).containsExactly("charlie", "foxtrot");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -272,18 +247,18 @@ public class H_Challenges {
         //TODO//List<String> result = null;
         //BEGINREMOVE
         int[] bounds =
-            IntStream.rangeClosed(0, input.length())
-                     .filter(i -> i == 0 || i == input.length() ||
-                                  input.charAt(i-1) != input.charAt(i))
-                     .toArray();
+                IntStream.rangeClosed(0, input.length())
+                        .filter(i -> i == 0 || i == input.length() ||
+                                input.charAt(i - 1) != input.charAt(i))
+                        .toArray();
 
         List<String> result =
-            IntStream.range(1, bounds.length)
-                     .mapToObj(i -> input.substring(bounds[i-1], bounds[i]))
-                     .collect(Collectors.toList());
+                IntStream.range(1, bounds.length)
+                        .mapToObj(i -> input.substring(bounds[i - 1], bounds[i]))
+                        .collect(Collectors.toList());
         //ENDREMOVE
 
-        assertEquals("[aaaaa, bb, cccc, d, eeeeee, aaa, fff]", result.toString());
+        assertThat(result).containsExactly("aaaaa", "bb", "cccc", "d", "eeeeee", "aaa", "fff");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -300,24 +275,26 @@ public class H_Challenges {
     @Test
     public void h5_reversingCollector() {
         Stream<String> input =
-            IntStream.range(0, 100).mapToObj(String::valueOf).parallel();
+                IntStream.range(0, 100).mapToObj(String::valueOf).parallel();
 
         //UNCOMMENT//Collection<String> result =
         //UNCOMMENT//    input.collect(Collector.of(null, null, null));
         //UNCOMMENT//    // TODO fill in collector functions above
         //BEGINREMOVE
         Collection<String> result =
-            input.collect(Collector.of(ArrayDeque::new,
-                                       ArrayDeque::addFirst,
-                                       (d1, d2) -> { d2.addAll(d1); return d2; }));
+                input.collect(Collector.of(ArrayDeque::new,
+                        ArrayDeque::addFirst,
+                        (d1, d2) -> {
+                            d2.addAll(d1);
+                            return d2;
+                        }));
         //ENDREMOVE
 
-        assertEquals(
-            IntStream.range(0, 100)
-                     .map(i -> 99 - i)
-                     .mapToObj(String::valueOf)
-                     .collect(Collectors.toList()),
-            new ArrayList<>(result));
+        List<String> expectedResult = IntStream.range(0, 100)
+                .map(i -> 99 - i)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.toList());
+        assertThat(result).isEqualTo(expectedResult);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -334,7 +311,7 @@ public class H_Challenges {
      * elements are that value), and return that int value in an OptionalInt.
      * Note, return the majority int value, not the number of times it occurs.
      * If there is no majority value, return an empty OptionalInt.
-     *
+     * <p>
      * For example, given an input array [11, 12, 12] the result should be
      * an OptionalInt containing 12. Given an input array [11, 12, 13]
      * the result should be an empty OptionalInt.
@@ -344,15 +321,15 @@ public class H_Challenges {
         //TODO//return null;
         //BEGINREMOVE
         Map<Integer, Long> map =
-            Arrays.stream(array)
-                  .boxed()
-                  .collect(Collectors.groupingBy(x -> x,
-                                                 Collectors.counting()));
+                Arrays.stream(array)
+                        .boxed()
+                        .collect(Collectors.groupingBy(x -> x,
+                                Collectors.counting()));
 
         return map.entrySet().stream()
-                  .filter(e -> e.getValue() > array.length / 2)
-                  .mapToInt(Map.Entry::getKey)
-                  .findAny();
+                .filter(e -> e.getValue() > array.length / 2)
+                .mapToInt(Map.Entry::getKey)
+                .findAny();
         //ENDREMOVE
     }
     // Hint:
@@ -363,14 +340,14 @@ public class H_Challenges {
 
     @Test
     public void h6_majority() {
-        int[] array1 = { 13, 13, 24, 35, 24, 24, 35, 24, 24 };
-        int[] array2 = { 13, 13, 24, 35, 24, 24, 35, 24 };
+        int[] array1 = {13, 13, 24, 35, 24, 24, 35, 24, 24};
+        int[] array2 = {13, 13, 24, 35, 24, 24, 35, 24};
 
         OptionalInt result1 = majority(array1);
         OptionalInt result2 = majority(array2);
 
-        assertEquals(OptionalInt.of(24), result1);
-        assertFalse(result2.isPresent());
+        assertThat(result1).isEqualTo(OptionalInt.of(24));
+        assertThat(result2).isEmpty();
     }
 
     /**
@@ -397,10 +374,17 @@ public class H_Challenges {
 
     static class Shoe {
         final int size;
-        public Shoe(int size) { this.size = size; }
-        public int hashCode() { return size ^ 0xcafebabe; }
+
+        public Shoe(int size) {
+            this.size = size;
+        }
+
+        public int hashCode() {
+            return size ^ 0xcafebabe;
+        }
+
         public boolean equals(Object other) {
-            return (other instanceof Shoe) && this.size == ((Shoe)other).size;
+            return (other instanceof Shoe) && this.size == ((Shoe) other).size;
         }
     }
 
@@ -414,12 +398,13 @@ public class H_Challenges {
         Shoe shoe3 = sup2.get();
         Shoe shoe4 = sup2.get();
 
-        assertTrue(shoe1 != shoe2);
-        assertTrue(shoe3 != shoe4);
-        assertEquals(new Shoe(9), shoe1);
-        assertEquals(shoe1, shoe2);
-        assertEquals(new Shoe(13), shoe3);
-        assertEquals(shoe3, shoe4);
+        assertThat(shoe1).isNotSameAs(shoe2);
+        assertThat(shoe3).isNotSameAs(shoe4);
+
+        assertThat(shoe1).isEqualTo(new Shoe(9));
+        assertThat(shoe1).isEqualTo(shoe2);
+        assertThat(shoe3).isEqualTo(new Shoe(13));
+        assertThat(shoe3).isEqualTo(shoe4);
     }
 
     /**
@@ -435,23 +420,24 @@ public class H_Challenges {
         //TODO//Map<Boolean, Set<Class<?>>> result = null;
         //BEGINREMOVE
         Stream<Class<?>> classesAndInterfaces =
-            Stream.<Class<?>>iterate(origin, Class::getSuperclass)
-                  .takeWhile(Objects::nonNull)
-                  .flatMap(c -> Stream.of(Stream.of(c), Arrays.stream(c.getInterfaces())))
-                  .flatMap(Function.identity());
+                Stream.<Class<?>>iterate(origin, Class::getSuperclass)
+                        .takeWhile(Objects::nonNull)
+                        .flatMap(c -> Stream.of(Stream.of(c), Arrays.stream(c.getInterfaces())))
+                        .flatMap(Function.identity());
 
-        Predicate<Class<?>> isConcrete = c -> ! Modifier.isAbstract(c.getModifiers());
+        Predicate<Class<?>> isConcrete = c -> !Modifier.isAbstract(c.getModifiers());
         Predicate<Class<?>> isInterface = Class::isInterface;
 
         Map<Boolean, Set<Class<?>>> result =
-            classesAndInterfaces.filter(isInterface.or(isConcrete))
-                                .collect(Collectors.partitioningBy(isInterface, Collectors.toSet()));
+                classesAndInterfaces.filter(isInterface.or(isConcrete))
+                        .collect(Collectors.partitioningBy(isInterface, Collectors.toSet()));
         //ENDREMOVE
 
-        assertEquals(Map.of(false, Set.of(ArrayList.class, Object.class),
-                            true,  Set.of(List.class, RandomAccess.class, Cloneable.class,
-                                          Serializable.class, Collection.class)),
-                     result);
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result)
+                .containsEntry(false, Set.of(ArrayList.class, Object.class))
+                .containsEntry(true, Set.of(List.class, RandomAccess.class, Cloneable.class,
+                        Serializable.class, Collection.class));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -479,56 +465,56 @@ public class H_Challenges {
         //BEGINREMOVE
         Function<Class<?>, Stream<Class<?>>> superClasses =
                 clazz -> Stream.<Class<?>>iterate(clazz, Class::getSuperclass)
-                               .takeWhile(Objects::nonNull);
+                        .takeWhile(Objects::nonNull);
 
         Function<Stream<? extends Class<?>>, Stream<? extends Class<?>>> classAndInterfaces =
                 stream -> stream.flatMap(clazz -> Stream.of(Stream.of(clazz), Arrays.stream(clazz.getInterfaces())))
-                                .flatMap(Function.identity());
+                        .flatMap(Function.identity());
 
         Function<Class<?>, Stream<? extends Class<?>>> superClassesAndInterfaces = superClasses.andThen(classAndInterfaces);
 
-        Predicate<Class<?>> isConcrete = c -> ! Modifier.isAbstract(c.getModifiers());
+        Predicate<Class<?>> isConcrete = c -> !Modifier.isAbstract(c.getModifiers());
         Predicate<Class<?>> isInterface = Class::isInterface;
         Predicate<Class<?>> isInterfaceOrConcreteClass = isInterface.or(isConcrete);
 
         // 1) To understand the algorithm, write out the previous processing as a stream pattern.
         //    This isn't used directly, but will be converted to a collector below.
         Map<Boolean, Set<Class<?>>> unusedResult =
-            origin.stream()
-                  .flatMap(superClassesAndInterfaces)
-                  .filter(isInterfaceOrConcreteClass)
-                  .collect(Collectors.partitioningBy(isInterface,
-                                                     Collectors.toSet()));
+                origin.stream()
+                        .flatMap(superClassesAndInterfaces)
+                        .filter(isInterfaceOrConcreteClass)
+                        .collect(Collectors.partitioningBy(isInterface,
+                                Collectors.toSet()));
 
         // 2) Convert the processing to a collector
         Collector<Class<?>, ?, Map<Boolean, Set<Class<?>>>> collector =
-            Collectors.flatMapping(superClassesAndInterfaces,
-                                   Collectors.filtering(isInterfaceOrConcreteClass,
-                                                        Collectors.partitioningBy(isInterface,
-                                                                                  Collectors.toSet())));
+                Collectors.flatMapping(superClassesAndInterfaces,
+                        Collectors.filtering(isInterfaceOrConcreteClass,
+                                Collectors.partitioningBy(isInterface,
+                                        Collectors.toSet())));
 
         // 3) use it as a downstream collector
         Map<Class<?>, Map<Boolean, Set<Class<?>>>> result =
-            origin.stream()
-                  .collect(Collectors.groupingBy(Function.identity(),
-                                                 collector));
+                origin.stream()
+                        .collect(Collectors.groupingBy(Function.identity(),
+                                collector));
         //ENDREMOVE
 
-        assertEquals(
-            Map.of(
-                ArrayList.class,
-                    Map.of(false, Set.of(ArrayList.class, Object.class),
-                           true,  Set.of(List.class, RandomAccess.class, Cloneable.class,
-                                         Serializable.class, Collection.class)),
-                HashSet.class,
-                    Map.of(false, Set.of(HashSet.class, Object.class),
-                           true,  Set.of(Set.class, Cloneable.class,
-                                         Serializable.class, Collection.class)),
-                LinkedHashSet.class,
-                    Map.of(false, Set.of(LinkedHashSet.class, HashSet.class, Object.class),
-                           true,  Set.of(Set.class, Cloneable.class,
-                                         Serializable.class, Collection.class))),
-            result);
+        assertThat(result).isEqualTo(
+                Map.of(
+                        ArrayList.class,
+                        Map.of(false, Set.of(ArrayList.class, Object.class),
+                                true, Set.of(List.class, RandomAccess.class, Cloneable.class,
+                                        Serializable.class, Collection.class)),
+                        HashSet.class,
+                        Map.of(false, Set.of(HashSet.class, Object.class),
+                                true, Set.of(Set.class, Cloneable.class,
+                                        Serializable.class, Collection.class)),
+                        LinkedHashSet.class,
+                        Map.of(false, Set.of(LinkedHashSet.class, HashSet.class, Object.class),
+                                true, Set.of(Set.class, Cloneable.class,
+                                        Serializable.class, Collection.class)))
+        );
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">

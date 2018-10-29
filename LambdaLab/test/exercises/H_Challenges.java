@@ -1,35 +1,18 @@
 package exercises;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
 import java.io.Serializable;
-import java.lang.reflect.Modifier;
-import java.util.AbstractMap;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.OptionalInt;
-import java.util.RandomAccess;
-import java.util.Set;
-import java.util.function.Function;
+import java.util.*;
 import java.util.function.IntFunction;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class H_Challenges {
 
@@ -342,21 +325,21 @@ public class H_Challenges {
         List<Class<?>> origin = List.of(ArrayList.class, HashSet.class, LinkedHashSet.class);
         Map<Class<?>, Map<Boolean, Set<Class<?>>>> result = null; // TODO
 
-        assertEquals(
-            Map.of(
-                ArrayList.class,
-                    Map.of(false, Set.of(ArrayList.class, Object.class),
-                           true,  Set.of(List.class, RandomAccess.class, Cloneable.class,
-                                         Serializable.class, Collection.class)),
-                HashSet.class,
-                    Map.of(false, Set.of(HashSet.class, Object.class),
-                           true,  Set.of(Set.class, Cloneable.class,
-                                         Serializable.class, Collection.class)),
-                LinkedHashSet.class,
-                    Map.of(false, Set.of(LinkedHashSet.class, HashSet.class, Object.class),
-                           true,  Set.of(Set.class, Cloneable.class,
-                                         Serializable.class, Collection.class))),
-            result);
+        assertThat(result).isEqualTo(
+                Map.of(
+                        ArrayList.class,
+                        Map.of(false, Set.of(ArrayList.class, Object.class),
+                                true, Set.of(List.class, RandomAccess.class, Cloneable.class,
+                                        Serializable.class, Collection.class)),
+                        HashSet.class,
+                        Map.of(false, Set.of(HashSet.class, Object.class),
+                                true, Set.of(Set.class, Cloneable.class,
+                                        Serializable.class, Collection.class)),
+                        LinkedHashSet.class,
+                        Map.of(false, Set.of(LinkedHashSet.class, HashSet.class, Object.class),
+                                true, Set.of(Set.class, Cloneable.class,
+                                        Serializable.class, Collection.class)))
+        );
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
