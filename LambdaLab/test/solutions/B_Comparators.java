@@ -6,6 +6,7 @@ import java.util.function.IntBinaryOperator;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -38,9 +39,9 @@ public class B_Comparators {
         Comparator<String> compareByLength = Comparator.comparing(String::length);
         //ENDREMOVE
 
-        assertTrue(compareByLength.compare("FOUR", "TWO") > 0);
-        assertTrue(compareByLength.compare("ONE", "SEVEN") < 0);
-        assertTrue(compareByLength.compare("ONE", "TWO") == 0);
+        assertThat(compareByLength.compare("FOUR", "TWO")).isGreaterThan(0);
+        assertThat(compareByLength.compare("ONE", "SEVEN")).isLessThan(0);
+        assertThat(compareByLength.compare("ONE", "TWO")).isEqualTo(0);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -61,11 +62,11 @@ public class B_Comparators {
                 Comparator.comparing(String::length).thenComparing(Comparator.naturalOrder());
         //ENDREMOVE
 
-        assertTrue(compareByLengthThenAlphabetical.compare("FOUR", "TWO") > 0);
-        assertTrue(compareByLengthThenAlphabetical.compare("ONE", "SEVEN") < 0);
-        assertTrue(compareByLengthThenAlphabetical.compare("ONE", "TWO") < 0);
-        assertTrue(compareByLengthThenAlphabetical.compare("FOUR", "FIVE") > 0);
-        assertTrue(compareByLengthThenAlphabetical.compare("EIGHT", "EIGHT") == 0);
+        assertThat(compareByLengthThenAlphabetical.compare("FOUR", "TWO")).isGreaterThan(0);
+        assertThat(compareByLengthThenAlphabetical.compare("ONE", "SEVEN")).isLessThan(0);
+        assertThat(compareByLengthThenAlphabetical.compare("ONE", "TWO")).isLessThan(0);
+        assertThat(compareByLengthThenAlphabetical.compare("FOUR", "FIVE")).isGreaterThan(0);
+        assertThat(compareByLengthThenAlphabetical.compare("EIGHT", "EIGHT")).isEqualTo(0);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -85,9 +86,9 @@ public class B_Comparators {
         Comparator<Person> comparebyLastName = Comparator.comparing(Person::getLastName);
         //ENDREMOVE
 
-        assertTrue(comparebyLastName.compare(michael, rod) < 0);
-        assertTrue(comparebyLastName.compare(paul, paul) == 0);
-        assertTrue(comparebyLastName.compare(michael, jermaine) == 0);
+        assertThat(comparebyLastName.compare(michael, rod)).isLessThan(0);
+        assertThat(comparebyLastName.compare(paul, paul)).isEqualTo(0);
+        assertThat(comparebyLastName.compare(michael, jermaine)).isEqualTo(0);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -109,9 +110,9 @@ public class B_Comparators {
                           .thenComparing(Person::getFirstName);
         //ENDREMOVE
 
-        assertTrue(comparebyLastNameThenFirstName.compare(michael, rod) < 0);
-        assertTrue(comparebyLastNameThenFirstName.compare(paul, paul) == 0);
-        assertTrue(comparebyLastNameThenFirstName.compare(michael, jermaine) > 0);
+        assertThat(comparebyLastNameThenFirstName.compare(michael, rod)).isLessThan(0);
+        assertThat(comparebyLastNameThenFirstName.compare(paul, paul)).isEqualTo(0);
+        assertThat(comparebyLastNameThenFirstName.compare(michael, jermaine)).isGreaterThan(0);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -132,9 +133,9 @@ public class B_Comparators {
                           .reversed();
         //ENDREMOVE
 
-        assertFalse(comparebyLastNameThenFirstNameReversed.compare(michael, rod) < 0);
-        assertTrue(comparebyLastNameThenFirstNameReversed.compare(paul, paul) == 0);
-        assertFalse(comparebyLastNameThenFirstNameReversed.compare(michael, jermaine) > 0);
+        assertThat(comparebyLastNameThenFirstNameReversed.compare(michael, rod)).isGreaterThan(0);
+        assertThat(comparebyLastNameThenFirstNameReversed.compare(paul, paul)).isEqualTo(0);
+        assertThat(comparebyLastNameThenFirstNameReversed.compare(michael, jermaine)).isLessThan(0);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -156,11 +157,11 @@ public class B_Comparators {
                               .thenComparing(Person::getFirstName));
         //ENDREMOVE
 
-        assertTrue(comparebyLastNameThenFirstNameWithNull.compare(michael, rod) < 0);
-        assertTrue(comparebyLastNameThenFirstNameWithNull.compare(paul, paul) == 0);
-        assertTrue(comparebyLastNameThenFirstNameWithNull.compare(michael, jermaine) > 0);
-        assertTrue(comparebyLastNameThenFirstNameWithNull.compare(mick, null) < 0);
-        assertTrue(comparebyLastNameThenFirstNameWithNull.compare(null, mick) > 0);
+        assertThat(comparebyLastNameThenFirstNameWithNull.compare(michael, rod)).isLessThan(0);
+        assertThat(comparebyLastNameThenFirstNameWithNull.compare(paul, paul)).isEqualTo(0);
+        assertThat(comparebyLastNameThenFirstNameWithNull.compare(michael, jermaine)).isGreaterThan(0);
+        assertThat(comparebyLastNameThenFirstNameWithNull.compare(mick, null)).isLessThan(0);
+        assertThat(comparebyLastNameThenFirstNameWithNull.compare(null, mick)).isGreaterThan(0);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -178,9 +179,9 @@ public class B_Comparators {
         Comparator<Person> comparebyAge = Comparator.comparingInt(Person::getAge);
         //ENDREMOVE
 
-        assertTrue(comparebyAge.compare(michael, rod) < 0);
-        assertTrue(comparebyAge.compare(paul, paul) == 0);
-        assertTrue(comparebyAge.compare(mick, jermaine) > 0);
+        assertThat(comparebyAge.compare(michael, rod)).isLessThan(0);
+        assertThat(comparebyAge.compare(paul, paul)).isEqualTo(0);
+        assertThat(comparebyAge.compare(mick, jermaine)).isGreaterThan(0);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -204,11 +205,11 @@ public class B_Comparators {
         // IntBinaryOperator intCompare = (a, b) -> a - b;
         //ENDREMOVE
 
-        assertTrue(intCompare.applyAsInt(0, 1) < 0);
-        assertTrue(intCompare.applyAsInt(1, 1) == 0);
-        assertTrue(intCompare.applyAsInt(2, 1) > 0);
-        assertTrue(intCompare.applyAsInt(Integer.MIN_VALUE, Integer.MAX_VALUE) < 0);
-        assertTrue(intCompare.applyAsInt(Integer.MAX_VALUE, Integer.MIN_VALUE) > 0);
+        assertThat(intCompare.applyAsInt(0, 1)).isLessThan(0);
+        assertThat(intCompare.applyAsInt(1, 1)).isEqualTo(0);
+        assertThat(intCompare.applyAsInt(2, 1)).isGreaterThan(0);
+        assertThat(intCompare.applyAsInt(Integer.MIN_VALUE, Integer.MAX_VALUE)).isLessThan(0);
+        assertThat(intCompare.applyAsInt(Integer.MAX_VALUE, Integer.MIN_VALUE)).isGreaterThan(0);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -227,11 +228,11 @@ public class B_Comparators {
         IntBinaryOperator intCompare = Integer::compare;
         //ENDREMOVE
 
-        assertTrue(intCompare.applyAsInt(0, 1) < 0);
-        assertTrue(intCompare.applyAsInt(1, 1) == 0);
-        assertTrue(intCompare.applyAsInt(2, 1) > 0);
-        assertTrue(intCompare.applyAsInt(Integer.MIN_VALUE, Integer.MAX_VALUE) < 0);
-        assertTrue(intCompare.applyAsInt(Integer.MAX_VALUE, Integer.MIN_VALUE) > 0);
+        assertThat(intCompare.applyAsInt(0, 1)).isLessThan(0);
+        assertThat(intCompare.applyAsInt(1, 1)).isEqualTo(0);
+        assertThat(intCompare.applyAsInt(2, 1)).isGreaterThan(0);
+        assertThat(intCompare.applyAsInt(Integer.MIN_VALUE, Integer.MAX_VALUE)).isLessThan(0);
+        assertThat(intCompare.applyAsInt(Integer.MAX_VALUE, Integer.MIN_VALUE)).isGreaterThan(0);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -257,12 +258,12 @@ public class B_Comparators {
         DoubleToIntBiFunction doubleCompare = Double::compare;
         //ENDREMOVE
 
-        assertTrue(doubleCompare.applyAsInt(0.0, 1.0) < 0);
-        assertTrue(doubleCompare.applyAsInt(1.0, 1.0) == 0);
-        assertTrue(doubleCompare.applyAsInt(2.0, 1.0) > 0);
-        assertTrue(doubleCompare.applyAsInt(Double.NaN, Double.NaN) == 0);
-        assertTrue(doubleCompare.applyAsInt(Double.NaN, 0.0) > 0);
-        assertTrue(doubleCompare.applyAsInt(0.0, Double.NaN) < 0);
+        assertThat(doubleCompare.applyAsInt(0.0, 1.0)).isLessThan(0);
+        assertThat(doubleCompare.applyAsInt(1.0, 1.0)).isEqualTo(0);
+        assertThat(doubleCompare.applyAsInt(2.0, 1.0)).isGreaterThan(0);
+        assertThat(doubleCompare.applyAsInt(Double.NaN, Double.NaN)).isEqualTo(0);
+        assertThat(doubleCompare.applyAsInt(Double.NaN, 0.0)).isGreaterThan(0);
+        assertThat(doubleCompare.applyAsInt(0.0, Double.NaN)).isLessThan(0);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
