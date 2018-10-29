@@ -1,32 +1,22 @@
 package solutions;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * This set of exercises covers advanced stream operations,
@@ -34,6 +24,8 @@ import static org.junit.Assert.assertTrue;
  * and customized collectors.
  */
 public class F_AdvancedStreams {
+
+    public static final String SONNET_PATH = "LambdaLab/files/SonnetI.txt";
 
     /**
      * Categorize the words from the text file into a map, where the map's key
@@ -55,12 +47,26 @@ public class F_AdvancedStreams {
                   .collect(Collectors.groupingBy(String::length));
         //ENDREMOVE
 
-        assertEquals(10, result.get(7).size());
-        assertEquals(new HashSet<>(Arrays.asList("beauty's", "increase", "ornament")), new HashSet<>(result.get(8)));
-        assertEquals(new HashSet<>(Arrays.asList("abundance", "creatures")), new HashSet<>(result.get(9)));
-        assertEquals(new HashSet<>(Arrays.asList("contracted", "niggarding")), new HashSet<>(result.get(10)));
-        assertEquals(Arrays.asList("substantial"), result.get(11));
-        assertFalse(result.containsKey(12));
+        assertThat(result.size()).isEqualTo(11);
+        assertThat(result)
+                .containsEntry(1, List.of("a"))
+                .containsEntry(2, List.of("we", "as", "by", "to", "to", "to", "in", "or", "be", "To", "by"))
+                .containsEntry(3, List.of("die", "But", "the", "His", "his", "But", "own", "thy", "Thy", "thy",
+                        "foe", "thy", "too", "art", "now", "the", "And", "the", "own", "bud",
+                        "thy", "And", "the", "eat", "the", "due", "the", "and"))
+                .containsEntry(4, List.of("From", "That", "rose", "time", "heir", "bear", "thou", "eyes", "with",
+                        "self", "fuel", "lies", "self", "self", "Thou", "that", "only", "Pity",
+                        "else", "this", "thee"))
+                .containsEntry(5, List.of("might", "never", "riper", "might", "thine", "flame", "where", "sweet",
+                        "cruel", "fresh", "gaudy", "thine", "churl", "waste", "world", "grave"))
+                .containsEntry(6, List.of("desire", "should", "tender", "memory", "bright", "Making", "famine",
+                        "herald", "spring", "Within", "tender", "mak'st"))
+                .containsEntry(7, List.of("fairest", "thereby", "decease", "Feed'st", "light's", "world's",
+                        "buriest", "content", "glutton", "world's"))
+                .containsEntry(8, List.of("increase", "beauty's", "ornament"))
+                .containsEntry(9, List.of("creatures", "abundance"))
+                .containsEntry(10, List.of("contracted", "niggarding"))
+                .containsEntry(11, List.of("substantial"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -87,21 +93,19 @@ public class F_AdvancedStreams {
                   .collect(Collectors.groupingBy(String::length, Collectors.counting()));
         //ENDREMOVE
 
-        assertEquals( 1L, (long)result.get(1));
-        assertEquals(11L, (long)result.get(2));
-        assertEquals(28L, (long)result.get(3));
-        assertEquals(21L, (long)result.get(4));
-        assertEquals(16L, (long)result.get(5));
-        assertEquals(12L, (long)result.get(6));
-        assertEquals(10L, (long)result.get(7));
-        assertEquals( 3L, (long)result.get(8));
-        assertEquals( 2L, (long)result.get(9));
-        assertEquals( 2L, (long)result.get(10));
-        assertEquals( 1L, (long)result.get(11));
-
-        IntSummaryStatistics stats = result.keySet().stream().mapToInt(i -> i).summaryStatistics();
-        assertEquals("min key",  1, stats.getMin());
-        assertEquals("max key", 11, stats.getMax());
+        assertThat(result.size()).isEqualTo(11);
+        assertThat(result)
+                .containsEntry(1, 1L)
+                .containsEntry(2, 11L)
+                .containsEntry(3, 28L)
+                .containsEntry(4, 21L)
+                .containsEntry(5, 16L)
+                .containsEntry(6, 12L)
+                .containsEntry(7, 10L)
+                .containsEntry(8, 3L)
+                .containsEntry(9, 2L)
+                .containsEntry(10, 2L)
+                .containsEntry(11, 1L);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -142,14 +146,16 @@ public class F_AdvancedStreams {
             //                          Long::sum));
         //ENDREMOVE
 
-        assertEquals(2L, (long)result.get("tender"));
-        assertEquals(6L, (long)result.get("the"));
-        assertEquals(1L, (long)result.get("churl"));
-        assertEquals(2L, (long)result.get("thine"));
-        assertEquals(1L, (long)result.get("world"));
-        assertEquals(4L, (long)result.get("thy"));
-        assertEquals(3L, (long)result.get("self"));
-        assertFalse(result.containsKey("lambda"));
+        assertThat(result.size()).isEqualTo(87);
+        assertThat(result)
+                .containsEntry("tender", 2L)
+                .containsEntry("the", 6L)
+                .containsEntry("churl", 1L)
+                .containsEntry("thine", 2L)
+                .containsEntry("world", 1L)
+                .containsEntry("thy", 4L)
+                .containsEntry("self", 3L);
+        assertThat(result).doesNotContainKey("lambda");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -188,15 +194,26 @@ public class F_AdvancedStreams {
                                                  Collectors.groupingBy(String::length)));
         //ENDREMOVE
 
-        assertEquals("[abundance]", result.get("a").get(9).toString());
-        assertEquals("[by, be, by]", result.get("b").get(2).toString());
-        assertEquals("[flame, fresh]", result.get("f").get(5).toString());
-        assertEquals("[gaudy, grave]", result.get("g").get(5).toString());
-        assertEquals("[should, spring]", result.get("s").get(6).toString());
-        assertEquals("[substantial]", result.get("s").get(11).toString());
-        assertEquals("[the, thy, thy, thy, too, the, the, thy, the, the, the]",
-            result.get("t").get(3).toString());
-        assertEquals("[where, waste, world]", result.get("w").get(5).toString());
+        assertThat(result.size()).isEqualTo(25);
+        assertThat(result)
+                .containsEntry("A", Map.of(3, List.of("And", "And")))
+                .containsEntry("a", Map.of(1, List.of("a"),
+                        2, List.of("as") ,
+                        3, List.of("art", "and") ,
+                        9, List.of("abundance")))
+                .containsEntry("b", Map.of(2, List.of("by", "be", "by"),
+                        3, List.of("bud") ,
+                        4, List.of("bear") ,
+                        6, List.of("bright"),
+                        7, List.of("buriest"),
+                        8, List.of("beauty's")))
+                .containsEntry("i", Map.of(2, List.of("in"),
+                        8, List.of("increase")))
+                .containsEntry("l", Map.of(4, List.of("lies"),
+                        7, List.of("light's")))
+                .containsEntry("r", Map.of(4, List.of("rose"),
+                        5, List.of("riper")))
+        ;
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -230,8 +247,8 @@ public class F_AdvancedStreams {
         int sumOdds  = sums.get(true);
         //ENDREMOVE
 
-        assertEquals(516, sumEvens);
-        assertEquals(614, sumOdds);
+        assertThat(sumEvens).isEqualTo(516);
+        assertThat(sumOdds).isEqualTo(614);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -273,7 +290,7 @@ public class F_AdvancedStreams {
                  .toString();
         //ENDREMOVE
 
-        assertEquals("tsrqponmlkjihgfedcbaabcdefghijklmnopqrst", result);
+        assertThat(result).isEqualTo("tsrqponmlkjihgfedcbaabcdefghijklmnopqrst");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -350,8 +367,8 @@ public class F_AdvancedStreams {
                                 TotalAndDistinct::accumulate,
                                 TotalAndDistinct::combine);
 
-        assertEquals("distinct count", 81, totalAndDistinct.getDistinctCount());
-        assertEquals("total count", 10700, totalAndDistinct.getTotalCount());
+        assertThat(totalAndDistinct.getDistinctCount()).isEqualTo(81);
+        assertThat(totalAndDistinct.getTotalCount()).isEqualTo(10700);
     }
 
 // ========================================================
@@ -368,7 +385,7 @@ public class F_AdvancedStreams {
     @Before
     public void z_setUpBufferedReader() throws IOException {
         reader = Files.newBufferedReader(
-                Paths.get("files/SonnetI.txt"), StandardCharsets.UTF_8);
+                Paths.get(SONNET_PATH), StandardCharsets.UTF_8);
     }
 
     @After

@@ -25,6 +25,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class F_AdvancedStreams {
 
+    public static final String SONNET_PATH = "LambdaLab/files/SonnetI.txt";
+
     /**
      * Categorize the words from the text file into a map, where the map's key
      * is the length of each word, and the value corresponding to a key is a
@@ -326,7 +328,7 @@ public class F_AdvancedStreams {
     @Before
     public void z_setUpBufferedReader() throws IOException {
         reader = Files.newBufferedReader(
-                Paths.get("LambdaLab/files/SonnetI.txt"), StandardCharsets.UTF_8);
+                Paths.get(SONNET_PATH), StandardCharsets.UTF_8);
     }
 
     @After
