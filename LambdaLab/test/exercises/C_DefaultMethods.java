@@ -92,10 +92,10 @@ public class C_DefaultMethods {
         // TODO write code to modify map
 
         assertThat(map.size()).isEqualTo(3);
-        assertThat(map)
-                .containsEntry(1, new StringBuilder("alfa1"))
-                .containsEntry(2, new StringBuilder("bravo2"))
-                .containsEntry(3, new StringBuilder("charlie3"));
+        assertThat(valuesToString(map))
+                .containsEntry(1, "alfa1")
+                .containsEntry(2, "bravo2")
+                .containsEntry(3, "charlie3");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -354,4 +354,9 @@ public class C_DefaultMethods {
     // Check the Map.compute() default method, read the Javadoc carefully
     // for the handling of null values returned from the function.
     // </editor-fold>
+
+    private Map<Integer, String> valuesToString(Map<Integer, StringBuilder> map) {
+        return map.entrySet().stream().collect(
+                Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().toString()));
+    }
 }
