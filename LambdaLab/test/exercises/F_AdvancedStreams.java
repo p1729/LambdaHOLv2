@@ -158,19 +158,6 @@ public class F_AdvancedStreams {
         Map<String, Map<Integer, List<String>>> result = null; // TODO
 
 
-        result =
-                reader.lines().flatMap(SPLIT_PATTERN::splitAsStream)
-                .collect(
-                        Collectors.groupingBy(
-                                word -> word.substring(0, 1),
-                                Collectors.groupingBy(
-                                        String::length
-                                )
-                        )
-                );
-
-        System.out.println("result = " + result);
-
         assertThat(result.size()).isEqualTo(25);
         assertThat(result)
                 .containsEntry("A", Map.of(3, List.of("And", "And")))
