@@ -1,5 +1,9 @@
 package solutions;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -11,23 +15,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * This set of exercises covers simple stream pipelines,
  * including intermediate operations and basic collectors.
- *
+ * <p>
  * Some of these exercises use a BufferedReader variable
  * named "reader" that the test has set up for you.
  */
 public class D_SimpleStreams {
+
+    public static final String SONNET_PATH = "LambdaLab/files/SonnetI.txt";
+
     /**
      * Given a list of words, create an output list that contains
      * only the odd-length words, converted to upper case.
@@ -35,21 +35,21 @@ public class D_SimpleStreams {
     @Test
     public void d1_upcaseOddLengthWords() {
         List<String> input = Arrays.asList(
-            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
+                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
 
         //TODO//List<String> result = null;
         //BEGINREMOVE
         List<String> result =
-            input.stream()
-                 .filter(w -> (w.length() & 1) == 1)
-                 .map(String::toUpperCase)
-                 .collect(Collectors.toList());
-            // Alternatives:
-            // Instead of w -> (w.length() & 1) == 1, use w -> (w.length() % 2) != 0
-            // Instead of String::toUpperCase, use w -> w.toUpperCase()
+                input.stream()
+                        .filter(w -> (w.length() & 1) == 1)
+                        .map(String::toUpperCase)
+                        .collect(Collectors.toList());
+        // Alternatives:
+        // Instead of w -> (w.length() & 1) == 1, use w -> (w.length() % 2) != 0
+        // Instead of String::toUpperCase, use w -> w.toUpperCase()
         //ENDREMOVE
 
-        assertEquals(Arrays.asList("BRAVO", "CHARLIE", "DELTA", "FOXTROT"), result);
+        assertThat(result).containsExactly("BRAVO", "CHARLIE", "DELTA", "FOXTROT");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -70,19 +70,19 @@ public class D_SimpleStreams {
     @Test
     public void d2_joinStreamRange() {
         List<String> input = Arrays.asList(
-            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
+                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
 
         //TODO//String result = "";
         //BEGINREMOVE
         String result =
-            input.stream()
-                 .skip(2)
-                 .limit(3)
-                 .map(word -> word.substring(1, 2))
-                 .collect(Collectors.joining(","));
+                input.stream()
+                        .skip(2)
+                        .limit(3)
+                        .map(word -> word.substring(1, 2))
+                        .collect(Collectors.joining(","));
         //ENDREMOVE
 
-        assertEquals("h,e,c", result);
+        assertThat(result).isEqualTo("h,e,c");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -106,10 +106,10 @@ public class D_SimpleStreams {
         //TODO//long count = 0;
         //BEGINREMOVE
         long count = reader.lines()
-                           .count();
+                .count();
         //ENDREMOVE
 
-        assertEquals(14, count);
+        assertThat(count).isEqualTo(14);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -131,13 +131,13 @@ public class D_SimpleStreams {
         //TODO//int longestLength = 0;
         //BEGINREMOVE
         int longestLength =
-            reader.lines()
-                  .mapToInt(String::length)
-                  .max()
-                  .orElse(0);
+                reader.lines()
+                        .mapToInt(String::length)
+                        .max()
+                        .orElse(0);
         //ENDREMOVE
 
-        assertEquals(53, longestLength);
+        assertThat(longestLength).isEqualTo(53);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -164,16 +164,16 @@ public class D_SimpleStreams {
         //TODO//String longest = null;
         //BEGINREMOVE
         String longest =
-            reader.lines()
-                  .max(Comparator.comparingInt(String::length))
-                  .orElse("");
-            // Alternative:
-            // Instead of Comparator.comparingInt(String::length), one could
-            // use something like:
-            //     (s1, s2) -> Integer.compare(s1.length(), s2.length())
+                reader.lines()
+                        .max(Comparator.comparingInt(String::length))
+                        .orElse("");
+        // Alternative:
+        // Instead of Comparator.comparingInt(String::length), one could
+        // use something like:
+        //     (s1, s2) -> Integer.compare(s1.length(), s2.length())
         //ENDREMOVE
 
-        assertEquals("Feed'st thy light's flame with self-substantial fuel,", longest);
+        assertThat(longest).isEqualTo("Feed'st thy light's flame with self-substantial fuel,");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -192,21 +192,21 @@ public class D_SimpleStreams {
     @Test
     public void d6_selectLongestWords() {
         List<String> input = Arrays.asList(
-            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
+                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
 
         //TODO//List<String> result = null;
         //BEGINREMOVE
         int max = input.stream()
-                       .mapToInt(String::length)
-                       .max()
-                       .orElse(-1);
+                .mapToInt(String::length)
+                .max()
+                .orElse(-1);
 
         List<String> result = input.stream()
-                                   .filter(s -> s.length() == max)
-                                   .collect(Collectors.toList());
+                .filter(s -> s.length() == max)
+                .collect(Collectors.toList());
         //ENDREMOVE
 
-        assertEquals(Arrays.asList("charlie", "foxtrot"), result);
+        assertThat(result).containsExactly("charlie", "foxtrot");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -220,18 +220,18 @@ public class D_SimpleStreams {
     @Test
     public void d7_selectByLengthAndPosition() {
         List<String> input = Arrays.asList(
-            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
+                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
 
         //TODO//List<String> result = null;
         //BEGINREMOVE
         List<String> result =
-            IntStream.range(0, input.size())
-                     .filter(pos -> input.get(pos).length() > pos)
-                     .mapToObj(pos -> input.get(pos))
-                     .collect(Collectors.toList());
+                IntStream.range(0, input.size())
+                        .filter(pos -> input.get(pos).length() > pos)
+                        .mapToObj(pos -> input.get(pos))
+                        .collect(Collectors.toList());
         //ENDREMOVE
 
-        assertEquals(Arrays.asList("alfa", "bravo", "charlie", "delta", "foxtrot"), result);
+        assertThat(result).containsExactly("alfa", "bravo", "charlie", "delta", "foxtrot");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -251,7 +251,7 @@ public class D_SimpleStreams {
     @Before
     public void z_setUpBufferedReader() throws IOException {
         reader = Files.newBufferedReader(
-                Paths.get("files/SonnetI.txt"), StandardCharsets.UTF_8);
+                Paths.get(SONNET_PATH), StandardCharsets.UTF_8);
     }
 
     @After
