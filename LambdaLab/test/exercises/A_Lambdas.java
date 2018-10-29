@@ -29,7 +29,7 @@ public class A_Lambdas {
         Predicate<String> pred = null; // TODO
 
         assertThat(pred.test("abcde")).isTrue();
-        assertThat(pred.test("abc")).isTrue();
+        assertThat(pred.test("abc")).isFalse();
     }
 
     /**
