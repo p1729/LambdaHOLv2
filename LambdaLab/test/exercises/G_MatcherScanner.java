@@ -24,6 +24,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * use the new JDK 9 pattern matching APIs.
  */
 public class G_MatcherScanner {
+
+    public static final String SONNET_PATH = "LambdaLab/files/SonnetI.txt";
+
     /**
      * Shakespeare used "poetic contractions" which (for purposes of this exercise)
      * are words that have an apostrophe (') in a position farther than one letter from
@@ -124,7 +127,7 @@ public class G_MatcherScanner {
 
     @Before
     public void z_readFileIntoString() throws IOException {
-        SONNET = new String(Files.readAllBytes(Paths.get("files/SonnetI.txt")),
+        SONNET = new String(Files.readAllBytes(Paths.get(SONNET_PATH)),
                             StandardCharsets.UTF_8);
     }
 }

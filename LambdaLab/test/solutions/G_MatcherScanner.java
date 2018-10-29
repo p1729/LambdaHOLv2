@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -28,6 +29,9 @@ import static org.junit.Assert.assertTrue;
  * use the new JDK 9 pattern matching APIs.
  */
 public class G_MatcherScanner {
+
+    public static final String SONNET_PATH = "LambdaLab/files/SonnetI.txt";
+
     /**
      * Shakespeare used "poetic contractions" which (for purposes of this exercise)
      * are words that have an apostrophe (') in a position farther than one letter from
@@ -50,7 +54,7 @@ public class G_MatcherScanner {
                                      .collect(Collectors.toSet());
         //ENDREMOVE
 
-        assertEquals(Set.of("Feed'st", "mak'st"), result);
+        assertThat(result).isEqualTo(Set.of("Feed'st", "mak'st"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -71,7 +75,7 @@ public class G_MatcherScanner {
                                                 .collect(Collectors.toSet());
         //ENDREMOVE
 
-        assertEquals(Set.of("Feed'st", "mak'st"), result);
+        assertThat(result).isEqualTo(Set.of("Feed'st", "mak'st"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -93,8 +97,8 @@ public class G_MatcherScanner {
                                     .replaceAll(mr -> "[" + mr.group().toUpperCase() + "]");
         //ENDREMOVE
 
-        assertTrue(result.contains("b[EAU]ty's"));
-        assertEquals(614, result.length());
+        assertThat(result).contains("b[EAU]ty's");
+        assertThat(result.length()).isEqualTo(614);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -122,7 +126,7 @@ public class G_MatcherScanner {
                             .orElseThrow(AssertionError::new);
         //ENDREMOVE
 
-        assertEquals("contracted", result);
+        assertThat(result).isEqualTo("contracted");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -150,7 +154,7 @@ public class G_MatcherScanner {
 
     @Before
     public void z_readFileIntoString() throws IOException {
-        SONNET = new String(Files.readAllBytes(Paths.get("files/SonnetI.txt")),
+        SONNET = new String(Files.readAllBytes(Paths.get(SONNET_PATH)),
                             StandardCharsets.UTF_8);
     }
 }
