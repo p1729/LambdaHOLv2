@@ -1,14 +1,13 @@
 package exercises;
 
-import java.util.Comparator;
-import java.util.function.IntBinaryOperator;
-
+import model.Person;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Comparator;
+import java.util.function.IntBinaryOperator;
 
-import model.Person;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Exercises to create comparators using lambda expressions
@@ -29,7 +28,8 @@ public class B_Comparators {
      * Write a Comparator that compare intances of String using their length.
      * For instance FOUR (4 letters) is greater than TWO (three letters)
      */
-    @Test @Ignore
+    @Test
+    @Ignore
     public void comparator01() {
         Comparator<String> compareByLength = null; // TODO
 
@@ -48,7 +48,8 @@ public class B_Comparators {
      * Write a Comparator that compare intances of String using their length.
      * If the lengths are the same, then use the alphabetical order.
      */
-    @Test @Ignore
+    @Test
+    @Ignore
     public void comparator02() {
         Comparator<String> compareByLengthThenAlphabetical = null; // TODO
 
@@ -69,7 +70,8 @@ public class B_Comparators {
     /**
      * Write a Comparator that compares instances of Person using their lastName.
      */
-    @Test @Ignore
+    @Test
+    @Ignore
     public void comparator03() {
         Comparator<Person> comparebyLastName = null; // TODO
 
@@ -88,7 +90,8 @@ public class B_Comparators {
      * Write a Comparator that compares instances of Person using their
      * lastName, and if their last name is the same, uses their first name.
      */
-    @Test @Ignore
+    @Test
+    @Ignore
     public void comparator04() {
         Comparator<Person> comparebyLastNameThenFirstName = null; // TODO
 
@@ -105,7 +108,8 @@ public class B_Comparators {
      * Write a Comparator that compares the people in the order reversed from
      * the one you wrote in the comparator04() exercise.
      */
-    @Test @Ignore
+    @Test
+    @Ignore
     public void comparator05() {
         Comparator<Person> comparebyLastNameThenFirstNameReversed = null; // TODO
 
@@ -123,7 +127,8 @@ public class B_Comparators {
      * one you wrote in comparator04(), but that supports null values. The null
      * values should be considered greater than any non-null values.
      */
-    @Test @Ignore
+    @Test
+    @Ignore
     public void comparator06() {
         Comparator<Person> comparebyLastNameThenFirstNameWithNull = null; // TODO
 
@@ -142,7 +147,8 @@ public class B_Comparators {
      * Write a Comparator that compares two people by age.
      * Try to write the comparator so as to avoid boxing of primitives.
      */
-    @Test @Ignore
+    @Test
+    @Ignore
     public void comparator07() {
         Comparator<Person> comparebyAge = null; // TODO
 
@@ -163,7 +169,8 @@ public class B_Comparators {
      * two objects, but in this case we are comparing int primitives, so the
      * functional interface we use is IntBinaryOperator.
      */
-    @Test @Ignore
+    @Test
+    @Ignore
     public void comparator08() {
         IntBinaryOperator intCompare = null; // TODO
 
@@ -183,7 +190,8 @@ public class B_Comparators {
      * int result that is less than, equal to, or greater than zero, like
      * a comparator.
      */
-    @Test @Ignore
+    @Test
+    @Ignore
     public void comparator09() {
         IntBinaryOperator intCompare = null; // TODO
 
@@ -210,7 +218,8 @@ public class B_Comparators {
      * special cases such NaN. Consider all NaN values to be equal to each other
      * and greater than any non-NaN value.
      */
-    @Test @Ignore
+    @Test
+    @Ignore
     public void comparator10() {
         DoubleToIntBiFunction doubleCompare = null; // TODO
 
