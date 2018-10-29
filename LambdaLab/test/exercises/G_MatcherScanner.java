@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Comparator;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.regex.MatchResult;
@@ -12,14 +11,11 @@ import java.util.Set;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * JDK 9 added several new streams-producing APIs in the java.util.regex.Matcher
@@ -44,7 +40,7 @@ public class G_MatcherScanner {
     public void g1_wordsWithApostrophes() {
         Set<String> result = null; // TODO
 
-        assertEquals(Set.of("Feed'st", "mak'st"), result);
+        assertThat(result).isEqualTo(Set.of("Feed'st", "mak'st"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -60,7 +56,7 @@ public class G_MatcherScanner {
     public void g2_wordsWithApostrophes() {
         Set<String> result = null; // TODO
 
-        assertEquals(Set.of("Feed'st", "mak'st"), result);
+        assertThat(result).isEqualTo(Set.of("Feed'st", "mak'st"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -78,8 +74,8 @@ public class G_MatcherScanner {
         final Pattern TRIGRAPH_PAT = Pattern.compile("[aeiou]{3}", Pattern.CASE_INSENSITIVE);
         String result = null; // TODO
 
-        assertTrue(result.contains("b[EAU]ty's"));
-        assertEquals(614, result.length());
+        assertThat(result).contains("b[EAU]ty's");
+        assertThat(result.length()).isEqualTo(614);
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -100,7 +96,7 @@ public class G_MatcherScanner {
     public void g4_firstLongWhitespaceSeparatedToken() {
         String result = null; // TODO
 
-        assertEquals("contracted", result);
+        assertThat(result).isEqualTo("contracted");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
