@@ -8,9 +8,12 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -34,10 +37,8 @@ public class C_DefaultMethods {
 
         // TODO write code to modify sbList
 
-        assertEquals(Arrays.asList("alfanew", "bravonew", "charlienew"),
-                sbList.stream()
-                      .map(StringBuilder::toString)
-                      .collect(Collectors.toList()));
+        List<String> actualStrings = sbList.stream().map(StringBuilder::toString).collect(Collectors.toList());
+        assertThat(actualStrings).containsExactly("alfanew", "bravonew", "charlienew");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -55,7 +56,7 @@ public class C_DefaultMethods {
 
         // TODO write code to modify list
 
-        assertEquals(Arrays.asList("alfa", "echo"), list);
+        assertThat(list).containsExactly("alfa", "echo");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -73,8 +74,7 @@ public class C_DefaultMethods {
 
         // TODO code to modify list
 
-        assertEquals(Arrays.asList("ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO", "FOXTROT"),
-                     list);
+        assertThat(list).containsExactly("ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO", "FOXTROT");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -96,11 +96,12 @@ public class C_DefaultMethods {
 
         // TODO write code to modify map
 
+        assertThat(map.size()).isEqualTo(3);
+        assertThat(map)
+                .containsEntry(1, new StringBuilder("alfa1"))
+                .containsEntry(2, new StringBuilder("bravo2"))
+                .containsEntry(3, new StringBuilder("charlie3"));
         assertEquals(3, map.size());
-        assertTrue(map.values().stream().allMatch(x -> x instanceof StringBuilder));
-        assertEquals("alfa1",    map.get(1).toString());
-        assertEquals("bravo2",   map.get(2).toString());
-        assertEquals("charlie3", map.get(3).toString());
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -122,10 +123,12 @@ public class C_DefaultMethods {
 
         // TODO write code to modify map
 
+        assertThat(map.size()).isEqualTo(3);
+        assertThat(map)
+                .containsEntry(1, "alfa1")
+                .containsEntry(2, "bravo2")
+                .containsEntry(3, "charlie3");
         assertEquals(3, map.size());
-        assertEquals("alfa1",    map.get(1));
-        assertEquals("bravo2",   map.get(2));
-        assertEquals("charlie3", map.get(3));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -147,13 +150,14 @@ public class C_DefaultMethods {
 
         // TODO write code to populate result
 
-        assertEquals(Arrays.asList(5, 6, 7, 8, 9, 10), new ArrayList<>(result.keySet()));
-        assertEquals(Arrays.asList("bison"), result.get(5));
-        assertEquals(Arrays.asList("avocet"), result.get(6));
-        assertEquals(Arrays.asList("bustard"), result.get(7));
-        assertEquals(Arrays.asList("aardvark", "capybara", "bushbaby", "capuchin"), result.get(8));
-        assertEquals(Arrays.asList("alligator"), result.get(9));
-        assertEquals(Arrays.asList("chimpanzee"), result.get(10));
+        assertThat(result).containsOnlyKeys(5, 6, 7, 8, 9, 10);
+        assertThat(result)
+                .containsEntry(5, Arrays.asList("bison"))
+                .containsEntry(6, Arrays.asList("avocet"))
+                .containsEntry(7, Arrays.asList("bustard"))
+                .containsEntry(8, Arrays.asList("aardvark", "capybara", "bushbaby", "capuchin"))
+                .containsEntry(9, Arrays.asList("alligator"))
+                .containsEntry(10, Arrays.asList("chimpanzee"));
     }
     // <editor-fold defaultstate="collapsed">
     // Use Map.computeIfAbsent() within Iterable.forEach().
@@ -175,10 +179,11 @@ public class C_DefaultMethods {
 
         // TODO write code to populate result
 
-        assertEquals(Arrays.asList('a', 'b', 'c'), new ArrayList<>(result.keySet()));
-        assertEquals("aardvark:alligator:avocet",    result.get('a'));
-        assertEquals("bison:bushbaby:bustard",       result.get('b'));
-        assertEquals("capybara:chimpanzee:capuchin", result.get('c'));
+        assertThat(result).containsOnlyKeys('a', 'b', 'c');
+        assertThat(result)
+                .containsEntry('a', "aardvark:alligator:avocet")
+                .containsEntry('b', "bison:bushbaby:bustard")
+                .containsEntry('c', "capybara:chimpanzee:capuchin");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -202,14 +207,14 @@ public class C_DefaultMethods {
 
         // TODO write code to fix the map
 
-        assertEquals(Map.of("a", "alfa",
-                            "b", "bravo",
-                            "c", "charlie",
-                            "d", "delta",
-                            "e", "",
-                            "f", "",
-                            "g", ""),
-                     map);
+        assertThat(map)
+                .containsEntry("a", "alfa")
+                .containsEntry("b", "bravo")
+                .containsEntry("c", "charlie")
+                .containsEntry("d", "delta")
+                .containsEntry("e", "")
+                .containsEntry("f", "")
+                .containsEntry("g", "");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -235,11 +240,12 @@ public class C_DefaultMethods {
 
         // TODO write code to fix the map
 
-        assertEquals(Map.of("a", "alfa",
-                            "b", "bravo",
-                            "c", "charlie",
-                            "d", "delta"),
-                     map);
+        assertThat(map.size()).isEqualTo(4);
+        assertThat(map)
+                .containsEntry("a", "alfa")
+                .containsEntry("b", "bravo")
+                .containsEntry("c", "charlie")
+                .containsEntry("d", "delta");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -266,14 +272,15 @@ public class C_DefaultMethods {
 
         // TODO write code to fix the map
 
-        assertEquals(Map.of("a", "alfa",
-                            "b", "bravo",
-                            "c", "charlie",
-                            "d", "delta",
-                            "e", "e",
-                            "f", "f",
-                            "g", "g"),
-                map);
+        assertThat(map.size()).isEqualTo(7);
+        assertThat(map)
+                .containsEntry("a", "alfa")
+                .containsEntry("b", "bravo")
+                .containsEntry("c", "charlie")
+                .containsEntry("d", "delta")
+                .containsEntry("e", "e")
+                .containsEntry("f", "f")
+                .containsEntry("g", "g");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -297,14 +304,15 @@ public class C_DefaultMethods {
 
         // TODO write code transform the map
 
-        assertEquals(Map.of("a", "ALFA",
-                            "b", "BRAVO",
-                            "c", "CHARLIE",
-                            "d", "DELTA",
-                            "e", "e",
-                            "f", "f",
-                            "g", "g"),
-                map);
+        assertThat(map.size()).isEqualTo(7);
+        assertThat(map)
+                .containsEntry("a", "ALFA")
+                .containsEntry("b", "BRAVO")
+                .containsEntry("c", "CHARLIE")
+                .containsEntry("d", "DELTA")
+                .containsEntry("e", "e")
+                .containsEntry("f", "f")
+                .containsEntry("g", "g");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -332,11 +340,12 @@ public class C_DefaultMethods {
 
         // TODO write code transform the map
 
-        assertEquals(Map.of("a", "ALFA",
-                            "b", "BRAVO",
-                            "c", "CHARLIE",
-                            "d", "DELTA"),
-                map);
+        assertThat(map.size()).isEqualTo(4);
+        assertThat(map)
+                .containsEntry("a", "ALFA")
+                .containsEntry("b", "BRAVO")
+                .containsEntry("c", "CHARLIE")
+                .containsEntry("d", "DELTA");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
