@@ -1,17 +1,12 @@
 package solutions;
 
+import model.Person;
+import org.junit.Test;
+
 import java.util.Comparator;
 import java.util.function.IntBinaryOperator;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import model.Person;
 
 /**
  * Exercises to create comparators using lambda expressions
@@ -107,7 +102,7 @@ public class B_Comparators {
         //BEGINREMOVE
         Comparator<Person> comparebyLastNameThenFirstName =
                 Comparator.comparing(Person::getLastName)
-                          .thenComparing(Person::getFirstName);
+                        .thenComparing(Person::getFirstName);
         //ENDREMOVE
 
         assertThat(comparebyLastNameThenFirstName.compare(michael, rod)).isLessThan(0);
@@ -129,8 +124,8 @@ public class B_Comparators {
         //BEGINREMOVE
         Comparator<Person> comparebyLastNameThenFirstNameReversed =
                 Comparator.comparing(Person::getLastName)
-                          .thenComparing(Person::getFirstName)
-                          .reversed();
+                        .thenComparing(Person::getFirstName)
+                        .reversed();
         //ENDREMOVE
 
         assertThat(comparebyLastNameThenFirstNameReversed.compare(michael, rod)).isGreaterThan(0);
@@ -153,8 +148,8 @@ public class B_Comparators {
         //BEGINREMOVE
         Comparator<Person> comparebyLastNameThenFirstNameWithNull =
                 Comparator.nullsLast(
-                    Comparator.comparing(Person::getLastName)
-                              .thenComparing(Person::getFirstName));
+                        Comparator.comparing(Person::getLastName)
+                                .thenComparing(Person::getFirstName));
         //ENDREMOVE
 
         assertThat(comparebyLastNameThenFirstNameWithNull.compare(michael, rod)).isLessThan(0);
