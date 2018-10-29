@@ -24,6 +24,8 @@ import static org.junit.Assert.assertEquals;
  */
 public class E_IntermediateStreams {
 
+    public static final String SONNET_PATH = "LambdaLab/files/SonnetI.txt";
+
     /**
      * Convert a list of strings into a list of characters.
      */
@@ -272,7 +274,7 @@ public class E_IntermediateStreams {
     @Before
     public void z_setUpBufferedReader() throws IOException {
         reader = Files.newBufferedReader(
-                Paths.get("files/SonnetI.txt"), StandardCharsets.UTF_8);
+                Paths.get(SONNET_PATH), StandardCharsets.UTF_8);
     }
 
     @After
