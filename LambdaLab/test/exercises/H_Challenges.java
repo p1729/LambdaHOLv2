@@ -188,11 +188,11 @@ public class H_Challenges {
             input.collect(Collector.of(null, null, null));
             // TODO fill in collector functions above
 
-        List<String> expectedResult = IntStream.range(0, 100)
+        String[] expectedResult = IntStream.range(0, 100)
                 .map(i -> 99 - i)
                 .mapToObj(String::valueOf)
-                .collect(Collectors.toList());
-        assertThat(result).isEqualTo(expectedResult);
+                .toArray(String[]::new);
+        assertThat(result).containsExactly(expectedResult);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
