@@ -170,6 +170,7 @@ public class C_DefaultMethods {
                 .containsEntry(9, Arrays.asList("alligator"))
                 .containsEntry(10, Arrays.asList("chimpanzee"));
     }
+    // Hint:
     // <editor-fold defaultstate="collapsed">
     // Use Map.computeIfAbsent() within Iterable.forEach().
     // </editor-fold>
