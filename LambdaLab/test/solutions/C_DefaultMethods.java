@@ -173,6 +173,7 @@ public class C_DefaultMethods {
         assertEquals(Arrays.asList("alligator"), result.get(9));
         assertEquals(Arrays.asList("chimpanzee"), result.get(10));
     }
+    // Hint:
     // <editor-fold defaultstate="collapsed">
     // Use Map.computeIfAbsent() within Iterable.forEach().
     // </editor-fold>
