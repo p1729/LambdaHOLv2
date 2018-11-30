@@ -14,11 +14,6 @@ import java.util.stream.Stream;
  * test/exercises/*.java.
  */
 public class Grind {
-    private boolean eclipse;
-
-    Grind(boolean eclipse) {
-        this.eclipse = eclipse;
-    }
 
     static class Sink implements Consumer<String> {
         boolean removing = false;
@@ -53,22 +48,36 @@ public class Grind {
         }
     }
 
-    String subst(String line) {
-        return line.replace("package solutions;", "package exercises;")
+    String subst(String line, boolean eclipse) {
+        return line.replace("package solutions;", "package exercises" + (eclipse ? ".eclipse" : "") + ";")
                 .replace("@Test", "@Test @Ignore")
                 .replace("//UNCOMMENT//", "")
                 .replaceFirst("^(.*)//TODO//(.*)$", "$1$2 // TODO");
     }
 
     void processFile(Path input) {
+        // NetBeans/IntelliJ
         Path output = Paths.get("test", "exercises")
                 .resolve(input.getName(input.getNameCount() - 1));
         System.out.println(input + " => " + output);
 
         try (Stream<String> lines = Files.lines(input);
              PrintStream out = new PrintStream(output.toFile())) {
-            lines.map(this::subst)
-                    .forEachOrdered(new Sink(out, eclipse));
+            lines.map(s -> subst(s, false))
+                    .forEachOrdered(new Sink(out, false));
+        } catch (IOException ioe) {
+            throw new UncheckedIOException(ioe);
+        }
+
+        // Eclipse
+        output = Paths.get("test", "exercises", "eclipse")
+                .resolve(input.getName(input.getNameCount() - 1));
+        System.out.println(input + " => " + output);
+
+        try (Stream<String> lines = Files.lines(input);
+             PrintStream out = new PrintStream(output.toFile())) {
+            lines.map(s -> subst(s, true))
+                    .forEachOrdered(new Sink(out, true));
         } catch (IOException ioe) {
             throw new UncheckedIOException(ioe);
         }
@@ -83,7 +92,6 @@ public class Grind {
     }
 
     public static void main(String[] args) throws IOException {
-        boolean eclipse = args.length > 0 && args[0].equals("-eclipse");
-        new Grind(eclipse).run();
+        new Grind().run();
     }
 }
