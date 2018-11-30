@@ -1,4 +1,4 @@
-package exercises;
+package exercises.eclipse;
 
 import org.junit.Test;
 import org.junit.Ignore;
@@ -58,13 +58,12 @@ public class A_Lambdas {
         assertThat(pred.test("")).isTrue();
         assertThat(pred.test("a")).isFalse();
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Copy the lambda expression from the previous exercise and then pop
-    // up the menu over the "light bulb" icon in the left margin. This menu
-    // has an option to convert the lambda to a method reference. (The exact
-    // gesture will vary among IDEs.)
-    // </editor-fold>
+    /* Hint:
+     * Copy the lambda expression from the previous exercise and then pop
+     * up the menu over the "light bulb" icon in the left margin. This menu
+     * has an option to convert the lambda to a method reference. (The exact
+     * gesture will vary among IDEs.)
+     */
 
     /**
      * Create a predicate that returns true if both predicates
@@ -82,10 +81,9 @@ public class A_Lambdas {
         assertThat(startsWithJAndLengthIs7.test("Java1")).isFalse();
         assertThat(startsWithJAndLengthIs7.test("JavaOne")).isTrue();
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // see java.util.function.Predicate.and()
-    // </editor-fold>
+    /* Hint:
+     * see java.util.function.Predicate.and()
+     */
 
     /**
      * Create a predicate that is true if the length of the provided string
@@ -104,10 +102,9 @@ public class A_Lambdas {
         assertThat(lengthIs9orError.test("ERROR")).isTrue();
         assertThat(lengthIs9orError.test("Error")).isFalse();
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // see java.util.function.Predicate.or()
-    // </editor-fold>
+    /* Hint:
+     * see java.util.function.Predicate.or()
+     */
 
     /**
      * Write a lambda expression that wraps the given
@@ -159,10 +156,9 @@ public class A_Lambdas {
         assertThat(lengthBis.apply("")).isEqualTo(0);
         assertThat(lengthBis.apply(null)).isEqualTo(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // See java.util.Function.andThen() or java.util.Function.compose()
-    // </editor-fold>
+    /* Hint:
+     * See java.util.Function.andThen() or java.util.Function.compose()
+     */
 
     /**
      * Write a lambda expression that appends the
@@ -220,10 +216,9 @@ public class A_Lambdas {
 
         assertThat(list).containsExactly("a", "b", "c", "first", "second");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // see java.util.function.Consumer.andThen()
-    // </editor-fold>
+    /* Hint:
+     * see java.util.function.Consumer.andThen()
+     */
 
     /**
      * Write a lambda expression that returns a new StringBuilder
@@ -280,14 +275,13 @@ public class A_Lambdas {
         assertThat(bifunc.apply("abcdefghi", "def")).isEqualTo(3);
         assertThat(bifunc.apply("abcdefghi", "xyz")).isEqualTo(-1);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // The String method
-    //     public int indexOf(String)
-    // works as a BiFunction, because the receiver (a String instance)
-    // counts as the first argument. The argument to indexOf() becomes
-    // the second argument to the BiFunction.
-    // </editor-fold>
+    /* Hint:
+     * The String method
+     *     public int indexOf(String)
+     * works as a BiFunction, because the receiver (a String instance)
+     * counts as the first argument. The argument to indexOf() becomes
+     * the second argument to the BiFunction.
+     */
 
     /**
      * Write an unbound method reference that returns the index of
@@ -301,18 +295,16 @@ public class A_Lambdas {
         assertThat(bifunc.apply("abcdefghij", "def")).isEqualTo(3);
         assertThat(bifunc.apply("abcdefghij", "xyz")).isEqualTo(-1);
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Try using the IDE command to convert the lambda from the previous
-    // exercise into a method reference.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // This is just like the example above with the argument shifting.
-    // The only difference is that arguments aren't specified in a
-    // method reference, so overload resolution has to do more work
-    // to find the overloaded method that matches.
-    // </editor-fold>
+    /* Hint 1:
+     * Try using the IDE command to convert the lambda from the previous
+     * exercise into a method reference.
+     */
+    /* Hint 2:
+     * This is just like the example above with the argument shifting.
+     * The only difference is that arguments aren't specified in a
+     * method reference, so overload resolution has to do more work
+     * to find the overloaded method that matches.
+     */
 
 
     /**
@@ -347,10 +339,9 @@ public class A_Lambdas {
         assertThat(func.apply("efg")).isEqualTo(4);
         assertThat(func.apply("xyz")).isEqualTo(-1);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Call the indexOf() method on a string literal.
-    // </editor-fold>
+    /* Hint:
+     * Call the indexOf() method on a string literal.
+     */
 
     /**
      * Write a bound method reference that takes a string argument
@@ -373,8 +364,7 @@ public class A_Lambdas {
         assertThat(func.apply("efg")).isEqualTo(4);
         assertThat(func.apply("xyz")).isEqualTo(-1);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Place a string literal on the left-hand side of the :: operator.
-    // </editor-fold>
+    /* Hint:
+     * Place a string literal on the left-hand side of the :: operator.
+     */
 }

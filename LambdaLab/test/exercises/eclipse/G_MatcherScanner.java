@@ -1,4 +1,4 @@
-package exercises;
+package exercises.eclipse;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -51,10 +51,9 @@ public class G_MatcherScanner {
 
         assertThat(result).isEqualTo(Set.of("Feed'st", "mak'st"));
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use the Matcher.results() method, then convert each MatchResult into a String.
-    // </editor-fold>
+    /* Hint:
+     * Use the Matcher.results() method, then convert each MatchResult into a String.
+     */
 
     /**
      * Perform the same task as in exercise g1, except using Scanner instead of Matcher.
@@ -67,10 +66,9 @@ public class G_MatcherScanner {
 
         assertThat(result).isEqualTo(Set.of("Feed'st", "mak'st"));
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use the Scanner.findAll() method, then convert each MatchResult into a String.
-    // </editor-fold>
+    /* Hint:
+     * Use the Scanner.findAll() method, then convert each MatchResult into a String.
+     */
 
     /**
      * Find all vowel trigraphs (that is, sequences of three consecutive vowels)
@@ -98,10 +96,9 @@ public class G_MatcherScanner {
                 "To eat the world's due, by the grave and thee.\n";
         assertThat(result).isEqualToNormalizingNewlines(expectedResult);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use the Matcher.replaceAll() method.
-    // </editor-fold>
+    /* Hint:
+     * Use the Matcher.replaceAll() method.
+     */
 
     /**
      * Use Scanner to parse the SONNET string into whitespace-separated tokens.
@@ -119,10 +116,9 @@ public class G_MatcherScanner {
 
         assertThat(result).isEqualTo("contracted");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use the Scanner.tokens() method.
-    // </editor-fold>
+    /* Hint:
+     * Use the Scanner.tokens() method.
+     */
 
 
 // ========================================================

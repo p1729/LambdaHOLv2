@@ -1,4 +1,4 @@
-package exercises;
+package exercises.eclipse;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -32,10 +32,9 @@ public class C_DefaultMethods {
         List<String> actualStrings = sbList.stream().map(StringBuilder::toString).collect(Collectors.toList());
         assertThat(actualStrings).containsExactly("alfanew", "bravonew", "charlienew");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Iterable.forEach().
-    // </editor-fold>
+    /* Hint:
+     * Use Iterable.forEach().
+     */
 
 
     /**
@@ -50,10 +49,9 @@ public class C_DefaultMethods {
 
         assertThat(list).containsExactly("alfa", "echo");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Collection.removeIf().
-    // </editor-fold>
+    /* Hint:
+     * Use Collection.removeIf().
+     */
 
 
     /**
@@ -68,10 +66,9 @@ public class C_DefaultMethods {
 
         assertThat(list).containsExactly("ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO", "FOXTROT");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use List.replaceAll().
-    // </editor-fold>
+    /* Hint:
+     * Use List.replaceAll().
+     */
 
 
     /**
@@ -94,10 +91,9 @@ public class C_DefaultMethods {
                 .containsEntry(2, "bravo2")
                 .containsEntry(3, "charlie3");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Map.forEach().
-    // </editor-fold>
+    /* Hint:
+     * Use Map.forEach().
+     */
 
 
     /**
@@ -120,10 +116,9 @@ public class C_DefaultMethods {
                 .containsEntry(2, "bravo2")
                 .containsEntry(3, "charlie3");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Map.replaceAll().
-    // </editor-fold>
+    /* Hint:
+     * Use Map.replaceAll().
+     */
 
 
     /**
@@ -149,10 +144,9 @@ public class C_DefaultMethods {
                 .containsEntry(9, Arrays.asList("alligator"))
                 .containsEntry(10, Arrays.asList("chimpanzee"));
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Map.computeIfAbsent() within Iterable.forEach().
-    // </editor-fold>
+    /* Hint:
+     * Use Map.computeIfAbsent() within Iterable.forEach().
+     */
 
     /**
      * Given a list of words, populate a map whose keys are the initial characters of
@@ -176,10 +170,9 @@ public class C_DefaultMethods {
                 .containsEntry('b', "bison:bushbaby:bustard")
                 .containsEntry('c', "capybara:chimpanzee:capuchin");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Map.merge() within Iterable.forEach().
-    // </editor-fold>
+    /* Hint:
+     * Use Map.merge() within Iterable.forEach().
+     */
 
 
     /**
@@ -208,10 +201,9 @@ public class C_DefaultMethods {
                 .containsEntry("f", "")
                 .containsEntry("g", "");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Check the Map.putIfAbsent() default method.
-    // </editor-fold>
+    /* Hint:
+     * Check the Map.putIfAbsent() default method.
+     */
 
 
     /**
@@ -239,10 +231,9 @@ public class C_DefaultMethods {
                 .containsEntry("c", "charlie")
                 .containsEntry("d", "delta");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Check the two-arg Map.remove() default method.
-    // </editor-fold>
+    /* Hint:
+     * Check the two-arg Map.remove() default method.
+     */
 
 
     /**
@@ -274,10 +265,9 @@ public class C_DefaultMethods {
                 .containsEntry("f", "f")
                 .containsEntry("g", "g");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Check the Map.replace() default method that takes 3 arguments.
-    // </editor-fold>
+    /* Hint:
+     * Check the Map.replace() default method that takes 3 arguments.
+     */
 
 
     /**
@@ -306,11 +296,10 @@ public class C_DefaultMethods {
                 .containsEntry("f", "f")
                 .containsEntry("g", "g");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Check the Map.compute() default method, and read the Javadoc carefully
-    // regarding the mappings that aren't present.
-    // </editor-fold>
+    /* Hint:
+     * Check the Map.compute() default method, and read the Javadoc carefully
+     * regarding the mappings that aren't present.
+     */
 
 
     /**
@@ -339,11 +328,10 @@ public class C_DefaultMethods {
                 .containsEntry("c", "CHARLIE")
                 .containsEntry("d", "DELTA");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Check the Map.compute() default method, read the Javadoc carefully
-    // for the handling of null values returned from the function.
-    // </editor-fold>
+    /* Hint:
+     * Check the Map.compute() default method, read the Javadoc carefully
+     * for the handling of null values returned from the function.
+     */
 
     private Map<Integer, String> valuesToString(Map<Integer, StringBuilder> map) {
         return map.entrySet().stream().collect(

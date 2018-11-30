@@ -1,4 +1,4 @@
-package exercises;
+package exercises.eclipse;
 
 import org.junit.After;
 import org.junit.Before;
@@ -63,10 +63,9 @@ public class F_AdvancedStreams {
                 .containsEntry(10, List.of("contracted", "niggarding"))
                 .containsEntry(11, List.of("substantial"));
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Collectors.groupingBy().
-    // </editor-fold>
+    /* Hint:
+     * Use Collectors.groupingBy().
+     */
 
 
     /**
@@ -96,15 +95,13 @@ public class F_AdvancedStreams {
                 .containsEntry(10, 2L)
                 .containsEntry(11, 1L);
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Use the overload of Collectors.groupingBy() that has
-    // a "downstream" parameter.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // Use Collectors.counting().
-    // </editor-fold>
+    /* Hint 1:
+     * Use the overload of Collectors.groupingBy() that has
+     * a "downstream" parameter.
+     */
+    /* Hint 2:
+     * Use Collectors.counting().
+     */
 
 
     /**
@@ -130,17 +127,15 @@ public class F_AdvancedStreams {
                 .containsEntry("self", 3L);
         assertThat(result).doesNotContainKey("lambda");
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // For Collectors.groupingBy(), consider that each word needs to be in
-    // a category of its own, that is, each word is categorized as itself.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // For Collectors.toMap(), the first occurrence of a word should be mapped to 1.
-    // If two elements of the Stream are generating the same key, you will need to
-    // provide a merging function.
-    // </editor-fold>
+    /* Hint 1:
+     * For Collectors.groupingBy(), consider that each word needs to be in
+     * a category of its own, that is, each word is categorized as itself.
+     */
+    /* Hint 2:
+     * For Collectors.toMap(), the first occurrence of a word should be mapped to 1.
+     * If two elements of the Stream are generating the same key, you will need to
+     * provide a merging function.
+     */
 
 
     /**
@@ -181,15 +176,13 @@ public class F_AdvancedStreams {
                         5, List.of("riper")))
         ;
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // The nested map structure that's desired is the result of applying a
-    // "downstream" collector that's the same operation as the first-level collector.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // Both collection operations are Collectors.groupingBy().
-    // </editor-fold>
+    /* Hint 1:
+     * The nested map structure that's desired is the result of applying a
+     * "downstream" collector that's the same operation as the first-level collector.
+     */
+    /* Hint 2:
+     * Both collection operations are Collectors.groupingBy().
+     */
 
 
     /**
@@ -207,15 +200,13 @@ public class F_AdvancedStreams {
         assertThat(sumEvens).isEqualTo(516);
         assertThat(sumOdds).isEqualTo(614);
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Use Collectors.partitioningBy().
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // The collect(Collector) method we need is defined on Stream<T>, but not on
-    // IntStream, LongStream or DoubleStream.
-    // </editor-fold>
+    /* Hint 1:
+     * Use Collectors.partitioningBy().
+     */
+    /* Hint 2:
+     * The collect(Collector) method we need is defined on Stream<T>, but not on
+     * IntStream, LongStream or DoubleStream.
+     */
 
 
     /**
@@ -238,23 +229,20 @@ public class F_AdvancedStreams {
 
         assertThat(result).isEqualTo("tsrqponmlkjihgfedcbaabcdefghijklmnopqrst");
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // The collector state (that is, the object being accumulated and
-    // combined) can be a single StringBuilder, which is manipulated
-    // by lambda expressions in the three-arg form of the collect() method.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // The combiner function must take its second argument and merge
-    // it into the first argument, mutating the first argument.
-    // </editor-fold>
-    // Hint 3:
-    // <editor-fold defaultstate="collapsed">
-    // The second argument to the combiner function happens AFTER the first
-    // argument in encounter order, so the second argument needs to be split
-    // in half and prepended/appended to the first argument.
-    // </editor-fold>
+    /* Hint 1:
+     * The collector state (that is, the object being accumulated and
+     * combined) can be a single StringBuilder, which is manipulated
+     * by lambda expressions in the three-arg form of the collect() method.
+     */
+    /* Hint 2:
+     * The combiner function must take its second argument and merge
+     * it into the first argument, mutating the first argument.
+     */
+    /* Hint 3:
+     * The second argument to the combiner function happens AFTER the first
+     * argument in encounter order, so the second argument needs to be split
+     * in half and prepended/appended to the first argument.
+     */
 
     /**
      * Count the total number of words and the number of distinct, lower case
@@ -284,11 +272,10 @@ public class F_AdvancedStreams {
         int getTotalCount() { return count; }
         int getDistinctCount() { return set.size(); }
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // The operations you need to write are actually quite simple.
-    // Don't overthink it.
-    // </editor-fold>
+    /* Hint:
+     * The operations you need to write are actually quite simple.
+     * Don't overthink it.
+     */
 
     @Test @Ignore
     public void f7_countTotalAndDistinctWords() {

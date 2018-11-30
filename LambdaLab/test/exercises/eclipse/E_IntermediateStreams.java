@@ -1,4 +1,4 @@
-package exercises;
+package exercises.eclipse;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,14 +38,12 @@ public class E_IntermediateStreams {
 
         assertThat(result).containsExactly('a', 'l', 'f', 'a', 'b', 'r', 'a', 'v', 'o', 'c', 'h', 'a', 'r', 'l', 'i', 'e');
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Use String.chars() and Stream.flatMap().
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // Pay attention to the return type of String.chars() and boxing conversion.
-    // </editor-fold>
+    /* Hint 1:
+     * Use String.chars() and Stream.flatMap().
+     */
+    /* Hint 2:
+     * Pay attention to the return type of String.chars() and boxing conversion.
+     */
 
 
     /**
@@ -81,10 +79,9 @@ public class E_IntermediateStreams {
                         "To", "eat", "the", "world's", "due", "by", "the", "grave", "and", "thee"
                 );
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Stream.flatMap().
-    // </editor-fold>
+    /* Hint:
+     * Use Stream.flatMap().
+     */
 
 
     /**
@@ -103,10 +100,9 @@ public class E_IntermediateStreams {
                         "increase", "niggarding", "ornament", "substantial"
                 );
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Stream.sorted().
-    // </editor-fold>
+    /* Hint:
+     * Use Stream.sorted().
+     */
 
 
     /**
@@ -126,10 +122,9 @@ public class E_IntermediateStreams {
                         "creatures", "contracted", "beauty's", "abundance"
                 );
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Comparator.reverseOrder().
-    // </editor-fold>
+    /* Hint:
+     * Use Comparator.reverseOrder().
+     */
 
 
     /**
@@ -159,14 +154,12 @@ public class E_IntermediateStreams {
                         "substantial"
                 );
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Use Stream.distinct().
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // Use Comparator.thenComparing().
-    // </editor-fold>
+    /* Hint 1:
+     * Use Stream.distinct().
+     */
+    /* Hint 2:
+     * Use Comparator.thenComparing().
+     */
 
     /**
      * Compute the value of 21!, that is, 21 factorial. This value is larger than
@@ -178,16 +171,14 @@ public class E_IntermediateStreams {
 
         assertThat(result).isEqualTo(new BigInteger("51090942171709440000"));
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Use one of the range methods of LongStream to help create
-    // the BigInteger instances.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // Use Stream.reduce() to "collapse" all elements of a stream into
-    // a single value.
-    // </editor-fold>
+    /* Hint 1:
+     * Use one of the range methods of LongStream to help create
+     * the BigInteger instances.
+     */
+    /* Hint 2:
+     * Use Stream.reduce() to "collapse" all elements of a stream into
+     * a single value.
+     */
 
 
     /**
@@ -201,10 +192,9 @@ public class E_IntermediateStreams {
 
         assertThat(result).isEqualTo("thee");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use Stream.reduce() and think about the order of the arguments.
-    // </editor-fold>
+    /* Hint:
+     * Use Stream.reduce() and think about the order of the arguments.
+     */
 
     /**
      * Create a list containing ArrayList.class and all its super classes.
@@ -217,13 +207,12 @@ public class E_IntermediateStreams {
 
         assertThat(result).containsExactly(ArrayList.class, AbstractList.class, AbstractCollection.class, Object.class);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // There is a getSuperClass() method on the Class class.
-    // Creating a stream of these classes can be made with Stream.iterate().
-    // Then you need to close that stream when the current class is null.
-    // Java 9 added the takeWhile() method on the stream interface.
-    // </editor-fold>
+    /* Hint:
+     * There is a getSuperClass() method on the Class class.
+     * Creating a stream of these classes can be made with Stream.iterate().
+     * Then you need to close that stream when the current class is null.
+     * Java 9 added the takeWhile() method on the stream interface.
+     */
 
 
     /**
@@ -246,10 +235,9 @@ public class E_IntermediateStreams {
 
         assertThat(count).isEqualTo(53);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Java 9 added the dropWhile() method on the stream interface.
-    // </editor-fold>
+    /* Hint:
+     * Java 9 added the dropWhile() method on the stream interface.
+     */
 
 
 // ========================================================

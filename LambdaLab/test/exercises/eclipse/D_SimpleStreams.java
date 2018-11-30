@@ -1,4 +1,4 @@
-package exercises;
+package exercises.eclipse;
 
 import org.junit.After;
 import org.junit.Before;
@@ -42,15 +42,13 @@ public class D_SimpleStreams {
 
         assertThat(result).containsExactly("BRAVO", "CHARLIE", "DELTA", "FOXTROT");
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Use filter() and map().
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // To create the result list, use collect() with one of the
-    // predefined collectors on the Collectors class.
-    // </editor-fold>
+    /* Hint 1:
+     * Use filter() and map().
+     */
+    /* Hint 2:
+     * To create the result list, use collect() with one of the
+     * predefined collectors on the Collectors class.
+     */
 
 
     /**
@@ -67,14 +65,12 @@ public class D_SimpleStreams {
 
         assertThat(result).isEqualTo("h,e,c");
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Use Stream.skip() and Stream.limit().
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // Use Collectors.joining().
-    // </editor-fold>
+    /* Hint 1:
+     * Use Stream.skip() and Stream.limit().
+     */
+    /* Hint 2:
+     * Use Collectors.joining().
+     */
 
 
     /**
@@ -90,14 +86,12 @@ public class D_SimpleStreams {
 
         assertThat(count).isEqualTo(14);
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Use BufferedReader.lines() to get a stream of lines.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // Use Stream.count().
-    // </editor-fold>
+    /* Hint 1:
+     * Use BufferedReader.lines() to get a stream of lines.
+     */
+    /* Hint 2:
+     * Use Stream.count().
+     */
 
 
     /**
@@ -111,19 +105,16 @@ public class D_SimpleStreams {
 
         assertThat(longestLength).isEqualTo(53);
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Use Stream.mapToInt() to convert a stream of objects to an IntStream.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // Look at java.util.OptionalInt to get the result.
-    // </editor-fold>
-    // Hint 3:
-    // <editor-fold defaultstate="collapsed">
-    // Think about the case where the OptionalInt might be empty
-    // (that is, where it has no value).
-    // </editor-fold>
+    /* Hint 1:
+     * Use Stream.mapToInt() to convert a stream of objects to an IntStream.
+     */
+    /* Hint 2:
+     * Look at java.util.OptionalInt to get the result.
+     */
+    /* Hint 3:
+     * Think about the case where the OptionalInt might be empty
+     * (that is, where it has no value).
+     */
 
 
     /**
@@ -137,14 +128,12 @@ public class D_SimpleStreams {
 
         assertThat(longest).isEqualTo("Feed'st thy light's flame with self-substantial fuel,");
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // Use Stream.max() with a Comparator.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // Use static methods on Comparator to help create a Comparator instance.
-    // </editor-fold>
+    /* Hint 1:
+     * Use Stream.max() with a Comparator.
+     */
+    /* Hint 2:
+     * Use static methods on Comparator to help create a Comparator instance.
+     */
 
 
     /**
@@ -160,10 +149,9 @@ public class D_SimpleStreams {
 
         assertThat(result).containsExactly("charlie", "foxtrot");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Consider making two passes over the input stream.
-    // </editor-fold>
+    /* Hint:
+     * Consider making two passes over the input stream.
+     */
 
     /**
      * Select the list of words from the input list whose length is greater than
@@ -178,11 +166,10 @@ public class D_SimpleStreams {
 
         assertThat(result).containsExactly("alfa", "bravo", "charlie", "delta", "foxtrot");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Instead of a stream of words (Strings), run an IntStream of indexes of
-    // the input list, using index values to get elements from the input list.
-    // </editor-fold>
+    /* Hint:
+     * Instead of a stream of words (Strings), run an IntStream of indexes of
+     * the input list, using index values to get elements from the input list.
+     */
 
 
 // ========================================================

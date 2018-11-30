@@ -1,4 +1,4 @@
-package exercises;
+package exercises.eclipse;
 
 import org.junit.Test;
 import org.junit.Ignore;
@@ -58,15 +58,13 @@ public class H_Challenges {
                 .contains("ibex:4", "hedgehog:4", "wombat:4", "ant:6", "beetle:6", "octopus:8", "spider:8",
                         "squid:8", "crab:10", "lobster:10", "scorpion:10", "millipede:750");
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // There are several ways to approach this. You could use a stream of map keys,
-    // a stream of map entries, or nested forEach() methods.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // If you use streams, consider using Stream.flatMap().
-    // </editor-fold>
+    /* Hint 1:
+     * There are several ways to approach this. You could use a stream of map keys,
+     * a stream of map entries, or nested forEach() methods.
+     */
+    /* Hint 2:
+     * If you use streams, consider using Stream.flatMap().
+     */
 
 
     /**
@@ -115,17 +113,15 @@ public class H_Challenges {
                 .containsEntry(3, Set.of("b", "c", "f"))
                 .containsEntry(4, Set.of("d", "e", "f"));
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // A general approach is to flatten the input structure in one stage
-    // of the pipeline and then to create the result structure using a collector.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // A useful intermediate data structure after the flattening step
-    // is a pair of items. You can write your own pair class, or you can
-    // use a pre-existing class like AbstractMap.SimpleEntry.
-    // </editor-fold>
+    /* Hint 1:
+     * A general approach is to flatten the input structure in one stage
+     * of the pipeline and then to create the result structure using a collector.
+     */
+    /* Hint 2:
+     * A useful intermediate data structure after the flattening step
+     * is a pair of items. You can write your own pair class, or you can
+     * use a pre-existing class like AbstractMap.SimpleEntry.
+     */
 
 
     /**
@@ -147,12 +143,11 @@ public class H_Challenges {
 
         assertThat(result).containsExactly("charlie", "foxtrot");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // There are several ways to solve this exercise, but one approach is to
-    // create a helper class with four functions, and then pass method
-    // references to these functions to the Collector.of() method.
-    // </editor-fold>
+    /* Hint:
+     * There are several ways to solve this exercise, but one approach is to
+     * create a helper class with four functions, and then pass method
+     * references to these functions to the Collector.of() method.
+     */
 
 
 
@@ -170,12 +165,11 @@ public class H_Challenges {
 
         assertThat(result).containsExactly("aaaaa", "bb", "cccc", "d", "eeeeee", "aaa", "fff");
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // One possibility is a two-pass approach: one pass to gather data about
-    // the boundaries between the runs, and the second to create the substrings
-    // based on output from the first.
-    // </editor-fold>
+    /* Hint:
+     * One possibility is a two-pass approach: one pass to gather data about
+     * the boundaries between the runs, and the second to create the substrings
+     * based on output from the first.
+     */
 
     /**
      * Given a parallel stream of strings, collect them into a collection in reverse order.
@@ -197,14 +191,12 @@ public class H_Challenges {
                 .toArray(String[]::new);
         assertThat(result).containsExactly(expectedResult);
     }
-    // Hint 1:
-    // <editor-fold defaultstate="collapsed">
-    // ArrayDeque supports fast insertion at the front.
-    // </editor-fold>
-    // Hint 2:
-    // <editor-fold defaultstate="collapsed">
-    // Be careful with ordering of the arguments and results in the combiner.
-    // </editor-fold>
+    /* Hint 1:
+     * ArrayDeque supports fast insertion at the front.
+     */
+    /* Hint 2:
+     * Be careful with ordering of the arguments and results in the combiner.
+     */
 
     /**
      * Given an array of int, find the int value that occurs a majority
@@ -221,11 +213,10 @@ public class H_Challenges {
     OptionalInt majority(int[] array) {
         return null; // TODO
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // A two-pass approach may be called for here: a counting pass
-    // and a majority-finding pass.
-    // </editor-fold>
+    /* Hint:
+     * A two-pass approach may be called for here: a counting pass
+     * and a majority-finding pass.
+     */
 
     @Test @Ignore
     public void h6_majority() {
@@ -252,11 +243,10 @@ public class H_Challenges {
     Supplier<Shoe> makeShoeSupplier(IntFunction<Shoe> ifunc, int size) {
         return null; // TODO
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // You don't want to return the result of calling the IntFunction.
-    // Instead, you want to return a lambda that calls the IntFunction.
-    // </editor-fold>
+    /* Hint:
+     * You don't want to return the result of calling the IntFunction.
+     * Instead, you want to return a lambda that calls the IntFunction.
+     */
 
     static class Shoe {
         final int size;
@@ -311,16 +301,15 @@ public class H_Challenges {
                 .containsEntry(true, Set.of(List.class, RandomAccess.class, Cloneable.class,
                         Serializable.class, Collection.class));
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // The beginning of this challenge begins with the same kind of pattern
-    // as the E8 intermediate exercise.
-    // The interfaces are returned in an array, so one can put them in a stream
-    // using Arrays.stream(). To add the class to that stream, you can also
-    // use Stream.of() and flatMap the result to have the final stream.
-    // Writing the filter step is just a matter of creating the right predicate.
-    // Then the partioningBy collector will build the map.
-    // </editor-fold>
+    /* Hint:
+     * The beginning of this challenge begins with the same kind of pattern
+     * as the E8 intermediate exercise.
+     * The interfaces are returned in an array, so one can put them in a stream
+     * using Arrays.stream(). To add the class to that stream, you can also
+     * use Stream.of() and flatMap the result to have the final stream.
+     * Writing the filter step is just a matter of creating the right predicate.
+     * Then the partioningBy collector will build the map.
+     */
 
     /**
      * Write a method that extracts all the superclasses and
@@ -351,12 +340,11 @@ public class H_Challenges {
                                         Serializable.class, Collection.class)))
         );
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // The trick here is to write the whole processing of the previous
-    // G8 challenge as a single collector. Once this is done, just pass
-    // this collector as the downstream collector of a groupingBy.
-    // A filtering collector and a flatMapping collector have been added
-    // to JDK9.
-    // </editor-fold>
+    /* Hint:
+     * The trick here is to write the whole processing of the previous
+     * G8 challenge as a single collector. Once this is done, just pass
+     * this collector as the downstream collector of a groupingBy.
+     * A filtering collector and a flatMapping collector have been added
+     * to JDK9.
+     */
 }

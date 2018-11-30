@@ -4,6 +4,7 @@
 *.orig
 *.rej
 *#
+*.iml
 
 # Package Files #
 *.jar

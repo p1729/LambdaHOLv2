@@ -1,4 +1,4 @@
-package exercises;
+package exercises.eclipse;
 
 import model.Person;
 import org.junit.Test;
@@ -36,12 +36,11 @@ public class B_Comparators {
         assertThat(compareByLength.compare("ONE", "SEVEN")).isLessThan(0);
         assertThat(compareByLength.compare("ONE", "TWO")).isEqualTo(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Check the static factory methods of the Comparator interface. Remember
-    // how you implemented functions in the previous exercises. Write it using
-    // a method reference.
-    // </editor-fold>
+    /* Hint:
+     * Check the static factory methods of the Comparator interface. Remember
+     * how you implemented functions in the previous exercises. Write it using
+     * a method reference.
+     */
 
     /**
      * Write a Comparator that compare instances of String using their length.
@@ -57,13 +56,12 @@ public class B_Comparators {
         assertThat(compareByLengthThenAlphabetical.compare("FOUR", "FIVE")).isGreaterThan(0);
         assertThat(compareByLengthThenAlphabetical.compare("EIGHT", "EIGHT")).isEqualTo(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use the previous comparator and check the default methods of the
-    // Comparator interface.
-    // Check also the factory methods of the Comparator interface, and remember
-    // that String is comparable.
-    // </editor-fold>
+    /* Hint:
+     * Use the previous comparator and check the default methods of the
+     * Comparator interface.
+     * Check also the factory methods of the Comparator interface, and remember
+     * that String is comparable.
+     */
 
     /**
      * Write a Comparator that compares instances of Person using their lastName.
@@ -76,12 +74,11 @@ public class B_Comparators {
         assertThat(comparebyLastName.compare(paul, paul)).isEqualTo(0);
         assertThat(comparebyLastName.compare(michael, jermaine)).isEqualTo(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Check the static factory methods of the Comparator interface. Remember
-    // how you implemented functions in the previous exercises. Write it using
-    // a method reference.
-    // </editor-fold>
+    /* Hint:
+     * Check the static factory methods of the Comparator interface. Remember
+     * how you implemented functions in the previous exercises. Write it using
+     * a method reference.
+     */
 
     /**
      * Write a Comparator that compares instances of Person using their
@@ -95,10 +92,9 @@ public class B_Comparators {
         assertThat(comparebyLastNameThenFirstName.compare(paul, paul)).isEqualTo(0);
         assertThat(comparebyLastNameThenFirstName.compare(michael, jermaine)).isGreaterThan(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use the previous comparator and check the default methods of the Comparator interface.
-    // </editor-fold>
+    /* Hint:
+     * Use the previous comparator and check the default methods of the Comparator interface.
+     */
 
     /**
      * Write a Comparator that compares the people in the order reversed from
@@ -115,10 +111,9 @@ public class B_Comparators {
         assertThat(comparebyLastNameThenFirstNameReversed.compare(paul, paul)).isEqualTo(0);
         assertThat(comparebyLastNameThenFirstNameReversed.compare(michael, jermaine)).isLessThan(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use the previous comparator and check the default methods of the Comparator interface.
-    // </editor-fold>
+    /* Hint:
+     * Use the previous comparator and check the default methods of the Comparator interface.
+     */
 
     /**
      * Write a Comparator that compares the people in the same order than the
@@ -135,10 +130,9 @@ public class B_Comparators {
         assertThat(comparebyLastNameThenFirstNameWithNull.compare(mick, null)).isLessThan(0);
         assertThat(comparebyLastNameThenFirstNameWithNull.compare(null, mick)).isGreaterThan(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use the previous comparator and check the static methods of the Comparator interface.
-    // </editor-fold>
+    /* Hint:
+     * Use the previous comparator and check the static methods of the Comparator interface.
+     */
 
     /**
      * Write a Comparator that compares two people by age.
@@ -152,11 +146,10 @@ public class B_Comparators {
         assertThat(comparebyAge.compare(paul, paul)).isEqualTo(0);
         assertThat(comparebyAge.compare(mick, jermaine)).isGreaterThan(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Look for static methods on the Comparator interface that
-    // have primitive specializations.
-    // </editor-fold>
+    /* Hint:
+     * Look for static methods on the Comparator interface that
+     * have primitive specializations.
+     */
 
     /**
      * Write a lambda expression that compares two int values and returns an
@@ -175,10 +168,9 @@ public class B_Comparators {
         assertThat(intCompare.applyAsInt(Integer.MIN_VALUE, Integer.MAX_VALUE)).isLessThan(0);
         assertThat(intCompare.applyAsInt(Integer.MAX_VALUE, Integer.MIN_VALUE)).isGreaterThan(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use a ternary operator (cond ? result1 : result2) instead of subtraction.
-    // </editor-fold>
+    /* Hint:
+     * Use a ternary operator (cond ? result1 : result2) instead of subtraction.
+     */
 
     /**
      * Write a method reference that compares two int values and returns an
@@ -195,10 +187,9 @@ public class B_Comparators {
         assertThat(intCompare.applyAsInt(Integer.MIN_VALUE, Integer.MAX_VALUE)).isLessThan(0);
         assertThat(intCompare.applyAsInt(Integer.MAX_VALUE, Integer.MIN_VALUE)).isGreaterThan(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use a method reference to a static method on the Integer class.
-    // </editor-fold>
+    /* Hint:
+     * Use a method reference to a static method on the Integer class.
+     */
 
     interface DoubleToIntBiFunction {
         int applyAsInt(double a, double b);
@@ -223,8 +214,7 @@ public class B_Comparators {
         assertThat(doubleCompare.applyAsInt(Double.NaN, 0.0)).isGreaterThan(0);
         assertThat(doubleCompare.applyAsInt(0.0, Double.NaN)).isLessThan(0);
     }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Use a method reference to a static method on the Double class.
-    // </editor-fold>
+    /* Hint:
+     * Use a method reference to a static method on the Double class.
+     */
 }
