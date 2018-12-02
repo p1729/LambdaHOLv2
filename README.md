@@ -25,7 +25,7 @@ select the directory LambdaHOLv2-Java9. click "Open", then
 Ensure that the "Comments" checkbox is ticked.
 
     Select File | Import... | Maven | Existing Maven Projects, click
-"Next", select the directory LambdaHOLv2-Java8, click "Finish".
+"Next", select the directory LambdaHOLv2-Java9, click "Finish".
 
     In the `LambdaLab/test` folder, open the `exercises.eclipse` package.
 
