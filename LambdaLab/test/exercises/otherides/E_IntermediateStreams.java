@@ -2,8 +2,8 @@ package exercises.otherides;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,9 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -213,7 +210,7 @@ public class E_IntermediateStreams {
     public void e8_selectTheSuperClassesOfArrayList() {
         Class<?> origin = ArrayList.class;
 
-        List<String> result = null; // TODO
+        List<Class<?>> result = null; // TODO
 
         assertThat(result).containsExactly(ArrayList.class, AbstractList.class, AbstractCollection.class, Object.class);
     }

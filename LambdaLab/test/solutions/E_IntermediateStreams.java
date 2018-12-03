@@ -266,7 +266,7 @@ public class E_IntermediateStreams {
     public void e8_selectTheSuperClassesOfArrayList() {
         Class<?> origin = ArrayList.class;
 
-        //TODO//List<String> result = null;
+        //TODO//List<Class<?>> result = null;
         //BEGINREMOVE
         List<Class<?>> result = Stream.<Class<?>>iterate(origin, Class::getSuperclass)
                 .takeWhile(Objects::nonNull)

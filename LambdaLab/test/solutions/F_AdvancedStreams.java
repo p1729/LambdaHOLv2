@@ -277,7 +277,6 @@ public class F_AdvancedStreams {
 
         //UNCOMMENT//String result = input.collect(null, null, null).toString();
         //UNCOMMENT//// TODO fill in lambda expressions or method references
-        //UNCOMMENT//// in place of the nulls in the line above.
         //BEGINREMOVE
         String result =
             input.collect(StringBuilder::new,
@@ -311,12 +310,12 @@ public class F_AdvancedStreams {
     // </editor-fold>
 
     /**
-     * Count the total number of words and the number of distinct, lower case
-     * words in a stream, in one pass. This exercise uses a helper class
-     * that defines methods that are called by the Stream.collect() method.
-     * Your task is to fill in the implementation of the accumulate() and
-     * combine() methods in the helper class. You don't need to modify the
-     * test method itself.
+     * f7: Count the total number of words and the number of distinct, lower
+     * case words in a stream, in one pass. This exercise uses a helper class
+     * TotalAndDistinct that defines methods that are called by the method
+     * Stream.collect(). Your task is to fill in the implementation of the
+     * accumulate() and combine() methods in the helper class. You don't need
+     * to modify the test method itself.
      *
      * The stream is run in parallel, so you must write a combine() method
      * that works properly.
@@ -356,7 +355,7 @@ public class F_AdvancedStreams {
     public void f7_countTotalAndDistinctWords() {
         List<String> allWords = reader.lines()
                                       .map(String::toLowerCase)
-                                      .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
+                                      .flatMap(SPLIT_PATTERN::splitAsStream)
                                       .collect(Collectors.toList());
 
         TotalAndDistinct totalAndDistinct =
