@@ -277,6 +277,7 @@ public class F_AdvancedStreams {
 
         //UNCOMMENT//String result = input.collect(null, null, null).toString();
         //UNCOMMENT//// TODO fill in lambda expressions or method references
+        //UNCOMMENT//// TODO in place of the nulls in the line above.
         //BEGINREMOVE
         String result =
             input.collect(StringBuilder::new,
