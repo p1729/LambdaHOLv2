@@ -19,7 +19,7 @@ select the directory LambdaHOLv2-Java9. click "Open", then
 "Import from External Model", select "Maven", and click "Next", 
 "Next", and "Finish".
 
-    In the `LambdaLab/test` folder, open the package `exercises`.
+    In the `LambdaLab/test` folder, open the package `exercises.otherides`.
 
     (b) **In Eclipse**, select Preferences | Java | Editor | Folding. 
 Ensure that the "Comments" checkbox is ticked.
