@@ -49,7 +49,7 @@ public class Grind {
     }
 
     String subst(String line, boolean eclipse) {
-        return line.replace("package solutions;", "package exercises" + (eclipse ? ".eclipse" : "") + ";")
+        return line.replace("package solutions;", "package exercises" + (eclipse ? ".eclipse" : ".otherides") + ";")
                 .replace("@Test", "@Test @Ignore")
                 .replace("//UNCOMMENT//", "")
                 .replaceFirst("^(.*)//TODO//(.*)$", "$1$2 // TODO");
@@ -57,7 +57,7 @@ public class Grind {
 
     void processFile(Path input) {
         // NetBeans/IntelliJ
-        Path output = Paths.get("test", "exercises")
+        Path output = Paths.get("test", "exercises", "otherides")
                 .resolve(input.getName(input.getNameCount() - 1));
         System.out.println(input + " => " + output);
 

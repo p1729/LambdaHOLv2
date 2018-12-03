@@ -1,4 +1,4 @@
-package exercises;
+package exercises.otherides;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,6 +23,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -212,52 +213,6 @@ public class E_IntermediateStreams {
     // Hint:
     // <editor-fold defaultstate="collapsed">
     // Use Stream.reduce() and think about the order of the arguments.
-    // </editor-fold>
-
-    /**
-     * Create a list containing ArrayList.class and all its super classes.
-     */
-    @Test @Ignore
-    public void e8_selectTheSuperClassesOfArrayList() {
-        Class<?> origin = ArrayList.class;
-
-        List<String> result = null; // TODO
-
-        List<Class<?>> classes = Arrays.asList(ArrayList.class, AbstractList.class, AbstractCollection.class, Object.class);
-        assertEquals(classes, result);
-    }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // There is a getSuperClass() method on the Class class.
-    // Creating a stream of these classes can be made with Stream.iterate().
-    // Then you need to close that stream when the current class is null.
-    // Java 9 added the takeWhile() method on the stream interface.
-    // </editor-fold>
-
-
-    /**
-     * Count the length of a stream dropping the first elements on a predicate.
-     */
-    @Test @Ignore
-    public void e9_countTheElementsAfterAPredicate() {
-
-        Random rand = new Random(314L);
-        Stream<String> stream = Stream.iterate(
-                "",
-                (String s) -> {
-                    final int nextInt = rand.nextInt(10);
-                    return (nextInt == 0 && !s.isEmpty()) ? s.substring(0, s.length() - 1) :
-                           (nextInt == 8 || nextInt == 9) ? s + "+"
-                                                          : s;
-                }).limit(100);
-
-        long count = 0L; // TODO
-
-        assertEquals(53, count);
-    }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Java 9 added the dropWhile() method on the stream interface.
     // </editor-fold>
 
 

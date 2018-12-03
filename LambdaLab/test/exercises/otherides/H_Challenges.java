@@ -1,4 +1,4 @@
-package exercises;
+package exercises.otherides;
 
 import java.io.Serializable;
 import java.lang.reflect.Modifier;
@@ -27,6 +27,7 @@ import java.util.stream.Stream;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

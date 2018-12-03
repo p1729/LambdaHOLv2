@@ -1,17 +1,14 @@
 package exercises.eclipse;
 
-import java.util.Comparator;
-import java.util.function.IntBinaryOperator;
-
-import org.junit.Ignore;
+import model.Person;
 import org.junit.Test;
 import org.junit.Ignore;
 
-import static org.junit.Assert.assertEquals;
+import java.util.Comparator;
+import java.util.function.IntBinaryOperator;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import model.Person;
 
 /**
  * Exercises to create comparators using lambda expressions
@@ -199,7 +196,7 @@ public class B_Comparators {
     /**
      * Write a method reference that compares two double values and returns an
      * int result that is less than, equal to, or greater than zero, like
-     * a comparator. There functional interface that takes two doubles and returns
+     * a comparator. There is no functional interface that takes two doubles and returns
      * an int, so we define one here. Comparing double values introduces
      * special cases such NaN. Consider all NaN values to be equal to each other
      * and greater than any non-NaN value.

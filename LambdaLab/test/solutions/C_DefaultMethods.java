@@ -1,14 +1,12 @@
 package solutions;
 
+import org.assertj.core.api.Assertions;
+import org.junit.Test;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Ignore;
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -228,14 +226,14 @@ public class C_DefaultMethods {
         keys.forEach(key -> map.putIfAbsent(key, ""));
         //ENDREMOVE
 
-        Assertions.assertThat(map)
-                .containsExactly(new AbstractMap.SimpleEntry<>("a", "alfa"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("b", "bravo"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("c", "charlie"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("d", "delta"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("e", ""))
-                .containsExactly(new AbstractMap.SimpleEntry<>("f", ""))
-                .containsExactly(new AbstractMap.SimpleEntry<>("g", ""));
+        Assertions.assertThat(map).containsOnly(
+                new AbstractMap.SimpleEntry<>("a", "alfa"),
+                new AbstractMap.SimpleEntry<>("b", "bravo"),
+                new AbstractMap.SimpleEntry<>("c", "charlie"),
+                new AbstractMap.SimpleEntry<>("d", "delta"),
+                new AbstractMap.SimpleEntry<>("e", ""),
+                new AbstractMap.SimpleEntry<>("f", ""),
+                new AbstractMap.SimpleEntry<>("g", ""));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -265,11 +263,11 @@ public class C_DefaultMethods {
         keys.forEach(key -> map.remove(key, ""));
         //ENDREMOVE
 
-        Assertions.assertThat(map)
-                .containsExactly(new AbstractMap.SimpleEntry<>("a", "alfa"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("b", "bravo"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("c", "charlie"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("d", "delta"));
+        Assertions.assertThat(map).containsOnly(
+                new AbstractMap.SimpleEntry<>("a", "alfa"),
+                new AbstractMap.SimpleEntry<>("b", "bravo"),
+                new AbstractMap.SimpleEntry<>("c", "charlie"),
+                new AbstractMap.SimpleEntry<>("d", "delta"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -300,14 +298,14 @@ public class C_DefaultMethods {
         keys.forEach(key -> map.replace(key, "", key));
         //ENDREMOVE
 
-        Assertions.assertThat(map)
-                .containsExactly(new AbstractMap.SimpleEntry<>("a", "alfa"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("b", "bravo"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("c", "charlie"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("d", "delta"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("e", ""))
-                .containsExactly(new AbstractMap.SimpleEntry<>("f", ""))
-                .containsExactly(new AbstractMap.SimpleEntry<>("g", ""));
+        Assertions.assertThat(map).containsOnly(
+                new AbstractMap.SimpleEntry<>("a", "alfa"),
+                new AbstractMap.SimpleEntry<>("b", "bravo"),
+                new AbstractMap.SimpleEntry<>("c", "charlie"),
+                new AbstractMap.SimpleEntry<>("d", "delta"),
+                new AbstractMap.SimpleEntry<>("e", "e"),
+                new AbstractMap.SimpleEntry<>("f", "f"),
+                new AbstractMap.SimpleEntry<>("g", "g"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -335,14 +333,14 @@ public class C_DefaultMethods {
         keys.forEach(key -> map.compute(key, (k, v) -> v == null ? k : v.toUpperCase()));
         //ENDREMOVE
 
-        Assertions.assertThat(map)
-                .containsExactly(new AbstractMap.SimpleEntry<>("a", "ALFA"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("b", "BRAVO"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("c", "CHARLIE"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("d", "DELTA"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("e", "e"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("f", "f"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("g", "g"));
+        Assertions.assertThat(map).containsOnly(
+                new AbstractMap.SimpleEntry<>("a", "ALFA"),
+                new AbstractMap.SimpleEntry<>("b", "BRAVO"),
+                new AbstractMap.SimpleEntry<>("c", "CHARLIE"),
+                new AbstractMap.SimpleEntry<>("d", "DELTA"),
+                new AbstractMap.SimpleEntry<>("e", "e"),
+                new AbstractMap.SimpleEntry<>("f", "f"),
+                new AbstractMap.SimpleEntry<>("g", "g"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -374,11 +372,11 @@ public class C_DefaultMethods {
         keys.forEach(key -> map.compute(key, (k, v) -> v.isEmpty() ? null : v.toUpperCase()));
         //ENDREMOVE
 
-        Assertions.assertThat(map)
-                .containsExactly(new AbstractMap.SimpleEntry<>("a", "ALFA"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("b", "BRAVO"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("c", "CHARLIE"))
-                .containsExactly(new AbstractMap.SimpleEntry<>("d", "DELTA"));
+        Assertions.assertThat(map).containsOnly(
+                new AbstractMap.SimpleEntry<>("a", "ALFA"),
+                new AbstractMap.SimpleEntry<>("b", "BRAVO"),
+                new AbstractMap.SimpleEntry<>("c", "CHARLIE"),
+                new AbstractMap.SimpleEntry<>("d", "DELTA"));
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">

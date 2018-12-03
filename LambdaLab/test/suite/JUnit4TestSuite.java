@@ -5,12 +5,12 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses(value={
-    exercises.A_Lambdas.class,
-    exercises.B_Comparators.class,
-    exercises.C_DefaultMethods.class,
-    exercises.D_SimpleStreams.class,
-    exercises.E_IntermediateStreams.class,
-    exercises.F_AdvancedStreams.class
+    solutions.A_Lambdas.class,
+    solutions.B_Comparators.class,
+    solutions.C_DefaultMethods.class,
+    solutions.D_SimpleStreams.class,
+    solutions.E_IntermediateStreams.class,
+    solutions.F_AdvancedStreams.class
 })
 public class JUnit4TestSuite {
 }
