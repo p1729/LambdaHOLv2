@@ -1,4 +1,4 @@
-package exercises;
+package exercises.otherides;
 
 import org.junit.Ignore;
 import org.junit.Test;

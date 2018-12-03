@@ -1,4 +1,4 @@
-package exercises;
+package exercises.otherides;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

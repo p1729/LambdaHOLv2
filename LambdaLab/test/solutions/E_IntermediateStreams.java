@@ -284,35 +284,6 @@ public class E_IntermediateStreams {
     // </editor-fold>
 
 
-    /**
-     * Count the length of a stream dropping the first elements on a predicate.
-     */
-    @Test
-    public void e9_countTheElementsAfterAPredicate() {
-
-        Random rand = new Random(314L);
-        Stream<String> stream = Stream.iterate(
-                "",
-                (String s) -> {
-                    final int nextInt = rand.nextInt(10);
-                    return (nextInt == 0 && !s.isEmpty()) ? s.substring(0, s.length() - 1) :
-                            (nextInt == 8 || nextInt == 9) ? s + "+"
-                                    : s;
-                }).limit(100);
-
-        //TODO//long count = 0L;
-        //BEGINREMOVE
-        long count = stream.dropWhile(s -> s.length() < 3).count();
-        //ENDREMOVE
-
-        assertThat(count).isEqualTo(53);
-    }
-    // Hint:
-    // <editor-fold defaultstate="collapsed">
-    // Java 9 added the dropWhile() method on the stream interface.
-    // </editor-fold>
-
-
 // ========================================================
 // END OF EXERCISES
 // TEST INFRASTRUCTURE IS BELOW
