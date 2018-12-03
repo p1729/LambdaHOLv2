@@ -13,20 +13,20 @@ lambda or new API that enables the test to pass.
 ## Lab Instructions
 1. Download and unzip the ZIP file for the project.
 
-2. (a) In IntelliJ, select New | Project from Existing Sources, and
+2. (a) **In IntelliJ**, select New | Project from Existing Sources, and
 select the directory LambdaHOLv2-Java8. click "Open", then 
 "Import from External Model", select "Maven", and click "Next", 
 "Next", and "Finish".
 
-    In the `LambdaLab/test` folder, open the package `exercises`.
+    In the `LambdaLab/test` folder, open the package `exercises.otherides`.
 
-    (b) In Eclipse, select Preferences | Java | Editor | Folding. 
+    (b) **In Eclipse**, select Preferences | Java | Editor | Folding. 
 Ensure that the "Comments" checkbox is ticked.
 
     Select File | Import... | Maven | Existing Maven Projects, click
 "Next", select the directory LambdaHOLv2-Java8, click "Finish".
 
-    In the `LambdaLab/test` folder, open the `exercises.eclipse` package.
+    In the `LambdaLab/test` folder, open the package `exercises.eclipse`.
 
 3. Open up one of the following exercise files:
 
