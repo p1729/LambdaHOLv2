@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Comparator;
 import java.util.function.IntBinaryOperator;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -103,7 +104,7 @@ public class B_Comparators {
         //BEGINREMOVE
         Comparator<Person> comparebyLastNameThenFirstName =
                 Comparator.comparing(Person::getLastName)
-                          .thenComparing(Person::getFirstName);
+                        .thenComparing(Person::getFirstName);
         //ENDREMOVE
 
         assertTrue(comparebyLastNameThenFirstName.compare(michael, rod) < 0);
@@ -125,8 +126,8 @@ public class B_Comparators {
         //BEGINREMOVE
         Comparator<Person> comparebyLastNameThenFirstNameReversed =
                 Comparator.comparing(Person::getLastName)
-                          .thenComparing(Person::getFirstName)
-                          .reversed();
+                        .thenComparing(Person::getFirstName)
+                        .reversed();
         //ENDREMOVE
 
         assertFalse(comparebyLastNameThenFirstNameReversed.compare(michael, rod) < 0);
@@ -149,8 +150,8 @@ public class B_Comparators {
         //BEGINREMOVE
         Comparator<Person> comparebyLastNameThenFirstNameWithNull =
                 Comparator.nullsLast(
-                    Comparator.comparing(Person::getLastName)
-                              .thenComparing(Person::getFirstName));
+                        Comparator.comparing(Person::getLastName)
+                                .thenComparing(Person::getFirstName));
         //ENDREMOVE
 
         assertTrue(comparebyLastNameThenFirstNameWithNull.compare(michael, rod) < 0);
@@ -265,4 +266,28 @@ public class B_Comparators {
     // <editor-fold defaultstate="collapsed">
     // Use a method reference to a static method on the Double class.
     // </editor-fold>
+
+    /**
+     * Write a comparator that compare instances of the Person
+     * class using the following rules:
+     * - the instances are first compared using their last names
+     * - then compared with their first names, which may be null
+     *   (null should compare as greater than any non-null string)
+     * - then compared with their age in descending order
+     */
+    @Test
+    public void comparator11() {
+        //TODO//Comparator<Person> cmp = null;
+        //BEGINREMOVE
+        Comparator<Person> cmp = Comparator.nullsLast(
+                Comparator.comparing(Person::getLastName)
+                        .thenComparing(Person::getAge, Comparator.reverseOrder()));
+        //ENDREMOVE
+
+        assertThat(cmp.compare(michael, rod)).isLessThan(0);
+        assertThat(cmp.compare(paul, paul)).isEqualTo(0);
+        assertThat(cmp.compare(michael, jermaine)).isGreaterThan(0);
+        assertThat(cmp.compare(mick, null)).isLessThan(0);
+        assertThat(cmp.compare(null, mick)).isGreaterThan(0);
+    }
 }

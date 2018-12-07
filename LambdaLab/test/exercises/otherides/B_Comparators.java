@@ -7,6 +7,7 @@ import org.junit.Ignore;
 import java.util.Comparator;
 import java.util.function.IntBinaryOperator;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -225,4 +226,23 @@ public class B_Comparators {
     // <editor-fold defaultstate="collapsed">
     // Use a method reference to a static method on the Double class.
     // </editor-fold>
+
+    /**
+     * Write a comparator that compare instances of the Person
+     * class using the following rules:
+     * - the instances are first compared using their last names
+     * - then compared with their first names, which may be null
+     *   (null should compare as greater than any non-null string)
+     * - then compared with their age in descending order
+     */
+    @Test @Ignore
+    public void comparator11() {
+        Comparator<Person> cmp = null; // TODO
+
+        assertThat(cmp.compare(michael, rod)).isLessThan(0);
+        assertThat(cmp.compare(paul, paul)).isEqualTo(0);
+        assertThat(cmp.compare(michael, jermaine)).isGreaterThan(0);
+        assertThat(cmp.compare(mick, null)).isLessThan(0);
+        assertThat(cmp.compare(null, mick)).isGreaterThan(0);
+    }
 }
