@@ -1,32 +1,24 @@
 package exercises.eclipse;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.Ignore;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.AbstractCollection;
-import java.util.AbstractList;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
-import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
-import java.util.stream.Stream;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.Ignore;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -34,6 +26,8 @@ import static org.junit.Assert.assertTrue;
  * longer stream pipelines, and simple reductions.
  */
 public class E_IntermediateStreams {
+
+    public static final String SONNET_PATH = "LambdaLab/files/SonnetI.txt";
 
     /**
      * Convert a list of strings into a list of characters.
@@ -220,7 +214,7 @@ public class E_IntermediateStreams {
     @Before
     public void z_setUpBufferedReader() throws IOException {
         reader = Files.newBufferedReader(
-                Paths.get("files/SonnetI.txt"), StandardCharsets.UTF_8);
+                Paths.get(SONNET_PATH), StandardCharsets.UTF_8);
     }
 
     @After
