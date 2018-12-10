@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -80,21 +81,19 @@ public class F_AdvancedStreams {
                   .collect(Collectors.groupingBy(String::length, Collectors.counting()));
         //ENDREMOVE
 
-        assertEquals( 1L, (long)result.get(1));
-        assertEquals(11L, (long)result.get(2));
-        assertEquals(28L, (long)result.get(3));
-        assertEquals(21L, (long)result.get(4));
-        assertEquals(16L, (long)result.get(5));
-        assertEquals(12L, (long)result.get(6));
-        assertEquals(10L, (long)result.get(7));
-        assertEquals( 3L, (long)result.get(8));
-        assertEquals( 2L, (long)result.get(9));
-        assertEquals( 2L, (long)result.get(10));
-        assertEquals( 1L, (long)result.get(11));
-
-        IntSummaryStatistics stats = result.keySet().stream().mapToInt(i -> i).summaryStatistics();
-        assertEquals("min key",  1, stats.getMin());
-        assertEquals("max key", 11, stats.getMax());
+        assertThat(result.size()).isEqualTo(11);
+        assertThat(result)
+                .containsEntry(1, 1L)
+                .containsEntry(2, 11L)
+                .containsEntry(3, 28L)
+                .containsEntry(4, 21L)
+                .containsEntry(5, 16L)
+                .containsEntry(6, 12L)
+                .containsEntry(7, 10L)
+                .containsEntry(8, 3L)
+                .containsEntry(9, 2L)
+                .containsEntry(10, 2L)
+                .containsEntry(11, 1L);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -135,14 +134,16 @@ public class F_AdvancedStreams {
             //                          Long::sum));
         //ENDREMOVE
 
-        assertEquals(2L, (long)result.get("tender"));
-        assertEquals(6L, (long)result.get("the"));
-        assertEquals(1L, (long)result.get("churl"));
-        assertEquals(2L, (long)result.get("thine"));
-        assertEquals(1L, (long)result.get("world"));
-        assertEquals(4L, (long)result.get("thy"));
-        assertEquals(3L, (long)result.get("self"));
-        assertFalse(result.containsKey("lambda"));
+        assertThat(result.size()).isEqualTo(87);
+        assertThat(result)
+                .containsEntry("tender", 2L)
+                .containsEntry("the", 6L)
+                .containsEntry("churl", 1L)
+                .containsEntry("thine", 2L)
+                .containsEntry("world", 1L)
+                .containsEntry("thy", 4L)
+                .containsEntry("self", 3L);
+        assertThat(result).doesNotContainKey("lambda");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -223,8 +224,8 @@ public class F_AdvancedStreams {
         int sumOdds  = sums.get(true);
         //ENDREMOVE
 
-        assertEquals(516, sumEvens);
-        assertEquals(614, sumOdds);
+        assertThat(sumEvens).isEqualTo(516);
+        assertThat(sumOdds).isEqualTo(614);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -266,7 +267,7 @@ public class F_AdvancedStreams {
                  .toString();
         //ENDREMOVE
 
-        assertEquals("tsrqponmlkjihgfedcbaabcdefghijklmnopqrst", result);
+        assertThat(result).isEqualTo("tsrqponmlkjihgfedcbaabcdefghijklmnopqrst");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -343,8 +344,8 @@ public class F_AdvancedStreams {
                                 TotalAndDistinct::accumulate,
                                 TotalAndDistinct::combine);
 
-        assertEquals("distinct count", 81, totalAndDistinct.getDistinctCount());
-        assertEquals("total count", 10700, totalAndDistinct.getTotalCount());
+        assertThat(totalAndDistinct.getDistinctCount()).isEqualTo(81);
+        assertThat(totalAndDistinct.getTotalCount()).isEqualTo(10700);
     }
 
 // ========================================================
