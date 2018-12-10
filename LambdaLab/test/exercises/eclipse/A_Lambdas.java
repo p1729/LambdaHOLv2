@@ -1,22 +1,14 @@
 package exercises.eclipse;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.BiFunction;
-
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.Ignore;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * This set of exercises is about lambdas and method references.
@@ -35,8 +27,8 @@ public class A_Lambdas {
     public void a_predicate1() {
         Predicate<String> pred = null; // TODO
 
-        assertTrue(pred.test("abcde"));
-        assertFalse(pred.test("abcd"));
+        assertThat(pred.test("abcde")).isTrue();
+        assertThat(pred.test("abc")).isFalse();
     }
 
     /**
@@ -47,8 +39,8 @@ public class A_Lambdas {
     public void a_predicate2() {
         Predicate<String> pred = null; // TODO
 
-        assertTrue(pred.test(""));
-        assertFalse(pred.test("a"));
+        assertThat(pred.test("")).isTrue();
+        assertThat(pred.test("a")).isFalse();
     }
 
     /**
@@ -56,15 +48,15 @@ public class A_Lambdas {
      * that tests whether a string is empty. An unbound method
      * reference has a class name on the left-hand side of the ::
      * operator:
-     *
+     * <p>
      *     classname::methodname
      */
     @Test @Ignore
     public void a_predicate3() {
         Predicate<String> pred = null; // TODO
 
-        assertTrue(pred.test(""));
-        assertFalse(pred.test("a"));
+        assertThat(pred.test("")).isTrue();
+        assertThat(pred.test("a")).isFalse();
     }
     /* Hint:
      * Copy the lambda expression from the previous exercise and then pop
@@ -84,10 +76,10 @@ public class A_Lambdas {
 
         Predicate<String> startsWithJAndLengthIs7 = null; // TODO
 
-        assertFalse(startsWithJAndLengthIs7.test("Hello"));
-        assertFalse(startsWithJAndLengthIs7.test("HelloJ1"));
-        assertFalse(startsWithJAndLengthIs7.test("Java1"));
-        assertTrue(startsWithJAndLengthIs7.test("JavaOne"));
+        assertThat(startsWithJAndLengthIs7.test("Hello")).isFalse();
+        assertThat(startsWithJAndLengthIs7.test("HelloJ1")).isFalse();
+        assertThat(startsWithJAndLengthIs7.test("Java1")).isFalse();
+        assertThat(startsWithJAndLengthIs7.test("JavaOne")).isTrue();
     }
     /* Hint:
      * see java.util.function.Predicate.and()
@@ -105,10 +97,10 @@ public class A_Lambdas {
 
         Predicate<String> lengthIs9orError = null; // TODO
 
-        assertFalse(lengthIs9orError.test("Hello"));
-        assertTrue(lengthIs9orError.test("Hello J1!"));
-        assertTrue(lengthIs9orError.test("ERROR"));
-        assertFalse(lengthIs9orError.test("Error"));
+        assertThat(lengthIs9orError.test("Hello")).isFalse();
+        assertThat(lengthIs9orError.test("Hello J1!")).isTrue();
+        assertThat(lengthIs9orError.test("ERROR")).isTrue();
+        assertThat(lengthIs9orError.test("Error")).isFalse();
     }
     /* Hint:
      * see java.util.function.Predicate.or()
@@ -122,7 +114,7 @@ public class A_Lambdas {
     public void b_function1() {
         Function<String, String> func = null; // TODO
 
-        assertEquals("(abc)", func.apply("abc"));
+        assertThat(func.apply("abc")).isEqualTo("(abc)");
     }
 
     /**
@@ -133,7 +125,7 @@ public class A_Lambdas {
     public void b_function2() {
         Function<String, String> func = null; // TODO
 
-        assertEquals("ABC", func.apply("abc"));
+        assertThat(func.apply("abc")).isEqualTo("ABC");
     }
 
     /**
@@ -144,7 +136,7 @@ public class A_Lambdas {
     public void b_function3() {
         Function<String, String> func = null; // TODO
 
-        assertEquals("ABC", func.apply("abc"));
+        assertThat(func.apply("abc")).isEqualTo("ABC");
     }
 
     /**
@@ -160,9 +152,9 @@ public class A_Lambdas {
 
         Function<String, Integer> lengthBis = null; // TODO
 
-        assertEquals((Integer)14, lengthBis.apply("Hello JavaOne!"));
-        assertEquals((Integer)0, lengthBis.apply(""));
-        assertEquals((Integer)0, lengthBis.apply(null));
+        assertThat(lengthBis.apply("Hello JavaOne!")).isEqualTo(14);
+        assertThat(lengthBis.apply("")).isEqualTo(0);
+        assertThat(lengthBis.apply(null)).isEqualTo(0);
     }
     /* Hint:
      * See java.util.Function.andThen() or java.util.Function.compose()
@@ -178,7 +170,8 @@ public class A_Lambdas {
 
         StringBuilder sb = new StringBuilder("xyz");
         cons.accept(sb);
-        assertEquals("xyzabc", sb.toString());
+
+        assertThat(sb.toString()).isEqualTo("xyzabc");
     }
 
     /**
@@ -190,7 +183,8 @@ public class A_Lambdas {
 
         List<String> list = new ArrayList<>(Arrays.asList("a", "b", "c"));
         cons.accept(list);
-        assertTrue(list.isEmpty());
+
+        assertThat(list).isEmpty();
     }
 
     /**
@@ -202,7 +196,8 @@ public class A_Lambdas {
 
         List<String> list = new ArrayList<>(Arrays.asList("a", "b", "c"));
         cons.accept(list);
-        assertTrue(list.isEmpty());
+
+        assertThat(list).isEmpty();
     }
 
     /**
@@ -218,7 +213,8 @@ public class A_Lambdas {
 
         List<String> list = new ArrayList<>(Arrays.asList("a", "b", "c"));
         consumer.accept(list);
-        assertEquals(Arrays.asList("a", "b", "c", "first", "second"), list);
+
+        assertThat(list).containsExactly("a", "b", "c", "first", "second");
     }
     /* Hint:
      * see java.util.function.Consumer.andThen()
@@ -232,7 +228,7 @@ public class A_Lambdas {
     public void d_supplier1() {
         Supplier<StringBuilder> sup = null; // TODO
 
-        assertEquals("abc", sup.get().toString());
+        assertThat(sup.get().toString()).isEqualTo("abc");
     }
 
     /**
@@ -242,17 +238,17 @@ public class A_Lambdas {
     public void d_supplier2() {
         Supplier<StringBuilder> sup = null; // TODO
 
-        assertEquals("", sup.get().toString());
+        assertThat(sup.get().toString()).isEmpty();
     }
 
     /**
-     * Write an unbound method reference that returns a new, empty StringBuilder.
+     * Write a constructor reference that returns a new, empty StringBuilder.
      */
     @Test @Ignore
     public void d_supplier3() {
         Supplier<StringBuilder> sup = null; // TODO
 
-        assertEquals("", sup.get().toString());
+        assertThat(sup.get().toString()).isEmpty();
     }
 
     /**
@@ -264,7 +260,7 @@ public class A_Lambdas {
     public void e_bifunction1() {
         BiFunction<String, String, String> bifunc = null; // TODO
 
-        assertEquals("FirstSecondFirst", bifunc.apply("First", "Second"));
+        assertThat(bifunc.apply("First", "Second")).isEqualTo("FirstSecondFirst");
     }
 
     /**
@@ -276,8 +272,8 @@ public class A_Lambdas {
     public void e_bifunction2() {
         BiFunction<String, String, Integer> bifunc = null; // TODO
 
-        assertEquals(3, bifunc.apply("abcdefghi", "def").intValue());
-        assertEquals(-1, bifunc.apply("abcdefghi", "xyz").intValue());
+        assertThat(bifunc.apply("abcdefghi", "def")).isEqualTo(3);
+        assertThat(bifunc.apply("abcdefghi", "xyz")).isEqualTo(-1);
     }
     /* Hint:
      * The String method
@@ -296,8 +292,8 @@ public class A_Lambdas {
     public void e_bifunction3() {
         BiFunction<String, String, Integer> bifunc = null; // TODO
 
-        assertEquals(3, bifunc.apply("abcdefghij", "def").intValue());
-        assertEquals(-1, bifunc.apply("abcdefghij", "xyz").intValue());
+        assertThat(bifunc.apply("abcdefghij", "def")).isEqualTo(3);
+        assertThat(bifunc.apply("abcdefghij", "xyz")).isEqualTo(-1);
     }
     /* Hint 1:
      * Try using the IDE command to convert the lambda from the previous
@@ -325,7 +321,8 @@ public class A_Lambdas {
         r.run();
         r.run();
         r.run();
-        assertEquals("abcxyzxyzxyz", sb.toString());
+
+        assertThat(sb.toString()).isEqualTo("abcxyzxyzxyz");
     }
 
     /**
@@ -338,9 +335,9 @@ public class A_Lambdas {
     public void g_boundMethodRef1() {
         Function<String, Integer> func = null; // TODO
 
-        assertEquals(2, func.apply("cde").intValue());
-        assertEquals(4, func.apply("efg").intValue());
-        assertEquals(-1, func.apply("xyz").intValue());
+        assertThat(func.apply("cde")).isEqualTo(2);
+        assertThat(func.apply("efg")).isEqualTo(4);
+        assertThat(func.apply("xyz")).isEqualTo(-1);
     }
     /* Hint:
      * Call the indexOf() method on a string literal.
@@ -353,9 +350,9 @@ public class A_Lambdas {
      * doesn't occur. A bound method reference has an instance,
      * or an expression that evaluates to an instance, on the left-hand
      * side of the :: operator:
-     *
+     * <p>
      *     myObject::methodname
-     *
+     * <p>
      * This is in contrast to an unbound method reference, which has
      * a classname on the left-hand side of the :: operator.
      */
@@ -363,9 +360,9 @@ public class A_Lambdas {
     public void g_boundMethodRef2() {
         Function<String, Integer> func = null; // TODO
 
-        assertEquals(2, func.apply("cde").intValue());
-        assertEquals(4, func.apply("efg").intValue());
-        assertEquals(-1, func.apply("xyz").intValue());
+        assertThat(func.apply("cde")).isEqualTo(2);
+        assertThat(func.apply("efg")).isEqualTo(4);
+        assertThat(func.apply("xyz")).isEqualTo(-1);
     }
     /* Hint:
      * Place a string literal on the left-hand side of the :: operator.

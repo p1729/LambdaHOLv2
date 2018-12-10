@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * This set of exercises covers simple stream pipelines,
  * including intermediate operations and basic collectors.
- *
+ * <p>
  * Some of these exercises use a BufferedReader variable
  * named "reader" that the test has set up for you.
  */
@@ -40,7 +40,7 @@ public class D_SimpleStreams {
 
         List<String> result = null; // TODO
 
-        assertEquals(Arrays.asList("BRAVO", "CHARLIE", "DELTA", "FOXTROT"), result);
+        assertThat(result).containsExactly("BRAVO", "CHARLIE", "DELTA", "FOXTROT");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -65,7 +65,7 @@ public class D_SimpleStreams {
 
         String result = ""; // TODO
 
-        assertEquals("h,e,c", result);
+        assertThat(result).isEqualTo("h,e,c");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -88,7 +88,7 @@ public class D_SimpleStreams {
     public void d3_countLinesInFile() throws IOException {
         long count = 0; // TODO
 
-        assertEquals(14, count);
+        assertThat(count).isEqualTo(14);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -109,7 +109,7 @@ public class D_SimpleStreams {
     public void d4_findLengthOfLongestLine() throws IOException {
         int longestLength = 0; // TODO
 
-        assertEquals(53, longestLength);
+        assertThat(longestLength).isEqualTo(53);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -135,7 +135,7 @@ public class D_SimpleStreams {
     public void d5_findLongestLine() throws IOException {
         String longest = null; // TODO
 
-        assertEquals("Feed'st thy light's flame with self-substantial fuel,", longest);
+        assertThat(longest).isEqualTo("Feed'st thy light's flame with self-substantial fuel,");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -158,7 +158,7 @@ public class D_SimpleStreams {
 
         List<String> result = null; // TODO
 
-        assertEquals(Arrays.asList("charlie", "foxtrot"), result);
+        assertThat(result).containsExactly("charlie", "foxtrot");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -176,7 +176,7 @@ public class D_SimpleStreams {
 
         List<String> result = null; // TODO
 
-        assertEquals(Arrays.asList("alfa", "bravo", "charlie", "delta", "foxtrot"), result);
+        assertThat(result).containsExactly("alfa", "bravo", "charlie", "delta", "foxtrot");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">

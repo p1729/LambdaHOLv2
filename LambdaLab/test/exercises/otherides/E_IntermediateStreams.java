@@ -11,15 +11,13 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * This set of exercises covers more advanced stream operations
@@ -38,8 +36,7 @@ public class E_IntermediateStreams {
 
         List<Character> result = null; // TODO
 
-        assertEquals("[a, l, f, a, b, r, a, v, o, c, h, a, r, l, i, e]", result.toString());
-        assertTrue(result.stream().allMatch(x -> x instanceof Character));
+        assertThat(result).containsExactly('a', 'l', 'f', 'a', 'b', 'r', 'a', 'v', 'o', 'c', 'h', 'a', 'r', 'l', 'i', 'e');
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -66,23 +63,23 @@ public class E_IntermediateStreams {
     public void e2_listOfAllWords() throws IOException {
         List<String> output = null; // TODO
 
-        assertEquals(
-            Arrays.asList(
-                "From", "fairest", "creatures", "we", "desire", "increase",
-                "That", "thereby", "beauty's", "rose", "might", "never", "die",
-                "But", "as", "the", "riper", "should", "by", "time", "decease",
-                "His", "tender", "heir", "might", "bear", "his", "memory",
-                "But", "thou", "contracted", "to", "thine", "own", "bright", "eyes",
-                "Feed'st", "thy", "light's", "flame", "with", "self", "substantial", "fuel",
-                "Making", "a", "famine", "where", "abundance", "lies",
-                "Thy", "self", "thy", "foe", "to", "thy", "sweet", "self", "too", "cruel",
-                "Thou", "that", "art", "now", "the", "world's", "fresh", "ornament",
-                "And", "only", "herald", "to", "the", "gaudy", "spring",
-                "Within", "thine", "own", "bud", "buriest", "thy", "content",
-                "And", "tender", "churl", "mak'st", "waste", "in", "niggarding",
-                "Pity", "the", "world", "or", "else", "this", "glutton", "be",
-                "To", "eat", "the", "world's", "due", "by", "the", "grave", "and", "thee"),
-            output);
+        assertThat(output)
+                .containsExactly(
+                        "From", "fairest", "creatures", "we", "desire", "increase",
+                        "That", "thereby", "beauty's", "rose", "might", "never", "die",
+                        "But", "as", "the", "riper", "should", "by", "time", "decease",
+                        "His", "tender", "heir", "might", "bear", "his", "memory",
+                        "But", "thou", "contracted", "to", "thine", "own", "bright", "eyes",
+                        "Feed'st", "thy", "light's", "flame", "with", "self", "substantial", "fuel",
+                        "Making", "a", "famine", "where", "abundance", "lies",
+                        "Thy", "self", "thy", "foe", "to", "thy", "sweet", "self", "too", "cruel",
+                        "Thou", "that", "art", "now", "the", "world's", "fresh", "ornament",
+                        "And", "only", "herald", "to", "the", "gaudy", "spring",
+                        "Within", "thine", "own", "bud", "buriest", "thy", "content",
+                        "And", "tender", "churl", "mak'st", "waste", "in", "niggarding",
+                        "Pity", "the", "world", "or", "else", "this", "glutton", "be",
+                        "To", "eat", "the", "world's", "due", "by", "the", "grave", "and", "thee"
+                );
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -100,11 +97,11 @@ public class E_IntermediateStreams {
     public void e3_longLowerCaseSortedWords() throws IOException {
         List<String> output = null; // TODO
 
-        assertEquals(
-            Arrays.asList(
+        assertThat(output)
+                .containsExactly(
                 "abundance", "beauty's", "contracted", "creatures",
-                "increase", "niggarding", "ornament", "substantial"),
-            output);
+                        "increase", "niggarding", "ornament", "substantial"
+                );
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -123,11 +120,11 @@ public class E_IntermediateStreams {
     public void e4_longLowerCaseReverseSortedWords() throws IOException {
         List<String> result = null; // TODO
 
-        assertEquals(
-            Arrays.asList(
+        assertThat(result)
+                .containsExactly(
                 "substantial", "ornament", "niggarding", "increase",
-                "creatures", "contracted", "beauty's", "abundance"),
-            result);
+                        "creatures", "contracted", "beauty's", "abundance"
+                );
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -145,8 +142,8 @@ public class E_IntermediateStreams {
     public void e5_sortedLowerCaseDistinctByLengthThenAlphabetically() throws IOException {
         List<String> result = null; // TODO
 
-        assertEquals(
-            Arrays.asList(
+        assertThat(result)
+                .containsExactly(
                 "a", "as", "be", "by", "in", "or", "to", "we",
                 "and", "art", "bud", "but", "die", "due", "eat", "foe",
                 "his", "now", "own", "the", "thy", "too", "bear", "else",
@@ -159,8 +156,8 @@ public class E_IntermediateStreams {
                 "tender", "within", "buriest", "content", "decease",
                 "fairest", "feed'st", "glutton", "light's", "thereby", "world's", "beauty's",
                 "increase", "ornament", "abundance", "creatures", "contracted", "niggarding",
-                "substantial"),
-            result);
+                 "substantial"
+                );
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -179,7 +176,7 @@ public class E_IntermediateStreams {
     public void e6_bigFactorial() {
         BigInteger result = BigInteger.ONE; // TODO
 
-        assertEquals(new BigInteger("51090942171709440000"), result);
+        assertThat(result).isEqualTo(new BigInteger("51090942171709440000"));
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -202,7 +199,7 @@ public class E_IntermediateStreams {
     public void e7_getLastWord() throws IOException {
         String result = null; // TODO
 
-        assertEquals("thee", result);
+        assertThat(result).isEqualTo("thee");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">

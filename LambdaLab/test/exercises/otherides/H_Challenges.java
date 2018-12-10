@@ -1,37 +1,18 @@
 package exercises.otherides;
 
-import java.io.Serializable;
-import java.lang.reflect.Modifier;
-import java.util.AbstractMap;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.OptionalInt;
-import java.util.RandomAccess;
-import java.util.Set;
-import java.util.function.Function;
+import org.junit.Test;
+import org.junit.Ignore;
+
+import java.util.*;
 import java.util.function.IntFunction;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.Ignore;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class H_Challenges {
 
@@ -41,13 +22,13 @@ public class H_Challenges {
      * "denormalized" list of strings describing the animal, with the animal's name separated
      * by a colon from the number of legs it has. The ordering in the output list is not
      * considered significant.
-     *
+     * <p>
      * Input is Map<Integer, List<String>>:
      *   { 4=["ibex", "hedgehog", "wombat"],
      *     6=["ant", "beetle", "cricket"],
      *     ...
      *   }
-     *
+     * <p>
      * Output should be a List<String>:
      *   [ "ibex:4",
      *     "hedgehog:4",
@@ -69,20 +50,10 @@ public class H_Challenges {
 
         List<String> result = null; // TODO
 
-        assertEquals(13, result.size());
-        assertTrue(result.contains("ibex:4"));
-        assertTrue(result.contains("hedgehog:4"));
-        assertTrue(result.contains("wombat:4"));
-        assertTrue(result.contains("ant:6"));
-        assertTrue(result.contains("beetle:6"));
-        assertTrue(result.contains("cricket:6"));
-        assertTrue(result.contains("octopus:8"));
-        assertTrue(result.contains("spider:8"));
-        assertTrue(result.contains("squid:8"));
-        assertTrue(result.contains("crab:10"));
-        assertTrue(result.contains("lobster:10"));
-        assertTrue(result.contains("scorpion:10"));
-        assertTrue(result.contains("millipede:750"));
+        assertThat(result.size()).isEqualTo(13);
+        assertThat(result)
+                .contains("ibex:4", "hedgehog:4", "wombat:4", "ant:6", "beetle:6", "octopus:8", "spider:8",
+                        "squid:8", "crab:10", "lobster:10", "scorpion:10", "millipede:750");
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -97,7 +68,7 @@ public class H_Challenges {
 
     /**
      * Invert a "multi-map". (From an idea by Paul Sandoz)
-     *
+     * <p>
      * Given a Map<X, Set<Y>>, convert it to Map<Y, Set<X>>.
      * Each set member of the input map's values becomes a key in
      * the result map. Each key in the input map becomes a set member
@@ -105,10 +76,10 @@ public class H_Challenges {
      * may appear in the value set of multiple keys. In the result
      * map, that item will be a key, and its value set will be
      * its corresopnding keys from the input map.
-     *
+     * <p>
      * In this case the input is Map<String, Set<Integer>>
      * and the result is Map<Integer, Set<String>>.
-     *
+     * <p>
      * For example, if the input map is
      *     {p=[10, 20], q=[20, 30]}
      * then the result map should be
@@ -117,7 +88,7 @@ public class H_Challenges {
      * in the value sets for both p and q in the input map. Therefore,
      * in the result map, there should be a mapping with 20 as the key
      * and p and q as its value set.
-     *
+     * <p>
      * It is possible to accomplish this task using a single stream
      * pipeline (not counting nested streams), that is, in a single pass
      * over the input, without storing anything in a temporary collection.
@@ -170,7 +141,7 @@ public class H_Challenges {
             Collector.of(null, null, null, null));
         // TODO implement a collector by replacing the nulls above
 
-        assertEquals(Arrays.asList("charlie", "foxtrot"), result);
+        assertThat(result).containsExactly("charlie", "foxtrot");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -193,7 +164,7 @@ public class H_Challenges {
 
         List<String> result = null; // TODO
 
-        assertEquals("[aaaaa, bb, cccc, d, eeeeee, aaa, fff]", result.toString());
+        assertThat(result).containsExactly("aaaaa", "bb", "cccc", "d", "eeeeee", "aaa", "fff");
     }
     // Hint:
     // <editor-fold defaultstate="collapsed">
@@ -216,12 +187,11 @@ public class H_Challenges {
             input.collect(Collector.of(null, null, null));
             // TODO fill in collector functions above
 
-        assertEquals(
-            IntStream.range(0, 100)
+        String[] expectedResult = IntStream.range(0, 100)
                      .map(i -> 99 - i)
                      .mapToObj(String::valueOf)
-                     .collect(Collectors.toList()),
-            new ArrayList<>(result));
+                .toArray(String[]::new);
+        assertThat(result).containsExactly(expectedResult);
     }
     // Hint 1:
     // <editor-fold defaultstate="collapsed">
@@ -238,7 +208,7 @@ public class H_Challenges {
      * elements are that value), and return that int value in an OptionalInt.
      * Note, return the majority int value, not the number of times it occurs.
      * If there is no majority value, return an empty OptionalInt.
-     *
+     * <p>
      * For example, given an input array [11, 12, 12] the result should be
      * an OptionalInt containing 12. Given an input array [11, 12, 13]
      * the result should be an empty OptionalInt.
@@ -261,8 +231,8 @@ public class H_Challenges {
         OptionalInt result1 = majority(array1);
         OptionalInt result2 = majority(array2);
 
-        assertEquals(OptionalInt.of(24), result1);
-        assertFalse(result2.isPresent());
+        assertThat(result1).isEqualTo(OptionalInt.of(24));
+        assertThat(result2).isEmpty();
     }
 
     /**
@@ -303,11 +273,12 @@ public class H_Challenges {
         Shoe shoe3 = sup2.get();
         Shoe shoe4 = sup2.get();
 
-        assertTrue(shoe1 != shoe2);
-        assertTrue(shoe3 != shoe4);
-        assertEquals(new Shoe(9), shoe1);
-        assertEquals(shoe1, shoe2);
-        assertEquals(new Shoe(13), shoe3);
-        assertEquals(shoe3, shoe4);
+        assertThat(shoe1).isNotSameAs(shoe2);
+        assertThat(shoe3).isNotSameAs(shoe4);
+
+        assertThat(shoe1).isEqualTo(new Shoe(9));
+        assertThat(shoe1).isEqualTo(shoe2);
+        assertThat(shoe3).isEqualTo(new Shoe(13));
+        assertThat(shoe3).isEqualTo(shoe4);
     }
 }

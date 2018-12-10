@@ -1,14 +1,12 @@
 package exercises.eclipse;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.Ignore;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * This set of exercises covers new default methods on
@@ -29,10 +27,8 @@ public class C_DefaultMethods {
 
         // TODO write code to modify sbList
 
-        assertEquals(Arrays.asList("alfanew", "bravonew", "charlienew"),
-                sbList.stream()
-                      .map(StringBuilder::toString)
-                      .collect(Collectors.toList()));
+        List<String> actualStrings = sbList.stream().map(StringBuilder::toString).collect(Collectors.toList());
+        assertThat(actualStrings).containsExactly("alfanew", "bravonew", "charlienew");
     }
     /* Hint:
      * Use Iterable.forEach().
@@ -49,7 +45,7 @@ public class C_DefaultMethods {
 
         // TODO write code to modify list
 
-        assertEquals(Arrays.asList("alfa", "echo"), list);
+        assertThat(list).containsExactly("alfa", "echo");
     }
     /* Hint:
      * Use Collection.removeIf().
@@ -66,8 +62,7 @@ public class C_DefaultMethods {
 
         // TODO code to modify list
 
-        assertEquals(Arrays.asList("ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO", "FOXTROT"),
-                     list);
+        assertThat(list).containsExactly("ALFA", "BRAVO", "CHARLIE", "DELTA", "ECHO", "FOXTROT");
     }
     /* Hint:
      * Use List.replaceAll().
@@ -88,11 +83,11 @@ public class C_DefaultMethods {
 
         // TODO write code to modify map
 
-        assertEquals(3, map.size());
-        assertTrue(map.values().stream().allMatch(x -> x instanceof StringBuilder));
-        assertEquals("alfa1",    map.get(1).toString());
-        assertEquals("bravo2",   map.get(2).toString());
-        assertEquals("charlie3", map.get(3).toString());
+        assertThat(map.size()).isEqualTo(3);
+        assertThat(valuesToString(map))
+                .containsEntry(1, "alfa1")
+                .containsEntry(2, "bravo2")
+                .containsEntry(3, "charlie3");
     }
     /* Hint:
      * Use Map.forEach().
@@ -113,10 +108,11 @@ public class C_DefaultMethods {
 
         // TODO write code to modify map
 
-        assertEquals(3, map.size());
-        assertEquals("alfa1",    map.get(1));
-        assertEquals("bravo2",   map.get(2));
-        assertEquals("charlie3", map.get(3));
+        assertThat(map.size()).isEqualTo(3);
+        assertThat(map)
+                .containsEntry(1, "alfa1")
+                .containsEntry(2, "bravo2")
+                .containsEntry(3, "charlie3");
     }
     /* Hint:
      * Use Map.replaceAll().
@@ -137,13 +133,14 @@ public class C_DefaultMethods {
 
         // TODO write code to populate result
 
-        assertEquals(Arrays.asList(5, 6, 7, 8, 9, 10), new ArrayList<>(result.keySet()));
-        assertEquals(Arrays.asList("bison"), result.get(5));
-        assertEquals(Arrays.asList("avocet"), result.get(6));
-        assertEquals(Arrays.asList("bustard"), result.get(7));
-        assertEquals(Arrays.asList("aardvark", "capybara", "bushbaby", "capuchin"), result.get(8));
-        assertEquals(Arrays.asList("alligator"), result.get(9));
-        assertEquals(Arrays.asList("chimpanzee"), result.get(10));
+        assertThat(result).containsOnlyKeys(5, 6, 7, 8, 9, 10);
+        assertThat(result)
+                .containsEntry(5, Arrays.asList("bison"))
+                .containsEntry(6, Arrays.asList("avocet"))
+                .containsEntry(7, Arrays.asList("bustard"))
+                .containsEntry(8, Arrays.asList("aardvark", "capybara", "bushbaby", "capuchin"))
+                .containsEntry(9, Arrays.asList("alligator"))
+                .containsEntry(10, Arrays.asList("chimpanzee"));
     }
     /* Hint:
      * Use Map.computeIfAbsent() within Iterable.forEach().
@@ -165,10 +162,11 @@ public class C_DefaultMethods {
 
         // TODO write code to populate result
 
-        assertEquals(Arrays.asList('a', 'b', 'c'), new ArrayList<>(result.keySet()));
-        assertEquals("aardvark:alligator:avocet",    result.get('a'));
-        assertEquals("bison:bushbaby:bustard",       result.get('b'));
-        assertEquals("capybara:chimpanzee:capuchin", result.get('c'));
+        assertThat(result).containsOnlyKeys('a', 'b', 'c');
+        assertThat(result)
+                .containsEntry('a', "aardvark:alligator:avocet")
+                .containsEntry('b', "bison:bushbaby:bustard")
+                .containsEntry('c', "capybara:chimpanzee:capuchin");
     }
     /* Hint:
      * Use Map.merge() within Iterable.forEach().
@@ -192,14 +190,15 @@ public class C_DefaultMethods {
 
         // TODO write code to fix the map
 
-        Assertions.assertThat(map).containsOnly(
-                new AbstractMap.SimpleEntry<>("a", "alfa"),
-                new AbstractMap.SimpleEntry<>("b", "bravo"),
-                new AbstractMap.SimpleEntry<>("c", "charlie"),
-                new AbstractMap.SimpleEntry<>("d", "delta"),
-                new AbstractMap.SimpleEntry<>("e", ""),
-                new AbstractMap.SimpleEntry<>("f", ""),
-                new AbstractMap.SimpleEntry<>("g", ""));
+        assertThat(map.size()).isEqualTo(7);
+        assertThat(map)
+                .containsEntry("a", "alfa")
+                .containsEntry("b", "bravo")
+                .containsEntry("c", "charlie")
+                .containsEntry("d", "delta")
+                .containsEntry("e", "")
+                .containsEntry("f", "")
+                .containsEntry("g", "");
     }
     /* Hint:
      * Check the Map.putIfAbsent() default method.
@@ -225,11 +224,12 @@ public class C_DefaultMethods {
 
         // TODO write code to fix the map
 
-        Assertions.assertThat(map).containsOnly(
-                new AbstractMap.SimpleEntry<>("a", "alfa"),
-                new AbstractMap.SimpleEntry<>("b", "bravo"),
-                new AbstractMap.SimpleEntry<>("c", "charlie"),
-                new AbstractMap.SimpleEntry<>("d", "delta"));
+        assertThat(map.size()).isEqualTo(4);
+        assertThat(map)
+                .containsEntry("a", "alfa")
+                .containsEntry("b", "bravo")
+                .containsEntry("c", "charlie")
+                .containsEntry("d", "delta");
     }
     /* Hint:
      * Check the two-arg Map.remove() default method.
@@ -256,14 +256,15 @@ public class C_DefaultMethods {
 
         // TODO write code to fix the map
 
-        Assertions.assertThat(map).containsOnly(
-                new AbstractMap.SimpleEntry<>("a", "alfa"),
-                new AbstractMap.SimpleEntry<>("b", "bravo"),
-                new AbstractMap.SimpleEntry<>("c", "charlie"),
-                new AbstractMap.SimpleEntry<>("d", "delta"),
-                new AbstractMap.SimpleEntry<>("e", "e"),
-                new AbstractMap.SimpleEntry<>("f", "f"),
-                new AbstractMap.SimpleEntry<>("g", "g"));
+        assertThat(map.size()).isEqualTo(7);
+        assertThat(map)
+                .containsEntry("a", "alfa")
+                .containsEntry("b", "bravo")
+                .containsEntry("c", "charlie")
+                .containsEntry("d", "delta")
+                .containsEntry("e", "e")
+                .containsEntry("f", "f")
+                .containsEntry("g", "g");
     }
     /* Hint:
      * Check the Map.replace() default method that takes 3 arguments.
@@ -287,14 +288,15 @@ public class C_DefaultMethods {
 
         // TODO write code transform the map
 
-        Assertions.assertThat(map).containsOnly(
-                new AbstractMap.SimpleEntry<>("a", "ALFA"),
-                new AbstractMap.SimpleEntry<>("b", "BRAVO"),
-                new AbstractMap.SimpleEntry<>("c", "CHARLIE"),
-                new AbstractMap.SimpleEntry<>("d", "DELTA"),
-                new AbstractMap.SimpleEntry<>("e", "e"),
-                new AbstractMap.SimpleEntry<>("f", "f"),
-                new AbstractMap.SimpleEntry<>("g", "g"));
+        assertThat(map.size()).isEqualTo(7);
+        assertThat(map)
+                .containsEntry("a", "ALFA")
+                .containsEntry("b", "BRAVO")
+                .containsEntry("c", "CHARLIE")
+                .containsEntry("d", "DELTA")
+                .containsEntry("e", "e")
+                .containsEntry("f", "f")
+                .containsEntry("g", "g");
     }
     /* Hint:
      * Check the Map.compute() default method, and read the Javadoc carefully
@@ -322,14 +324,20 @@ public class C_DefaultMethods {
 
         // TODO write code transform the map
 
-        Assertions.assertThat(map).containsOnly(
-                new AbstractMap.SimpleEntry<>("a", "ALFA"),
-                new AbstractMap.SimpleEntry<>("b", "BRAVO"),
-                new AbstractMap.SimpleEntry<>("c", "CHARLIE"),
-                new AbstractMap.SimpleEntry<>("d", "DELTA"));
+        assertThat(map.size()).isEqualTo(4);
+        assertThat(map)
+                .containsEntry("a", "ALFA")
+                .containsEntry("b", "BRAVO")
+                .containsEntry("c", "CHARLIE")
+                .containsEntry("d", "DELTA");
     }
     /* Hint:
      * Check the Map.compute() default method, read the Javadoc carefully
      * for the handling of null values returned from the function.
      */
+
+    private Map<Integer, String> valuesToString(Map<Integer, StringBuilder> map) {
+        return map.entrySet().stream().collect(
+                Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().toString()));
+    }
 }
