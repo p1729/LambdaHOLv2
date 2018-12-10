@@ -27,20 +27,20 @@ public class H_Challenges {
      * considered significant.
      * <p>
      * Input is Map<Integer, List<String>>:
-     * { 4=["ibex", "hedgehog", "wombat"],
-     * 6=["ant", "beetle", "cricket"],
-     * ...
-     * }
+     *   { 4=["ibex", "hedgehog", "wombat"],
+     *     6=["ant", "beetle", "cricket"],
+     *     ...
+     *   }
      * <p>
      * Output should be a List<String>:
-     * [ "ibex:4",
-     * "hedgehog:4",
-     * "wombat:4",
-     * "ant:6",
-     * "beetle:6",
-     * "cricket:6",
-     * ...
-     * ]
+     *   [ "ibex:4",
+     *     "hedgehog:4",
+     *     "wombat:4",
+     *     "ant:6",
+     *     "beetle:6",
+     *     "cricket:6",
+     *     ...
+     *   ]
      */
     @Test @Ignore
     public void h1_denormalizeMap() {
@@ -84,9 +84,9 @@ public class H_Challenges {
      * and the result is Map<Integer, Set<String>>.
      * <p>
      * For example, if the input map is
-     * {p=[10, 20], q=[20, 30]}
+     *     {p=[10, 20], q=[20, 30]}
      * then the result map should be
-     * {10=[p], 20=[p, q], 30=[q]}
+     *     {10=[p], 20=[p, q], 30=[q]}
      * irrespective of ordering. Note that the Integer 20 appears
      * in the value sets for both p and q in the input map. Therefore,
      * in the result map, there should be a mapping with 20 as the key
@@ -138,8 +138,8 @@ public class H_Challenges {
     @Test @Ignore
     public void h3_selectLongestWordsOnePass() {
         Stream<String> input = Stream.of(
-                "alfa", "bravo", "charlie", "delta",
-                "echo", "foxtrot", "golf", "hotel").parallel();
+            "alfa", "bravo", "charlie", "delta",
+            "echo", "foxtrot", "golf", "hotel").parallel();
 
         List<String> result = input.collect(
             Collector.of(null, null, null, null));
@@ -185,15 +185,15 @@ public class H_Challenges {
     @Test @Ignore
     public void h5_reversingCollector() {
         Stream<String> input =
-                IntStream.range(0, 100).mapToObj(String::valueOf).parallel();
+            IntStream.range(0, 100).mapToObj(String::valueOf).parallel();
 
         Collection<String> result =
             input.collect(Collector.of(null, null, null));
             // TODO fill in collector functions above
 
         String[] expectedResult = IntStream.range(0, 100)
-                .map(i -> 99 - i)
-                .mapToObj(String::valueOf)
+                     .map(i -> 99 - i)
+                     .mapToObj(String::valueOf)
                 .toArray(String[]::new);
         assertThat(result).containsExactly(expectedResult);
     }
@@ -229,8 +229,8 @@ public class H_Challenges {
 
     @Test @Ignore
     public void h6_majority() {
-        int[] array1 = {13, 13, 24, 35, 24, 24, 35, 24, 24};
-        int[] array2 = {13, 13, 24, 35, 24, 24, 35, 24};
+        int[] array1 = { 13, 13, 24, 35, 24, 24, 35, 24, 24 };
+        int[] array2 = { 13, 13, 24, 35, 24, 24, 35, 24 };
 
         OptionalInt result1 = majority(array1);
         OptionalInt result2 = majority(array2);
@@ -260,15 +260,8 @@ public class H_Challenges {
 
     static class Shoe {
         final int size;
-
-        public Shoe(int size) {
-            this.size = size;
-        }
-
-        public int hashCode() {
-            return size ^ 0xcafebabe;
-        }
-
+        public Shoe(int size) { this.size = size; }
+        public int hashCode() { return size ^ 0xcafebabe; }
         public boolean equals(Object other) {
             return (other instanceof Shoe) && this.size == ((Shoe) other).size;
         }

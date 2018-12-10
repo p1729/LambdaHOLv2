@@ -4,16 +4,16 @@
 *.orig
 *.rej
 *#
-*.iml
 
 # Package Files #
 *.jar
 *.war
 *.ear
 
-# NetBeans Files #
+# NetBeans/IntelliJ Files #
 /LambdaLab/build/
 /LambdaLab/dist/
 /LambdaLab/nbproject/private/
 .idea/
+*.iml
 target/

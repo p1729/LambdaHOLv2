@@ -24,7 +24,7 @@ public class B_Comparators {
     final Person jermaine = new Person("Jermaine", "Jackson", 61);
 
     /**
-     * Write a Comparator that compare instances of String using their length.
+     * Write a Comparator that compares instances of String using their length.
      * For instance FOUR (4 letters) is greater than TWO (three letters)
      */
     @Test

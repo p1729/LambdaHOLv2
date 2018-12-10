@@ -36,9 +36,9 @@ public class E_IntermediateStreams {
         //TODO//List<Character> result = null;
         //BEGINREMOVE
         List<Character> result =
-                input.stream()
-                        .flatMap(word -> word.chars().mapToObj(i -> (char) i))
-                        .collect(Collectors.toList());
+            input.stream()
+                .flatMap(word -> word.chars().mapToObj(i -> (char)i))
+                .collect(Collectors.toList());
         //ENDREMOVE
 
         assertThat(result).containsExactly('a', 'l', 'f', 'a', 'b', 'r', 'a', 'v', 'o', 'c', 'h', 'a', 'r', 'l', 'i', 'e');
@@ -69,9 +69,9 @@ public class E_IntermediateStreams {
         //TODO//List<String> output = null;
         //BEGINREMOVE
         List<String> output =
-                reader.lines()
-                        .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
-                        .collect(Collectors.toList());
+            reader.lines()
+                  .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
+                  .collect(Collectors.toList());
         // Alternatively, Stream.of() can be used instead of Arrays.stream().
         //ENDREMOVE
 
@@ -110,12 +110,12 @@ public class E_IntermediateStreams {
         //TODO//List<String> output = null;
         //BEGINREMOVE
         List<String> output =
-                reader.lines()
-                        .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
-                        .filter(word -> word.length() >= 8)
-                        .map(String::toLowerCase)
-                        .sorted()
-                        .collect(Collectors.toList());
+            reader.lines()
+                  .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
+                  .filter(word -> word.length() >= 8)
+                  .map(String::toLowerCase)
+                  .sorted()
+                  .collect(Collectors.toList());
         //ENDREMOVE
 
         assertThat(output)
@@ -142,12 +142,12 @@ public class E_IntermediateStreams {
         //TODO//List<String> result = null;
         //BEGINREMOVE
         List<String> result =
-                reader.lines()
-                        .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
-                        .filter(word -> word.length() >= 8)
-                        .map(String::toLowerCase)
-                        .sorted(Comparator.reverseOrder())
-                        .collect(Collectors.toList());
+            reader.lines()
+                  .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
+                  .filter(word -> word.length() >= 8)
+                  .map(String::toLowerCase)
+                  .sorted(Comparator.reverseOrder())
+                  .collect(Collectors.toList());
         //ENDREMOVE
 
         assertThat(result)
@@ -173,13 +173,13 @@ public class E_IntermediateStreams {
         //TODO//List<String> result = null;
         //BEGINREMOVE
         List<String> result =
-                reader.lines()
-                        .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
-                        .map(String::toLowerCase)
-                        .distinct()
-                        .sorted(Comparator.comparingInt(String::length)
-                                .thenComparing(Comparator.naturalOrder()))
-                        .collect(Collectors.toList());
+            reader.lines()
+                  .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
+                  .map(String::toLowerCase)
+                  .distinct()
+                  .sorted(Comparator.comparingInt(String::length)
+                                    .thenComparing(Comparator.naturalOrder()))
+                  .collect(Collectors.toList());
         //ENDREMOVE
 
         assertThat(result)
@@ -217,9 +217,9 @@ public class E_IntermediateStreams {
         //TODO//BigInteger result = BigInteger.ONE;
         //BEGINREMOVE
         BigInteger result =
-                LongStream.rangeClosed(1, 21)
-                        .mapToObj(BigInteger::valueOf)
-                        .reduce(BigInteger.ONE, BigInteger::multiply);
+            LongStream.rangeClosed(1, 21)
+                      .mapToObj(BigInteger::valueOf)
+                      .reduce(BigInteger.ONE, BigInteger::multiply);
         //ENDREMOVE
 
         assertThat(result).isEqualTo(new BigInteger("51090942171709440000"));
@@ -246,10 +246,10 @@ public class E_IntermediateStreams {
         //TODO//String result = null;
         //BEGINREMOVE
         String result =
-                reader.lines()
-                        .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
-                        .reduce((a, b) -> b)
-                        .orElse("");
+            reader.lines()
+                  .flatMap(line -> SPLIT_PATTERN.splitAsStream(line))
+                  .reduce((a, b) -> b)
+                  .orElse("");
         //ENDREMOVE
 
         assertThat(result).isEqualTo("thee");

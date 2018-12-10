@@ -54,7 +54,7 @@ public class A_Lambdas {
      * reference has a class name on the left-hand side of the ::
      * operator:
      * <p>
-     * classname::methodname
+     *     classname::methodname
      */
     @Test
     public void a_predicate3() {
@@ -424,7 +424,7 @@ public class A_Lambdas {
      * or an expression that evaluates to an instance, on the left-hand
      * side of the :: operator:
      * <p>
-     * myObject::methodname
+     *     myObject::methodname
      * <p>
      * This is in contrast to an unbound method reference, which has
      * a classname on the left-hand side of the :: operator.

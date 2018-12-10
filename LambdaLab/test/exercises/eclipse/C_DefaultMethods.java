@@ -1,11 +1,9 @@
 package exercises.eclipse;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.Ignore;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,9 +21,9 @@ public class C_DefaultMethods {
     @Test @Ignore
     public void c01_appendNew() {
         List<StringBuilder> sbList = Arrays.asList(
-                new StringBuilder("alfa"),
-                new StringBuilder("bravo"),
-                new StringBuilder("charlie"));
+            new StringBuilder("alfa"),
+            new StringBuilder("bravo"),
+            new StringBuilder("charlie"));
 
         // TODO write code to modify sbList
 
@@ -43,7 +41,7 @@ public class C_DefaultMethods {
     @Test @Ignore
     public void c02_removeOddLengthWords() {
         List<String> list = new ArrayList<>(Arrays.asList(
-                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot"));
+            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot"));
 
         // TODO write code to modify list
 
@@ -60,7 +58,7 @@ public class C_DefaultMethods {
     @Test @Ignore
     public void c03_upcaseAllWords() {
         List<String> list = Arrays.asList(
-                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
+            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
 
         // TODO code to modify list
 
@@ -128,9 +126,9 @@ public class C_DefaultMethods {
     @Test @Ignore
     public void c06_mapOfListOfStringsByLength() {
         List<String> list = Arrays.asList(
-                "aardvark", "bison", "capybara",
-                "alligator", "bushbaby", "chimpanzee",
-                "avocet", "bustard", "capuchin");
+            "aardvark", "bison", "capybara",
+            "alligator", "bushbaby", "chimpanzee",
+            "avocet", "bustard", "capuchin");
         Map<Integer, List<String>> result = new TreeMap<>();
 
         // TODO write code to populate result
@@ -157,9 +155,9 @@ public class C_DefaultMethods {
     @Test @Ignore
     public void c07_mapOfStringByInitialCharacter() {
         List<String> list = Arrays.asList(
-                "aardvark", "bison", "capybara",
-                "alligator", "bushbaby", "chimpanzee",
-                "avocet", "bustard", "capuchin");
+            "aardvark", "bison", "capybara",
+            "alligator", "bushbaby", "chimpanzee",
+            "avocet", "bustard", "capuchin");
         Map<Character, String> result = new TreeMap<>();
 
         // TODO write code to populate result

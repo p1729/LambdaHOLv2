@@ -26,20 +26,20 @@ public class H_Challenges {
      * considered significant.
      * <p>
      * Input is Map<Integer, List<String>>:
-     * { 4=["ibex", "hedgehog", "wombat"],
-     * 6=["ant", "beetle", "cricket"],
-     * ...
-     * }
+     *   { 4=["ibex", "hedgehog", "wombat"],
+     *     6=["ant", "beetle", "cricket"],
+     *     ...
+     *   }
      * <p>
      * Output should be a List<String>:
-     * [ "ibex:4",
-     * "hedgehog:4",
-     * "wombat:4",
-     * "ant:6",
-     * "beetle:6",
-     * "cricket:6",
-     * ...
-     * ]
+     *   [ "ibex:4",
+     *     "hedgehog:4",
+     *     "wombat:4",
+     *     "ant:6",
+     *     "beetle:6",
+     *     "cricket:6",
+     *     ...
+     *   ]
      */
     @Test
     public void h1_denormalizeMap() {
@@ -59,7 +59,7 @@ public class H_Challenges {
 
         List<String> result = new ArrayList<>();
         input.forEach((legs, names) ->
-                names.forEach(name -> result.add(name + ":" + legs)));
+                          names.forEach(name -> result.add(name + ":" + legs)));
 
         // Alternative solution: stream over map entries, and use flatMap to generate
         // Animal instances for each animal name with the given number of legs. This
@@ -105,9 +105,9 @@ public class H_Challenges {
      * and the result is Map<Integer, Set<String>>.
      * <p>
      * For example, if the input map is
-     * {p=[10, 20], q=[20, 30]}
+     *     {p=[10, 20], q=[20, 30]}
      * then the result map should be
-     * {10=[p], 20=[p, q], 30=[q]}
+     *     {10=[p], 20=[p, q], 30=[q]}
      * irrespective of ordering. Note that the Integer 20 appears
      * in the value sets for both p and q in the input map. Therefore,
      * in the result map, there should be a mapping with 20 as the key
@@ -180,15 +180,15 @@ public class H_Challenges {
     @Test
     public void h3_selectLongestWordsOnePass() {
         Stream<String> input = Stream.of(
-                "alfa", "bravo", "charlie", "delta",
-                "echo", "foxtrot", "golf", "hotel").parallel();
+            "alfa", "bravo", "charlie", "delta",
+            "echo", "foxtrot", "golf", "hotel").parallel();
 
         //UNCOMMENT//List<String> result = input.collect(
         //UNCOMMENT//    Collector.of(null, null, null, null));
         //UNCOMMENT//// TODO implement a collector by replacing the nulls above
         //BEGINREMOVE
         List<String> result = input.collect(
-                Collector.of(Longest::new, Longest::acc, Longest::comb, Longest::finish));
+            Collector.of(Longest::new, Longest::acc, Longest::comb, Longest::finish));
         //ENDREMOVE
 
         assertThat(result).containsExactly("charlie", "foxtrot");
@@ -253,9 +253,9 @@ public class H_Challenges {
                         .toArray();
 
         List<String> result =
-                IntStream.range(1, bounds.length)
-                        .mapToObj(i -> input.substring(bounds[i - 1], bounds[i]))
-                        .collect(Collectors.toList());
+            IntStream.range(1, bounds.length)
+                     .mapToObj(i -> input.substring(bounds[i-1], bounds[i]))
+                     .collect(Collectors.toList());
         //ENDREMOVE
 
         assertThat(result).containsExactly("aaaaa", "bb", "cccc", "d", "eeeeee", "aaa", "fff");
@@ -275,24 +275,21 @@ public class H_Challenges {
     @Test
     public void h5_reversingCollector() {
         Stream<String> input =
-                IntStream.range(0, 100).mapToObj(String::valueOf).parallel();
+            IntStream.range(0, 100).mapToObj(String::valueOf).parallel();
 
         //UNCOMMENT//Collection<String> result =
         //UNCOMMENT//    input.collect(Collector.of(null, null, null));
         //UNCOMMENT//    // TODO fill in collector functions above
         //BEGINREMOVE
         Collection<String> result =
-                input.collect(Collector.of(ArrayDeque::new,
-                        ArrayDeque::addFirst,
-                        (d1, d2) -> {
-                            d2.addAll(d1);
-                            return d2;
-                        }));
+            input.collect(Collector.of(ArrayDeque::new,
+                                       ArrayDeque::addFirst,
+                                       (d1, d2) -> { d2.addAll(d1); return d2; }));
         //ENDREMOVE
 
         String[] expectedResult = IntStream.range(0, 100)
-                .map(i -> 99 - i)
-                .mapToObj(String::valueOf)
+                     .map(i -> 99 - i)
+                     .mapToObj(String::valueOf)
                 .toArray(String[]::new);
         assertThat(result).containsExactly(expectedResult);
     }
@@ -321,15 +318,15 @@ public class H_Challenges {
         //TODO//return null;
         //BEGINREMOVE
         Map<Integer, Long> map =
-                Arrays.stream(array)
-                        .boxed()
-                        .collect(Collectors.groupingBy(x -> x,
-                                Collectors.counting()));
+            Arrays.stream(array)
+                  .boxed()
+                  .collect(Collectors.groupingBy(x -> x,
+                                                 Collectors.counting()));
 
         return map.entrySet().stream()
-                .filter(e -> e.getValue() > array.length / 2)
-                .mapToInt(Map.Entry::getKey)
-                .findAny();
+                  .filter(e -> e.getValue() > array.length / 2)
+                  .mapToInt(Map.Entry::getKey)
+                  .findAny();
         //ENDREMOVE
     }
     // Hint:
@@ -340,8 +337,8 @@ public class H_Challenges {
 
     @Test
     public void h6_majority() {
-        int[] array1 = {13, 13, 24, 35, 24, 24, 35, 24, 24};
-        int[] array2 = {13, 13, 24, 35, 24, 24, 35, 24};
+        int[] array1 = { 13, 13, 24, 35, 24, 24, 35, 24, 24 };
+        int[] array2 = { 13, 13, 24, 35, 24, 24, 35, 24 };
 
         OptionalInt result1 = majority(array1);
         OptionalInt result2 = majority(array2);
@@ -374,15 +371,8 @@ public class H_Challenges {
 
     static class Shoe {
         final int size;
-
-        public Shoe(int size) {
-            this.size = size;
-        }
-
-        public int hashCode() {
-            return size ^ 0xcafebabe;
-        }
-
+        public Shoe(int size) { this.size = size; }
+        public int hashCode() { return size ^ 0xcafebabe; }
         public boolean equals(Object other) {
             return (other instanceof Shoe) && this.size == ((Shoe) other).size;
         }

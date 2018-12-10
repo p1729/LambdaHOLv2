@@ -36,7 +36,7 @@ public class D_SimpleStreams {
     @Test @Ignore
     public void d1_upcaseOddLengthWords() {
         List<String> input = Arrays.asList(
-                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
+            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
 
         List<String> result = null; // TODO
 
@@ -61,7 +61,7 @@ public class D_SimpleStreams {
     @Test @Ignore
     public void d2_joinStreamRange() {
         List<String> input = Arrays.asList(
-                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
+            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
 
         String result = ""; // TODO
 
@@ -154,7 +154,7 @@ public class D_SimpleStreams {
     @Test @Ignore
     public void d6_selectLongestWords() {
         List<String> input = Arrays.asList(
-                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
+            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
 
         List<String> result = null; // TODO
 
@@ -172,7 +172,7 @@ public class D_SimpleStreams {
     @Test @Ignore
     public void d7_selectByLengthAndPosition() {
         List<String> input = Arrays.asList(
-                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
+            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
 
         List<String> result = null; // TODO
 

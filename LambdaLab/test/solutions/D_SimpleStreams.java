@@ -35,18 +35,18 @@ public class D_SimpleStreams {
     @Test
     public void d1_upcaseOddLengthWords() {
         List<String> input = Arrays.asList(
-                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
+            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
 
         //TODO//List<String> result = null;
         //BEGINREMOVE
         List<String> result =
-                input.stream()
-                        .filter(w -> (w.length() & 1) == 1)
-                        .map(String::toUpperCase)
-                        .collect(Collectors.toList());
-        // Alternatives:
-        // Instead of w -> (w.length() & 1) == 1, use w -> (w.length() % 2) != 0
-        // Instead of String::toUpperCase, use w -> w.toUpperCase()
+            input.stream()
+                 .filter(w -> (w.length() & 1) == 1)
+                 .map(String::toUpperCase)
+                 .collect(Collectors.toList());
+            // Alternatives:
+            // Instead of w -> (w.length() & 1) == 1, use w -> (w.length() % 2) != 0
+            // Instead of String::toUpperCase, use w -> w.toUpperCase()
         //ENDREMOVE
 
         assertThat(result).containsExactly("BRAVO", "CHARLIE", "DELTA", "FOXTROT");
@@ -70,16 +70,16 @@ public class D_SimpleStreams {
     @Test
     public void d2_joinStreamRange() {
         List<String> input = Arrays.asList(
-                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
+            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot");
 
         //TODO//String result = "";
         //BEGINREMOVE
         String result =
-                input.stream()
-                        .skip(2)
-                        .limit(3)
-                        .map(word -> word.substring(1, 2))
-                        .collect(Collectors.joining(","));
+            input.stream()
+                 .skip(2)
+                 .limit(3)
+                 .map(word -> word.substring(1, 2))
+                 .collect(Collectors.joining(","));
         //ENDREMOVE
 
         assertThat(result).isEqualTo("h,e,c");
@@ -106,7 +106,7 @@ public class D_SimpleStreams {
         //TODO//long count = 0;
         //BEGINREMOVE
         long count = reader.lines()
-                .count();
+                           .count();
         //ENDREMOVE
 
         assertThat(count).isEqualTo(14);
@@ -131,10 +131,10 @@ public class D_SimpleStreams {
         //TODO//int longestLength = 0;
         //BEGINREMOVE
         int longestLength =
-                reader.lines()
-                        .mapToInt(String::length)
-                        .max()
-                        .orElse(0);
+            reader.lines()
+                  .mapToInt(String::length)
+                  .max()
+                  .orElse(0);
         //ENDREMOVE
 
         assertThat(longestLength).isEqualTo(53);
@@ -164,9 +164,9 @@ public class D_SimpleStreams {
         //TODO//String longest = null;
         //BEGINREMOVE
         String longest =
-                reader.lines()
-                        .max(Comparator.comparingInt(String::length))
-                        .orElse("");
+            reader.lines()
+                  .max(Comparator.comparingInt(String::length))
+                  .orElse("");
         // Alternative:
         // Instead of Comparator.comparingInt(String::length), one could
         // use something like:
@@ -192,18 +192,18 @@ public class D_SimpleStreams {
     @Test
     public void d6_selectLongestWords() {
         List<String> input = Arrays.asList(
-                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
+            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
 
         //TODO//List<String> result = null;
         //BEGINREMOVE
         int max = input.stream()
-                .mapToInt(String::length)
-                .max()
-                .orElse(-1);
+                       .mapToInt(String::length)
+                       .max()
+                       .orElse(-1);
 
         List<String> result = input.stream()
-                .filter(s -> s.length() == max)
-                .collect(Collectors.toList());
+                                   .filter(s -> s.length() == max)
+                                   .collect(Collectors.toList());
         //ENDREMOVE
 
         assertThat(result).containsExactly("charlie", "foxtrot");
@@ -220,15 +220,15 @@ public class D_SimpleStreams {
     @Test
     public void d7_selectByLengthAndPosition() {
         List<String> input = Arrays.asList(
-                "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
+            "alfa", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel");
 
         //TODO//List<String> result = null;
         //BEGINREMOVE
         List<String> result =
-                IntStream.range(0, input.size())
-                        .filter(pos -> input.get(pos).length() > pos)
-                        .mapToObj(pos -> input.get(pos))
-                        .collect(Collectors.toList());
+            IntStream.range(0, input.size())
+                     .filter(pos -> input.get(pos).length() > pos)
+                     .mapToObj(pos -> input.get(pos))
+                     .collect(Collectors.toList());
         //ENDREMOVE
 
         assertThat(result).containsExactly("alfa", "bravo", "charlie", "delta", "foxtrot");
