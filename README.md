@@ -83,8 +83,7 @@ file. In any exercise that refers to reading from the text file, you
 can simply use the "reader" variable without worry about opening or
 closing it. This is set up by JUnit using the `@Before` and `@After`
 methods at the bottom of the file. The text file is "SonnetI.txt"
-(Shakespeare's first sonnet) which is located at the root of this
-NetBeans project.
+(Shakespeare's first sonnet).
 
 If you're really stuck, the solutions to the exercises are in the package `test.solutions`.
 
